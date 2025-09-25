@@ -1,9 +1,9 @@
-package main.java.dk.propertymanagement.api.app;
+package main.java.dk.propertymanagement.app.api;
 
 import java.util.Scanner;
 
-import main.java.dk.propertymanagement.api.apartment.Apartment;
-import main.java.dk.propertymanagement.api.apartment.ApartmentInput;
+import main.java.dk.propertymanagement.apartment.api.Apartment;
+import main.java.dk.propertymanagement.apartment.api.ApartmentInput;
 
 public class RunApp {
         public static void main(String[] args) {

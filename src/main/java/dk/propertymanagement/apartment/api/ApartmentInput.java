@@ -1,4 +1,4 @@
-package main.java.dk.propertymanagement.api.apartment;
+package main.java.dk.propertymanagement.apartment.api;
 
 import java.util.Scanner;
 
