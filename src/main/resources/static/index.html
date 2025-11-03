@@ -18,26 +18,12 @@
         <strong>Himmerland</strong><span>Boligforening</span>
       </div>
     </div>
-    <h1>Overvågning af energi data</h1>
+    <h1>Overvågning af energidata</h1>
   </header>
 
   <div class="layout">
-    <aside class="sidebar">
-      <p class="menu-title">Menu</p>
-      <ul class="menu">
-        <li><a href="#" class="active">Notifikationer</a></li>
-        <li><a href="#">E-mails</a></li>
-        <li><a href="#">Regler</a></li>
-      </ul>
-
-      <div class="submenu">
-        <p class="submenu-title">Administrerer:</p>
-        <ul>
-          <li><a href="#">Service centre</a></li>
-          <li><a href="#">Personale</a></li>
-        </ul>
-      </div>
-    </aside>
+    <!-- This is where the shared menu is injected -->
+    <aside data-include="/partials/menu.html"></aside>
 
     <main class="content">
       <section class="card">
@@ -83,5 +69,8 @@
       </section>
     </main>
   </div>
+
+  <!-- load the include helper at the end of body -->
+  <script src="/js/include-menu.js"></script>
 </body>
 </html>
