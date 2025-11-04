@@ -28,7 +28,30 @@
     <main class="content">
       <section class="card">
         <h2>Regler</h2>
-        <p>Denne side er endnu ikke implementeret.</p>
+        <form>
+          <label for="Depart"><strong>Afdeling</strong>:</label> <br>
+          <input type="number" id="Depart" name="Depart" min="0" max="109" step="1"> <br><br>
+
+          <label for="threstempin">Grænseværdi for <strong>fremløbstemperatur</strong>:</label> <br>
+          <input type="number" id="threstempin" name="threstempin" min="0" step="1"> <br><br>
+
+          <label for="threstempout">Grænseværdi for <strong>returløbstemperatur</strong>:</label> <br>
+          <input type="number" id="threstempout" name="threstempout" min="0" step="1"> <br><br>
+
+          <label for="thresflow">Grænseværdi for <strong>flow</strong>:</label> <br>
+          <input type="number" id="thresflow" name="thresflow" step="0.01"> <br><br>
+
+          <label for="thresduration">Grænseværdi for <strong>varighed</strong> angivet i timer:</label> <br>
+          <input type="number" id="thresduration" name="thresduration" min="0" step="1"> <br><br>
+          
+          <label for="descr"><strong>Beskrivelse</strong>:</label> <br>
+          <input type="text" id="descr" name="descr"> <br><br>
+
+          <label for="reason"><strong>Årsag:</strong></label><br>
+          <input type="text" id="reason" name="reason"> <br><br>
+
+          <input type="submit"> <input type="reset">
+        </form>
       </section>
     </main>
   </div>
