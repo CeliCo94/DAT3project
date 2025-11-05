@@ -6,8 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.himmerland.hero.service.rules.*;
 import com.himmerland.hero.service.measurements.MeasurementHeat;
 import com.himmerland.hero.service.notifications.*;
-import static com.himmerland.hero.service.helperclasses.handlecsv.ReadCSVFileToMeasurementHeat.readCSVFileToMeasurementsHeat;
 
+import com.himmerland.hero.service.helperclasses.enums.Criticality;
+
+import static com.himmerland.hero.service.helperclasses.handlecsv.ReadCSVFileToMeasurementHeat.readCSVFileToMeasurementsHeat;
 import static com.himmerland.hero.service.helperclasses.handlejson.WriteObjectToJson.writeObjectToJson;
 
 import java.util.List;
@@ -25,11 +27,6 @@ public class Application {
 
 		System.out.println("Measurements Heat:");
 		for (MeasurementHeat measurement : measurements) {
-		    System.out.println("Meter Number: " + measurement.getTimestamp());
-			System.out.println("Volume: " + measurement.getVolume() + " " + measurement.getVolumeUnit());
-			System.out.println("Forward Temperature: " + measurement.getForwardTemperature() + " " + measurement.getForwardTemperatureUnit());
-			System.out.println("Return Temperature: " + measurement.getReturnTemperature() + " " + measurement.getReturnTemperatureUnit());
-	
 			if(
 				measurement.getForwardTemperature() >= rule.getThresholdTempIn() &&
 				measurement.getReturnTemperature() >= rule.getThresholdTempOut() &&
@@ -45,11 +42,12 @@ public class Application {
 		System.out.println("******************************************");
 		System.out.println("\nRule Evaluation Summary:");
 
-		String filePathNotification = "src/main/resources/json/notification.json";
+		String filePathNotification = "src/main/resources/json/notifications.json";
 
 		if (counter >= rule.getDuration()) {
 			System.out.println("A notification has been sent due to rule being triggered for " + counter + " measurements.");
-			Notification notification = new Notification("Address 1", "No presetting of radiators", rule.getName(), 0, "00:00:00", true, true);
+			Notification notification = new Notification("address123", "Cause XYZ", rule.getName(), Criticality.High,
+					"2024-01-01T12:00:00Z", true, false);
 			writeObjectToJson(filePathNotification, notification);
 		} else {
 			System.out.println("No notification triggered. Rule was only triggered for " + counter + " measurements.");
