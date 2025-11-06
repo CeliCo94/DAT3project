@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="da">
+
+<html lang="da" xmlns:th="https://www.thymeleaf.org">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,27 +30,33 @@
     <main class="content">
       <section class="card">
         <h2>Regler</h2>
-        <form>
-          <label for="Depart"><strong>Afdeling</strong>:</label> <br>
-          <input type="number" id="Depart" name="Depart" min="0" max="109" step="1"> <br><br>
+        
+        <!-- the expressions, th:field="*{name}", th:field="*{thresholdTempIn}", 
+             etc correspond to the fields in the RuleThresholdHeat object -->
+        <form action="#" th:action="@{/Regler}" th:object="${rule}">
+          <label for="name"><strong>Navngiv reglen</strong>:</label><br>
+          <input type="text" id="name" name="name" th:field="*{name}"> <br><br>
 
-          <label for="threstempin">Grænseværdi for <strong>fremløbstemperatur</strong>:</label> <br>
-          <input type="number" id="threstempin" name="threstempin" min="0" step="1"> <br><br>
+          <!--<label for="descr"><strong>Beskrivelse</strong>:</label> <br>
+          <input type="text" id="descr" name="descr"> <br><br>-->
 
-          <label for="threstempout">Grænseværdi for <strong>returløbstemperatur</strong>:</label> <br>
-          <input type="number" id="threstempout" name="threstempout" min="0" step="1"> <br><br>
+          <!--<label for="Depart"><strong>Afdeling</strong>:</label> <br>
+          <input type="number" id="Depart" name="Depart" min="0" max="109" step="1"> <br><br>--> <!-- lav som drop-down menu i stedet? -->
 
-          <label for="thresflow">Grænseværdi for <strong>flow</strong>:</label> <br>
-          <input type="number" id="thresflow" name="thresflow" step="0.01"> <br><br>
+          <!--<label for="reason"><strong>Årsag</strong>:</label><br>
+          <input type="text" id="reason" name="reason"> <br><br>-->
 
-          <label for="thresduration">Grænseværdi for <strong>varighed</strong> angivet i timer:</label> <br>
-          <input type="number" id="thresduration" name="thresduration" min="0" step="1"> <br><br>
-          
-          <label for="descr"><strong>Beskrivelse</strong>:</label> <br>
-          <input type="text" id="descr" name="descr"> <br><br>
+          <label for="thresholdTempIn">Grænseværdi for <strong>fremløbstemperatur</strong>:</label> <br>
+          <input type="number" id="thresholdTempIn" name="thresholdTempIn" min="0" step="1" th:field="*{thresholdTempIn}"> <br><br>
 
-          <label for="reason"><strong>Årsag:</strong></label><br>
-          <input type="text" id="reason" name="reason"> <br><br>
+          <label for="thresholdTempOut">Grænseværdi for <strong>returløbstemperatur</strong>:</label> <br>
+          <input type="number" id="thresholdTempOut" name="thresholdTempOut" min="0" step="1" th:field="*{thresholdTempOut}"> <br><br>
+
+          <label for="thresholdWaterFlow">Grænseværdi for <strong>flow</strong>:</label> <br>
+          <input type="number" id="thresholdWaterFlow" name="thresholdWaterFlow" step="0.01" th:field="*{thresholdWaterFlow}"> <br><br>
+
+          <label for="duration">Grænseværdi for <strong>varighed</strong> angivet i timer:</label> <br>
+          <input type="number" id="duration" name="duration" min="0" step="1" th:field="*{duration}"> <br><br>
 
           <input type="submit"> <input type="reset">
         </form>
@@ -58,5 +66,7 @@
 
   <!-- scripts -->
   <script src="/js/include-menu.js"></script>
+  <!--<script src="/js/getRules.js"></script>-->
 </body>
 </html>
+
