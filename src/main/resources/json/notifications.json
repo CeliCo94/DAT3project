@@ -1,1 +1,1 @@
-{"address":"address123","cause":"Cause XYZ","rule":"Heat Rule Example","criticality":"High","timeStamp":"2024-01-01T12:00:00Z","sent":false,"active":true}
+{"address":"address for the notification","cause":"Broken water heater","rule":"test2","criticality":"Low","timeStamp":"2024-01-01T12:00:00Z","active":true,"sent":false}
