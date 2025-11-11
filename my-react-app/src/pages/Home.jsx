@@ -1,14 +1,5 @@
-import Menu from "../components/Menu.jsx";
-import Header from "../components/Header.jsx";
-
 export default function Home() {
   return (
-     <>
-  <div className="layout">
-    {/* This is where the shared menu is injected */}
-    <aside><Menu /></aside>
-
-    <main className="content">
       <section className="card">
         <h2>Aktive notifikationer</h2>
 
@@ -50,8 +41,5 @@ export default function Home() {
           </table>
         </div>
       </section>
-    </main>
-  </div>
-    </>
   )
 }

@@ -91,7 +91,7 @@ body {
 .menu a:hover,
 .submenu a:hover { background: #bfe2c3; }
 
-.menu a.active {
+.menu a.active, .submenu a.active {
   background: #1c8b5e;
   color: #fff;
 }
