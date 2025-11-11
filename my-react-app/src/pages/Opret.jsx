@@ -1,6 +1,4 @@
 import { useMemo, useState } from "react";
-import Menu from "../components/Menu.jsx";
-import Header from "../components/Header.jsx";
 
 export default function Opret() {
   // step: 'editor' | 'test' | 'active'
@@ -49,17 +47,6 @@ export default function Opret() {
 
   return (
     <>
-      {/* Top header bar */}
-      <Header />
-
-      <div className="layout">
-        {/* Left menu */}
-        <aside>
-          <Menu />
-        </aside>
-
-        {/* Main content */}
-        <main className="content">
           {/* STEP 1: editor */}
           <section id="editor" className={cls("card", hiddenIf(step !== "editor"))}>
             <div className="row" style={{ justifyContent: "space-between" }}>
@@ -301,8 +288,6 @@ export default function Opret() {
               </button>
             </div>
           </section>
-        </main>
-      </div>
     </>
   );
 }

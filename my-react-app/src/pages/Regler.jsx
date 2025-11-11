@@ -1,6 +1,3 @@
-import Menu from "../components/Menu.jsx";
-import Header from "../components/Header.jsx";
-
 export default function Regler() {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -9,11 +6,6 @@ export default function Regler() {
   };
 
   return (
-    <>
-      <div className="layout">
-        <aside><Menu /></aside>
-
-        <main className="content">
           <section className="card">
             <h2>Regler</h2>
 
@@ -36,8 +28,5 @@ export default function Regler() {
               <button type="submit" className="btn btn-primary">Send</button>
             </form>
           </section>
-        </main>
-      </div>
-    </>
   );
 }
