@@ -7,8 +7,11 @@ import com.himmerland.hero.service.io.JsonStorage;
 import com.himmerland.hero.service.io.StorageStrategy;
 import com.himmerland.hero.service.measurements.MeasurementHeat;
 import com.himmerland.hero.service.notifications.Notification;
+import com.himmerland.hero.service.rules.RuleThresholdHeat;
 import com.himmerland.hero.service.helperclasses.enums.Criticality;
+
 import static com.himmerland.hero.service.helperclasses.handlejson.ReadAllJsonToList.readAll;
+import static com.himmerland.hero.service.helperclasses.handlecsv.ReadCSVFileToMeasurementHeat.readCSVFileToMeasurementsHeat;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -18,7 +21,7 @@ public class Application {
 
   public static void main(String[] args) {
     //SpringApplication.run(Application.class, args);
-    runStorageStrategyExample();
+    //runStorageStrategyExample();
   }
 
   static void runStorageStrategyExample() {
@@ -51,9 +54,7 @@ public class Application {
 
   }
 
-}
 
-/* 
   public static void evaluateRuleThresholdHeat(RuleThresholdHeat rule) {
     String filePath = "src/main/resources/csv/twentyfourHoursTestData.csv";
     List<MeasurementHeat> measurements = readCSVFileToMeasurementsHeat(filePath);
@@ -88,11 +89,12 @@ public class Application {
           true,
           false
       );
-      writeObjectToJson(filePathNotification, notification);
+      //writeObjectToJson(filePathNotification, notification);
     } else {
       System.out.println("No notification triggered. Rule was only triggered for " + counter + " measurements.");
-      writeObjectToJson(filePathNotification, "");
+      //writeObjectToJson(filePathNotification, "");
     }
   }
+}
 
- */  
+  
