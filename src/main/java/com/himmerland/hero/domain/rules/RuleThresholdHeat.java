@@ -1,6 +1,8 @@
 package com.himmerland.hero.domain.rules;
 
-public class RuleThresholdHeat implements IRule {
+import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
+
+public class RuleThresholdHeat extends IdentifiableBase implements IRule {
 
     private String name = "";
     private String description = "";
