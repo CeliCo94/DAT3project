@@ -20,7 +20,7 @@ public class RuleController {
   @PostMapping(consumes = "application/json", produces = "application/json")
   public ResponseEntity<RuleThresholdHeat> submitRule(@RequestBody RuleThresholdHeat rule) {
     System.out.println("Received rule: " + rule);
-    Application.evaluateRuleThresholdHeat(rule);
+    //Application.evaluateRuleThresholdHeat(rule);
     return ResponseEntity.status(201).body(rule);
   }
 }

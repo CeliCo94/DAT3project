@@ -1,6 +1,8 @@
 package com.himmerland.hero.service.measurements;
 
-public class Measurement {
+import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
+
+public class Measurement extends IdentifiableBase {
     private String meterNumber;
     private String meterType;
     private String consumptionType;

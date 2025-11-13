@@ -1,8 +1,9 @@
 package com.himmerland.hero.service.notifications;
 
 import com.himmerland.hero.service.helperclasses.enums.*;
+import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
 
-public class Notification {
+public class Notification extends IdentifiableBase{
     private String address;
     private String cause;
     private String rule;
