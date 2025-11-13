@@ -1,4 +1,4 @@
-package com.himmerland.hero.service.measurements;
+package com.himmerland.hero.domain.measurements;
 
 public class MeasurementHeat extends Measurement {
     private double Volume;

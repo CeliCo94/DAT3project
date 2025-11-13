@@ -1,4 +1,4 @@
-package com.himmerland.hero.service.measurements;
+package com.himmerland.hero.domain.measurements;
 
 import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
 

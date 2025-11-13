@@ -1,6 +1,6 @@
 package com.himmerland.hero.service.helperclasses.handlecsv;
 
-import com.himmerland.hero.service.measurements.MeasurementHeat;
+import com.himmerland.hero.domain.measurements.MeasurementHeat;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

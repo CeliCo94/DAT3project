@@ -1,7 +1,8 @@
 package com.himmerland.hero.web;
 
+import com.himmerland.hero.domain.notifications.Notification;
 import com.himmerland.hero.service.helperclasses.handlejson.ReadNotificationObjectFromJson;
-import com.himmerland.hero.service.notifications.Notification;
+
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

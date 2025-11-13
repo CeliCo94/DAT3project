@@ -1,4 +1,4 @@
-package com.himmerland.hero.service.rules;
+package com.himmerland.hero.domain.rules;
 
 interface IRule {
     

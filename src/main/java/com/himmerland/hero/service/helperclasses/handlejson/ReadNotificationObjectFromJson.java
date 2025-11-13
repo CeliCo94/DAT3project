@@ -1,7 +1,7 @@
 package com.himmerland.hero.service.helperclasses.handlejson;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.himmerland.hero.service.notifications.Notification;
+import com.himmerland.hero.domain.notifications.Notification;
 
 import java.io.File;
 

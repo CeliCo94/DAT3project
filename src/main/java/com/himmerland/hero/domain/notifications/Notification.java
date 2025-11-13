@@ -1,4 +1,4 @@
-package com.himmerland.hero.service.notifications;
+package com.himmerland.hero.domain.notifications;
 
 import com.himmerland.hero.service.helperclasses.enums.*;
 import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;

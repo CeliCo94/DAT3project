@@ -1,4 +1,4 @@
-package com.himmerland.hero.service.rules;
+package com.himmerland.hero.domain.rules;
 
 public class RuleThresholdHeat implements IRule {
 

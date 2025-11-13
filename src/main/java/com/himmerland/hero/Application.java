@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.himmerland.hero.service.io.JsonStorage;
 import com.himmerland.hero.service.io.StorageStrategy;
-import com.himmerland.hero.service.measurements.MeasurementHeat;
-import com.himmerland.hero.service.notifications.Notification;
-import com.himmerland.hero.service.rules.RuleThresholdHeat;
+import com.himmerland.hero.domain.measurements.MeasurementHeat;
+import com.himmerland.hero.domain.notifications.Notification;
+import com.himmerland.hero.domain.rules.RuleThresholdHeat;
 import com.himmerland.hero.service.helperclasses.enums.Criticality;
 
 import static com.himmerland.hero.service.helperclasses.handlejson.ReadAllJsonToList.readAll;
