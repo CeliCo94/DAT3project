@@ -1,0 +1,203 @@
+/* Basal reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  color: #0f2a1d;
+  background: #e9f4ea; /* lys grønlig baggrund */
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Topbar / brand */
+.topbar {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 14px 32px;
+  background: #d9efdb; /* lidt mørkere grøn tone */
+  border-bottom: 1px solid #c8e4cc;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  width: 56px;
+  height: 36px;
+  fill: #1c8b5e; /* Himmerland grøn */
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.brand-text strong { font-weight: 800; }
+
+.topbar h1 {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(22px, 3.3vw, 36px);
+  text-align: center;
+}
+
+/* Layout */
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: calc(100vh - 72px);
+}
+
+/* Sidebar */
+.sidebar {
+  border-right: 1px solid #c8e4cc;
+  background: #cfe9d2;
+  padding: 24px 20px;
+}
+
+.menu-title {
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+.menu,
+.submenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li + li { margin-top: 8px; }
+
+.menu a,
+.submenu a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #0f2a1d;
+  font-weight: 600;
+}
+
+.menu a:hover,
+.submenu a:hover { background: #bfe2c3; }
+
+.menu a.active, .submenu a.active {
+  background: #1c8b5e;
+  color: #fff;
+}
+
+.submenu { margin-top: 24px; }
+
+.submenu-title {
+  margin-bottom: 6px;
+  font-weight: 800;
+}
+
+/* Content */
+.content {
+  padding: 24px 32px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e2e8e4;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 6px 18px rgba(16, 42, 29, 0.06);
+}
+
+.card > h2 {
+  margin-bottom: 6px;
+  font-size: clamp(20px, 2.6vw, 28px);
+}
+
+.section-heading {
+  margin: 22px 0 8px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* Tabeller */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid #e6ece8;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+  font-size: 15px;
+}
+
+.data-table thead th {
+  background: #085a6b; /* mørk blågrøn */
+  color: #fff;
+  text-align: left;
+  padding: 12px 14px;
+  font-weight: 700;
+}
+
+.data-table tbody td {
+  padding: 12px 14px;
+  border-top: 1px solid #e7edf0;
+  background: #f4f7f8;
+}
+
+.data-table tbody tr:nth-child(odd) td {
+  background: #eef3f4;
+}
+
+.data-table tbody tr:hover td {
+  background: #e3eef1;
+}
+
+/* Responsivt layout */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 64px;
+    z-index: 5;
+    border-right: none;
+    border-bottom: 1px solid #c8e4cc;
+  }
+
+  .topbar {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .brand {
+    justify-content: center;
+  }
+}
+
+.accordion-trigger {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid #c8e4cc;
+  background: #eef5ef;
+  border-radius: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
