@@ -1,8 +1,8 @@
 package com.himmerland.hero.domain.rules;
 
-import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
+import com.himmerland.hero.domain.rules.Rule;
 
-public class RuleThresholdHeat extends IdentifiableBase implements IRule {
+public class ruleThresholdHeat extends Rule {
 
     private String name = "";
     private String description = "";
@@ -12,9 +12,9 @@ public class RuleThresholdHeat extends IdentifiableBase implements IRule {
     private int thresholdWaterFlow;
     private int duration;
 
-    public RuleThresholdHeat() {} // <-- Jackson needs a no-arg constructor
+    public ruleThresholdHeat() {} // <-- Jackson needs a no-arg constructor
 
-    public RuleThresholdHeat(String name, int thresholdTempIn, int thresholdTempOut, int thresholdWaterFlow, int duration) {
+    public ruleThresholdHeat(String name, int thresholdTempIn, int thresholdTempOut, int thresholdWaterFlow, int duration) {
         this.name = name;
         this.thresholdTempIn = thresholdTempIn;
         this.thresholdTempOut = thresholdTempOut;
@@ -45,18 +45,5 @@ public class RuleThresholdHeat extends IdentifiableBase implements IRule {
 
     public int getDuration() {
         return duration;
-    }
-
-    @Override
-    public int testRule() {
-        return 0;
-    }
-
-    @Override
-    public void activateRule() {}
-
-    @Override
-    public void applyDescription(String description) {
-        this.description = description;
     }
 }
