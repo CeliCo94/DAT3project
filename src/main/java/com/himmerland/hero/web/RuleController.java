@@ -1,7 +1,7 @@
 package com.himmerland.hero.web;
 
 import com.himmerland.hero.Application;
-import com.himmerland.hero.domain.rules.ruleThresholdHeat;
+import com.himmerland.hero.domain.rules.RuleThresholdHeat;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Controller;
 public class RuleController {
 
   @PostMapping(consumes = "application/json", produces = "application/json")
-  public ResponseEntity<ruleThresholdHeat> submitRule(@RequestBody ruleThresholdHeat rule) {
+  public ResponseEntity<RuleThresholdHeat> submitRule(@RequestBody RuleThresholdHeat rule) {
     System.out.println("Received rule: " + rule);
     //Application.evaluateRuleThresholdHeat(rule);
     return ResponseEntity.status(201).body(rule);

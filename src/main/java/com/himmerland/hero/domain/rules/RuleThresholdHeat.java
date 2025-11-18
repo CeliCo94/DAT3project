@@ -2,7 +2,7 @@ package com.himmerland.hero.domain.rules;
 
 import com.himmerland.hero.domain.rules.Rule;
 
-public class ruleThresholdHeat extends Rule {
+public class RuleThresholdHeat extends Rule {
 
     private String name = "";
     private String description = "";
@@ -12,9 +12,9 @@ public class ruleThresholdHeat extends Rule {
     private int thresholdWaterFlow;
     private int duration;
 
-    public ruleThresholdHeat() {} // <-- Jackson needs a no-arg constructor
+    public RuleThresholdHeat() {} // <-- Jackson needs a no-arg constructor
 
-    public ruleThresholdHeat(String name, int thresholdTempIn, int thresholdTempOut, int thresholdWaterFlow, int duration) {
+    public RuleThresholdHeat(String name, int thresholdTempIn, int thresholdTempOut, int thresholdWaterFlow, int duration) {
         this.name = name;
         this.thresholdTempIn = thresholdTempIn;
         this.thresholdTempOut = thresholdTempOut;

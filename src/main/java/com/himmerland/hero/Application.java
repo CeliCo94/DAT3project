@@ -7,7 +7,7 @@ import com.himmerland.hero.service.io.JsonStorage;
 import com.himmerland.hero.service.io.StorageStrategy;
 import com.himmerland.hero.domain.measurements.MeasurementHeat;
 import com.himmerland.hero.domain.notifications.Notification;
-import com.himmerland.hero.domain.rules.ruleThresholdHeat;
+import com.himmerland.hero.domain.rules.RuleThresholdHeat;
 import com.himmerland.hero.service.helperclasses.enums.Criticality;
 
 import static com.himmerland.hero.service.helperclasses.handlejson.ReadAllJsonToList.readAll;
@@ -55,7 +55,7 @@ public class Application {
   }
 
 
-  public static void evaluateRuleThresholdHeat(ruleThresholdHeat rule) {
+  public static void evaluateRuleThresholdHeat(RuleThresholdHeat rule) {
     String filePath = "src/main/resources/csv/twentyfourHoursTestData.csv";
     List<MeasurementHeat> measurements = readCSVFileToMeasurementsHeat(filePath);
 
