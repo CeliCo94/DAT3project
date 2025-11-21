@@ -1,6 +1,9 @@
 package com.himmerland.hero.domain.rules;
 
 import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
+import com.himmerland.hero.domain.measurements.Measurement;
+import com.himmerland.hero.domain.measurements.MeasurementHeat;
+import java.util.List;
 
 public class RuleThresholdHeat extends IdentifiableBase implements IRule {
 
@@ -48,8 +51,28 @@ public class RuleThresholdHeat extends IdentifiableBase implements IRule {
     }
 
     @Override
-    public int testRule() {
-        return 0;
+    public int testRule(List<Measurement> measurements) {
+        if (measurements == null || measurements.isEmpty()) {
+            return 0;
+        }
+
+        int counter = 0;
+
+        for (Measurement measurement : measurements) {
+            // Cast to MeasurementHeat since this rule works with heat measurements
+            if (measurement instanceof MeasurementHeat) {
+                MeasurementHeat heatMeasurement = (MeasurementHeat) measurement;
+                // Check if the measurement meets all threshold criteria
+                if (heatMeasurement.getForwardTemperature() >= this.thresholdTempIn
+                && heatMeasurement.getReturnTemperature() >= this.thresholdTempOut
+                && heatMeasurement.getVolume() >= this.thresholdWaterFlow) {
+                    counter++;
+                }
+            }
+        }
+        // Return the count of measurements that triggered the rule
+        // The rule should activate if counter is >=duration
+        return counter;
     }
 
     @Override
