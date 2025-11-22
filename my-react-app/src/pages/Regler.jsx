@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 export default function Regler() {
   const [form, setForm] = useState({
     name: "",
+    description: "",
+    criticality: "Low",
+    seasonal: false,
+    startDate: "",
+    endDate: "",
     thresholdTempIn: "",
     thresholdTempOut: "",
     thresholdWaterFlow: "",
@@ -10,17 +15,15 @@ export default function Regler() {
   });
 
   const [rules, setRules] = useState([]);
-  const [status, setStatus] = useState("idle"); // "idle" | "loading" | "success" | "error"
+  const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
 
-  // 1) Load existing rules from backend when page opens
+  // Load existing rules
   useEffect(() => {
     async function fetchRules() {
       try {
         const res = await fetch("/api/regler");
-        if (!res.ok) {
-          throw new Error("Kunne ikke hente regler");
-        }
+        if (!res.ok) return;
         const data = await res.json();
         setRules(data);
       } catch (err) {
@@ -30,21 +33,25 @@ export default function Regler() {
     fetchRules();
   }, []);
 
-  // 2) Update form state when user types
+  // Handle changes in all inputs (text, number, checkbox, select)
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setForm((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
-  // 3) When user clicks "Gem og kør regel"
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const payload = {
       name: form.name,
+      description: form.description,
+      criticality: form.criticality, // "High" | "Medium" | "Low"
+      seasonal: form.seasonal,
+      startDate: form.startDate || null,
+      endDate: form.endDate || null,
       thresholdTempIn: Number(form.thresholdTempIn),
       thresholdTempOut: Number(form.thresholdTempOut),
       thresholdWaterFlow: Number(form.thresholdWaterFlow),
@@ -67,7 +74,7 @@ export default function Regler() {
 
       const savedRule = await res.json();
 
-      // Update list: remove rule with same name (edit) and add new one
+      // If you keep using name as identifier:
       setRules((prev) => {
         const withoutSameName = prev.filter((r) => r.name !== savedRule.name);
         return [...withoutSameName, savedRule];
@@ -82,10 +89,14 @@ export default function Regler() {
     }
   };
 
-  // 4) When user clicks "Rediger" on a rule in the list → fill form
   const handleEditClick = (rule) => {
     setForm({
       name: rule.name ?? "",
+      description: rule.description ?? "",
+      criticality: rule.criticality ?? "Low",
+      seasonal: rule.seasonal ?? false,
+      startDate: rule.startDate ?? "",
+      endDate: rule.endDate ?? "",
       thresholdTempIn: rule.thresholdTempIn?.toString() ?? "",
       thresholdTempOut: rule.thresholdTempOut?.toString() ?? "",
       thresholdWaterFlow: rule.thresholdWaterFlow?.toString() ?? "",
@@ -113,6 +124,68 @@ export default function Regler() {
           onChange={handleChange}
         />
         <br />
+        <br />
+
+        <label htmlFor="description">
+          Beskrivelse / hvad tror du problemet er?
+        </label>
+        <br />
+        <input
+          type="text"
+          id="description"
+          name="description"
+          placeholder="f.eks. Manglende isolering på rør"
+          value={form.description}
+          onChange={handleChange}
+        />
+        <br />
+        <br />
+
+        <label htmlFor="criticality">Kritikalitet</label>
+        <br />
+        <select
+          id="criticality"
+          name="criticality"
+          value={form.criticality}
+          onChange={handleChange}
+        >
+          <option value="High">Høj</option>
+          <option value="Medium">Middel</option>
+          <option value="Low">Lav</option>
+        </select>
+        <br />
+        <br />
+
+        <fieldset style={{ border: "none", padding: 0, margin: 0 }}>
+          <legend>Periode</legend>
+          <label>
+            <input
+              type="checkbox"
+              name="seasonal"
+              checked={form.seasonal}
+              onChange={handleChange}
+            />{" "}
+            Sæson
+          </label>
+          <br />
+          {/* season dates */}
+          <input
+            type="date"
+            name="startDate"
+            value={form.startDate}
+            onChange={handleChange}
+            disabled={!form.seasonal}
+          />{" "}
+          -{" "}
+          <input
+            type="date"
+            name="endDate"
+            value={form.endDate}
+            onChange={handleChange}
+            disabled={!form.seasonal}
+          />
+        </fieldset>
+
         <br />
 
         <label htmlFor="thresholdTempIn">
@@ -145,9 +218,7 @@ export default function Regler() {
         <br />
         <br />
 
-        <label htmlFor="thresholdWaterFlow">
-          Grænseværdi for flow:
-        </label>
+        <label htmlFor="thresholdWaterFlow">Grænseværdi for flow:</label>
         <br />
         <input
           type="number"
@@ -160,9 +231,7 @@ export default function Regler() {
         <br />
         <br />
 
-        <label htmlFor="duration">
-          Grænseværdi for varighed (timer):
-        </label>
+        <label htmlFor="duration">Grænseværdi for varighed (timer):</label>
         <br />
         <input
           type="number"
@@ -180,7 +249,6 @@ export default function Regler() {
         </button>
       </form>
 
-      {/* STATUS MESSAGES */}
       {status === "loading" && <p>Sender reglen til serveren...</p>}
       {status === "success" && (
         <p className="badge blue" style={{ marginTop: 12 }}>
@@ -195,8 +263,7 @@ export default function Regler() {
 
       <hr style={{ margin: "24px 0" }} />
 
-      {/* LIST OF RULES */}
-      <h3>Gemte regler (kun mens serveren kører)</h3>
+      <h3>Gemte regler (mens serveren kører)</h3>
       {rules.length === 0 && <p>Der er ingen regler endnu.</p>}
 
       {rules.length > 0 && (
@@ -204,6 +271,9 @@ export default function Regler() {
           <thead>
             <tr>
               <th>Navn</th>
+              <th>Kritikalitet</th>
+              <th>Sæson</th>
+              <th>Periode</th>
               <th>Frem (°C)</th>
               <th>Retur (°C)</th>
               <th>Flow</th>
@@ -215,6 +285,13 @@ export default function Regler() {
             {rules.map((rule) => (
               <tr key={rule.name}>
                 <td>{rule.name}</td>
+                <td>{rule.criticality}</td>
+                <td>{rule.seasonal ? "Ja" : "Nej"}</td>
+                <td>
+                  {rule.startDate && rule.endDate
+                    ? `${rule.startDate} - ${rule.endDate}`
+                    : "-"}
+                </td>
                 <td>{rule.thresholdTempIn}</td>
                 <td>{rule.thresholdTempOut}</td>
                 <td>{rule.thresholdWaterFlow}</td>

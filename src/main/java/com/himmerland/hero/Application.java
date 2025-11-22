@@ -11,6 +11,8 @@ import com.himmerland.hero.service.helperclasses.enums.Criticality;
 import static com.himmerland.hero.service.helperclasses.handlecsv.ReadCSVFileToMeasurementHeat.readCSVFileToMeasurementsHeat;
 import static com.himmerland.hero.service.helperclasses.handlejson.WriteObjectToJson.writeObjectToJson;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 @SpringBootApplication
@@ -47,10 +49,10 @@ public class Application {
       System.out.println("A notification has been sent due to rule being triggered for " + counter + " measurements.");
       Notification notification = new Notification(
           "address for the notification",
-          "Broken water heater",
+          rule.getDescription(), 
           rule.getName(),
-          Criticality.Low,
-          "2024-01-01T12:00:00Z",
+          rule.getCriticality(), 
+          OffsetDateTime.now(ZoneOffset.UTC).toString(),
           true,
           false
       );

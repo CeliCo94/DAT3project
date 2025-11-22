@@ -1,10 +1,20 @@
 package com.himmerland.hero.service.rules;
 
+import com.himmerland.hero.service.helperclasses.enums.Criticality;
+
 public class RuleThresholdHeat implements IRule {
 
+    // Basic info
     private String name = "";
     private String description = "";
+    private Criticality criticality = Criticality.Low;
 
+    // Seasonal settings
+    private boolean seasonal = false;
+    private String startDate; // optional
+    private String endDate;   // optional
+
+    // Thresholds
     private int thresholdTempIn;
     private int thresholdTempOut;
     private int thresholdWaterFlow;
@@ -12,37 +22,76 @@ public class RuleThresholdHeat implements IRule {
 
     public RuleThresholdHeat() {} // <-- Jackson needs a no-arg constructor
 
-    public RuleThresholdHeat(String name, int thresholdTempIn, int thresholdTempOut, int thresholdWaterFlow, int duration) {
-        this.name = name;
-        this.thresholdTempIn = thresholdTempIn;
-        this.thresholdTempOut = thresholdTempOut;
-        this.thresholdWaterFlow = thresholdWaterFlow;
-        this.duration = duration;
-    }
 
-    // Getters – Jackson uses these to serialize
+    // --- Getters and setters --
     public String getName() {
         return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
         return description;
     }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Criticality getCriticality() {
+        return criticality;
+    }
+    public void setCriticality(Criticality criticality) {
+        this.criticality = criticality;
+    }
+
+    public boolean isSeasonal() {
+        return seasonal;
+    }
+    public void setSeasonal(boolean seasonal) {
+        this.seasonal = seasonal;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
     public int getThresholdTempIn() {
         return thresholdTempIn;
+    }
+    public void setThresholdTempIn(int thresholdTempIn) {
+        this.thresholdTempIn = thresholdTempIn;
     }
 
     public int getThresholdTempOut() {
         return thresholdTempOut;
     }
+    public void setThresholdTempOut(int thresholdTempOut) {
+        this.thresholdTempOut = thresholdTempOut;
+    }
 
     public int getThresholdWaterFlow() {
         return thresholdWaterFlow;
     }
+    public void setThresholdWaterFlow(int thresholdWaterFlow) {
+        this.thresholdWaterFlow = thresholdWaterFlow;
+    }
 
     public int getDuration() {
         return duration;
+    }
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     @Override

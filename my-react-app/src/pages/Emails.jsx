@@ -4,6 +4,7 @@ export default function Email() {
   const [notification, setNotification] = useState(null);
   const [status, setStatus] = useState("loading");
   const [error, setError] = useState("");
+  const [sendStatus, setSendStatus] = useState("idle"); // for email sending
 
   useEffect(() => {
     async function fetchNotification() {
@@ -29,6 +30,26 @@ export default function Email() {
 
     fetchNotification();
   }, []);
+
+  const handleSendEmail = async () => {
+    try {
+      setSendStatus("loading");
+      const res = await fetch("/notifications/send-email", {
+        method: "POST",
+      });
+      if (!res.ok) {
+        throw new Error("Kunne ikke sende e-mail");
+      }
+      setSendStatus("success");
+      // update local state so button disables
+      setNotification((prev) =>
+        prev ? { ...prev, sent: true } : prev
+      );
+    } catch (err) {
+      console.error(err);
+      setSendStatus("error");
+    }
+  };
 
   return (
     <section className="card">
@@ -70,6 +91,35 @@ export default function Email() {
             <strong>Sendt som e-mail:</strong>{" "}
             {notification.sent ? "Ja" : "Nej"}
           </p>
+
+          <br />
+
+          <button
+            type="button"
+            onClick={handleSendEmail}
+            disabled={
+              sendStatus === "loading" ||
+              notification.sent ||
+              !notification.active
+            }
+          >
+            {notification.sent
+              ? "E-mail er allerede sendt"
+              : sendStatus === "loading"
+              ? "Sender e-mail..."
+              : "Send e-mail"}
+          </button>
+
+          {sendStatus === "error" && (
+            <p className="badge red" style={{ marginTop: 8 }}>
+              Kunne ikke sende e-mail.
+            </p>
+          )}
+          {sendStatus === "success" && (
+            <p className="badge blue" style={{ marginTop: 8 }}>
+              E-mail er sendt!
+            </p>
+          )}
         </div>
       )}
     </section>
