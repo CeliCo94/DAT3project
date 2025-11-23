@@ -3,6 +3,8 @@ package com.himmerland.hero.domain.rules;
 import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
 import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.domain.measurements.MeasurementHeat;
+import com.himmerland.hero.domain.notifications.Notification;
+import com.himmerland.hero.service.helperclasses.enums.Criticality;
 import java.util.List;
 
 public class RuleThresholdHeat extends IdentifiableBase implements IRule {
@@ -81,5 +83,49 @@ public class RuleThresholdHeat extends IdentifiableBase implements IRule {
     @Override
     public void applyDescription(String description) {
         this.description = description;
+    }
+    
+    @Override
+    public boolean isBrokenBy(Measurement m, RuleContext ctx) {
+        if (m instanceof MeasurementHeat){
+            MeasurementHeat heatMeasurement = (MeasurementHeat)m;
+            return heatMeasurement.getForwardTemperature() >= this.thresholdTempIn
+            && heatMeasurement.getReturnTemperature() >= this.thresholdTempOut
+            && heatMeasurement.getVolume() >= this.thresholdWaterFlow;
+        }
+        return false;
+    }
+
+    @Override
+    public Notification buildNotification(Measurement m, RuleContext ctx) {
+        if (!(m instanceof MeasurementHeat)) {
+            return null;
+        }
+        MeasurementHeat heatMeasurement = (MeasurementHeat)m;
+
+        // Build a cause message describing what thresholds were exceeded
+        StringBuilder cause = new StringBuilder("Heat threshold exceeded: ");
+        if (heatMeasurement.getForwardTemperature() >= this.thresholdTempIn) {
+            cause.append("Forward temp (").append(heatMeasurement.getForwardTemperature())
+            .append(") >= ").append(this.thresholdTempIn).append("; ");
+        }
+        if (heatMeasurement.getReturnTemperature() >= this.thresholdTempOut) {
+            cause.append("Return temp (").append(heatMeasurement.getReturnTemperature())
+            .append(") >= ").append(this.thresholdTempOut).append("; ");
+        }
+        if (heatMeasurement.getVolume() >= this.thresholdWaterFlow) {
+            cause.append("Volume (").append(heatMeasurement.getVolume())
+            .append(") >= ").append(this.thresholdWaterFlow).append("; ");
+        }
+
+        return new Notification(
+            heatMeasurement.getMeterNumber(), //address
+            cause.toString(), // cause
+            this.name, // rule name
+            Criticality.Low, // criticality
+            heatMeasurement.getTimestamp(), // timeStamp
+            true, // isActive
+            false // isSent
+        );
     }
 }
