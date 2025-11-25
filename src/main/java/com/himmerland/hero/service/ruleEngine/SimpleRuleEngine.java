@@ -13,11 +13,8 @@ public class SimpleRuleEngine implements RuleEngine {
 
     @Override
     public List<Notification> onNewMeasurement(Measurement measurement, RuleContext ruleContext) {
-
         List<Notification> notifications = new ArrayList<>();
-        // Always start with an empty list
 
-        // TEMPORARY DUMMY LOGIC (replace later)
         if (measurement.getInfoCode() == 0) {
             Notification notification = new Notification();
             notification.setCause("This is a test");
