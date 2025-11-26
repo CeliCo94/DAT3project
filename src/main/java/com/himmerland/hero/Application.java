@@ -12,6 +12,7 @@ import com.himmerland.hero.service.helperclasses.enums.Criticality;
 
 import static com.himmerland.hero.service.helperclasses.handlejson.ReadAllJsonToList.readAll;
 import static com.himmerland.hero.service.helperclasses.handlecsv.ReadCSVFileToMeasurementHeat.readCSVFileToMeasurementsHeat;
+import static com.himmerland.hero.service.helperclasses.handlejson.WriteObjectToJson.writeObjectToJson;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -82,17 +83,17 @@ public class Application {
       System.out.println("A notification has been sent due to rule being triggered for " + counter + " measurements.");
       Notification notification = new Notification(
           "address for the notification",
-          "Broken water heater",
+          rule.getDescription(), 
           rule.getName(),
-          Criticality.Low,
+          rule.getCriticality(),
           "2024-01-01T12:00:00Z",
           true,
           false
       );
-      //writeObjectToJson(filePathNotification, notification);
+      writeObjectToJson(filePathNotification, notification);
     } else {
       System.out.println("No notification triggered. Rule was only triggered for " + counter + " measurements.");
-      //writeObjectToJson(filePathNotification, "");
+      writeObjectToJson(filePathNotification, "");
     }
   }
 }
