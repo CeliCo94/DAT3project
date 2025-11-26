@@ -19,10 +19,13 @@ public class NewMeasurementRestController {
     // Temporary test endpoint
     @GetMapping("/measurements/test")
     public ResponseEntity<Void> onNewMeasurement() {
-        MeasurementHeat measurement = new MeasurementHeat();
-        measurement.setVolume(700); // just a dummy value for now
-
-        monitoringService.handleNewMeasurement(measurement);
+        
+        for (int i = 0; i<9; i++){
+            MeasurementHeat measurement = new MeasurementHeat();
+            measurement.setVolume((int) (Math.random()*1000)); // just a dummy value for now
+    
+            monitoringService.handleNewMeasurement(measurement);
+        }
 
         return ResponseEntity.ok().build();
     }

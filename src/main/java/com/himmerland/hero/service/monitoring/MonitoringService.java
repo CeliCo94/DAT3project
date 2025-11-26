@@ -15,12 +15,13 @@ public class MonitoringService {
 
     public MonitoringService(RuleEngine ruleEngine) {
         this.ruleEngine = ruleEngine;
+        System.out.println("MonitoringService has been instantiated");
     }
 
     public void handleNewMeasurement(Measurement measurement) {
-        RuleContext ctx = new RuleContext();
-        List<?> notifications = ruleEngine.onNewMeasurement(measurement, ctx);
-        System.out.println("Notifications: " + notifications);
+        RuleContext ruleContext = new RuleContext();
+        List<?> notifications = ruleEngine.onNewMeasurement(measurement, ruleContext);
+        System.out.println("Number of notification in MonitoringService: " + notifications.size());
     }
 
 }
