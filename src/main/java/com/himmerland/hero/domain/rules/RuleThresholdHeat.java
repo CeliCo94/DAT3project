@@ -1,36 +1,23 @@
 package com.himmerland.hero.domain.rules;
 
-import com.himmerland.hero.domain.rules.Rule;
-
 public class RuleThresholdHeat extends Rule {
-
-    private String name = "";
-    private String description = "";
 
     private int thresholdTempIn;
     private int thresholdTempOut;
     private int thresholdWaterFlow;
-    private int duration;
 
-    public RuleThresholdHeat() {} // <-- Jackson needs a no-arg constructor
+    public RuleThresholdHeat() {
+        
+    } // <-- Jackson needs a no-arg constructor
 
-    public RuleThresholdHeat(String name, int thresholdTempIn, int thresholdTempOut, int thresholdWaterFlow, int duration) {
-        this.name = name;
+    public RuleThresholdHeat(String name, String description, String consumptionsType, int duration, int thresholdTempIn, int thresholdTempOut, int thresholdWaterFlow) {
+        super(name, description, consumptionsType, duration);
         this.thresholdTempIn = thresholdTempIn;
         this.thresholdTempOut = thresholdTempOut;
         this.thresholdWaterFlow = thresholdWaterFlow;
-        this.duration = duration;
     }
 
     // Getters – Jackson uses these to serialize
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public int getThresholdTempIn() {
         return thresholdTempIn;
     }
@@ -41,9 +28,5 @@ public class RuleThresholdHeat extends Rule {
 
     public int getThresholdWaterFlow() {
         return thresholdWaterFlow;
-    }
-
-    public int getDuration() {
-        return duration;
     }
 }

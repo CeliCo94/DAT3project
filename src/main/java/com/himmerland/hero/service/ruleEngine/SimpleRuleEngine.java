@@ -9,27 +9,27 @@ import org.springframework.stereotype.Service;
 
 import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.domain.notifications.Notification;
+import com.himmerland.hero.domain.rules.Rule;
+import com.himmerland.hero.domain.rules.RuleThresholdHeat;
 
 @Service
 public class SimpleRuleEngine implements RuleEngine {
 
     private final Map<String, List<MeterRuleState>> meterRuleStates = new HashMap<>();
 
-    private static final int DEFAULT_DURATION_MEASUREMENTS = 3;
-
     @Override
-
     public List<Notification> onNewMeasurement(Measurement measurement, RuleContext ruleContext) {
 
         System.out.println("SimpleRuleEngine is called from MonitoringService");
 
         List<Notification> notifications = new ArrayList<>();
+
         String meterNumber = measurement.getMeterNumber();
         System.out.println("MeterNumber is collected");
 
         List<MeterRuleState> statesForMeterRule = meterRuleStates.computeIfAbsent(
             meterNumber,
-            id -> createInitialStatesForMeter(id)
+            id -> createInitialStatesForMeter(id, ruleContext)
         );
 
         for (MeterRuleState meterRuleState : statesForMeterRule) {
@@ -45,9 +45,19 @@ public class SimpleRuleEngine implements RuleEngine {
         return notifications;
     }
 
-    private List<MeterRuleState> createInitialStatesForMeter(String meterNumber) {
-        List<MeterRuleState> list = new ArrayList<>();
-        list.add(new MeterRuleState(meterNumber, DEFAULT_DURATION_MEASUREMENTS));
-        return list;
+    private List<MeterRuleState> createInitialStatesForMeter(String meterId, RuleContext ruleContext) {
+        List<MeterRuleState> instances = new ArrayList<>();
+        
+        Rule mockRule = createMockRule();
+        
+        instances.add(new MeterRuleState(meterId, mockRule));
+
+        return instances;
+    }
+
+    private Rule createMockRule(){
+        RuleThresholdHeat rule = new RuleThresholdHeat("Test Rule", "This is the description", "Consumtion Type", 3, 60, 30, 20);
+        return rule;
+
     }
 }

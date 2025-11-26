@@ -2,32 +2,28 @@ package com.himmerland.hero.service.ruleEngine;
 
 import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.domain.notifications.Notification;
-import com.himmerland.hero.domain.rules.Rule;
-import com.himmerland.hero.domain.meters.Meter;
 import com.himmerland.hero.service.helperclasses.enums.Criticality;
-import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
+import com.himmerland.hero.domain.rules.Rule;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class MeterRuleState {
-  
+
     private final String meterId;
-    //private final String ruleId;
-    private final int durationInMeasurements;
+    private final Rule rule;
+
     private int consecutiveBrokenCount = 0;
 
-    public MeterRuleState(String meterId, int duration) {
+    public MeterRuleState(String meterId, Rule rule) {
         this.meterId = meterId;
-        //this.ruleId = ruleId;
-        this.durationInMeasurements = duration;
+        this.rule = rule;
     }
 
-    // called every time a new measurement for this meter arrives
     public List<Notification> onNewMeasurement(Measurement measurement, RuleContext ruleContext) {
 
-        List<Notification> notifications = new ArrayList(); 
+        List<Notification> notifications = new ArrayList();
+
         boolean brokenNow = isBroken(measurement, ruleContext); // single-measurement check
 
         if (brokenNow) {
@@ -38,7 +34,9 @@ public class MeterRuleState {
             System.out.println("Counter is reset");
         }
 
-        if (consecutiveBrokenCount >= durationInMeasurements) {
+        int duration = rule.getDuration();
+
+        if (consecutiveBrokenCount >= duration) {
             Notification notification = buildNotification(measurement, ruleContext);
             notifications.add(notification);
             System.out.println("Notification is added to list");
@@ -58,10 +56,10 @@ public class MeterRuleState {
     private Notification buildNotification(Measurement measurement, RuleContext ruleContext) {
 
         Notification notification = new Notification("Test address",
-                "Test for SimpelRuleEngine", "Content1",
+                rule.getDescription(), rule.getName(),
                 Criticality.Low, "2024-01-01T02:00:00Z", false, false);
 
         return notification;
     }
-     
+
 }
