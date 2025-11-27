@@ -72,8 +72,12 @@ function ActiveTable({ rows }) {
 export default function Home() {
   const [rows, setRows] = useState([]);
   useEffect(() => {
-    loadCsv("/data/notifications.csv").then(setRows);
+    fetch('http://localhost:8080/notifications/fetch')
+    .then((r) => r.json())
+    .then(setRows)
+    .catch(console.error);
   }, []);
+
 
   const { active, history } = splitActiveAndHistory(rows);
 
@@ -125,5 +129,5 @@ export default function Home() {
         ))}
       </Section>
     </section>
-  );
+);
 }

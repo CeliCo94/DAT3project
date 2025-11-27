@@ -2,7 +2,7 @@ package com.himmerland.hero.domain.rules;
 
 import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.domain.notifications.Notification;
-import com.himmerland.hero.domain.rules.RuleContext;
+//import com.himmerland.hero.domain.rules.RuleContext;
 import java.util.List;
 
 interface IRule {
