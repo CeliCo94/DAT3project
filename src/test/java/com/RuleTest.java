@@ -18,6 +18,6 @@ public class RuleTest {
     @Test
     public void testRule() {
         RuleThresholdHeat rule = new RuleThresholdHeat();
-        Assertions.assertEquals(0, rule.testRule());
+        Assertions.assertEquals(0, rule.getDuration());
     }
 }
