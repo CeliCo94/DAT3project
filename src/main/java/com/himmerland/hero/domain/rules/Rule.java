@@ -1,6 +1,8 @@
 package com.himmerland.hero.domain.rules;
 
 import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
+import com.himmerland.hero.domain.measurements.Measurement;
+import com.himmerland.hero.domain.notifications.Notification;
 
 public abstract class Rule extends IdentifiableBase {
     private String name = "";
@@ -10,7 +12,7 @@ public abstract class Rule extends IdentifiableBase {
 
     public Rule() {}
 
-    public Rule(String name, String description, String consumptionsType, int duration){
+    public Rule(String name, String description, String consumptionType, int duration){
         this.name = name;
         this.description = description;
         this.consumptionType = consumptionType;
@@ -32,5 +34,9 @@ public abstract class Rule extends IdentifiableBase {
     public String getDescription() {
         return description;
     }
+
+    public abstract boolean isBroken(Measurement m);
+
+    public abstract Notification buildNotification(Measurement m);
     
 }

@@ -3,6 +3,7 @@ target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+.env
 
 ### STS ###
 .apt_generated
@@ -31,3 +32,16 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+## Docker ##
+/src/main/resources/dockerfile
+/my-react-app/src/dockerfile
+docker-compose.yml
+
+## Supabase ##
+.env
+application.yml
+
+Personnel.java
+ServiceCenterTest.java

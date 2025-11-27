@@ -32,6 +32,10 @@ public final class JsonStorage<T extends Identifiable> implements StorageStrateg
         return baseDir.resolve(id + ".json");
     }
 
+    public Path getBaseDir() {
+        return baseDir;
+    }
+
     @Override
     public Optional<T> read(String id) {
         Path f = file(id);

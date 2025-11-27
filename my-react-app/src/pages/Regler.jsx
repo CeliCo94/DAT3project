@@ -1,6 +1,16 @@
 export default function Regler() {
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    await fetch('http://localhost:8080/api/regler', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: e.target.name.value,
+        thresholdTempIn: e.target.thresholdTempIn.value,
+        thresholdTempOut: e.target.thresholdTempOut.value,
+        thresholdWaterFlow: e.target.thresholdWaterFlow.value,
+        duration: e.target.duration.value
+      })
+    });
     // TODO: read values with e.target.elements or convert to controlled inputs
     // const { name, thresholdTempIn, thresholdTempOut, thresholdWaterFlow, duration } = e.target.elements;
   };
