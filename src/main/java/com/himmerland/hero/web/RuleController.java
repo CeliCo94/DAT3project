@@ -1,6 +1,5 @@
 package com.himmerland.hero.web;
 
-import com.himmerland.hero.Application;
 import com.himmerland.hero.domain.rules.RuleThresholdHeat;
 
 import org.springframework.http.ResponseEntity;

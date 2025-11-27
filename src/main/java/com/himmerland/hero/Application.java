@@ -20,9 +20,10 @@ import java.util.List;
 public class Application {
 
   public static void main(String[] args) {
-    //SpringApplication.run(Application.class, args);
+    SpringApplication.run(Application.class, args);
     //runStorageStrategyExample();
   }
+
 
   static void runStorageStrategyExample() {
     // Write to a real data directory, not resources
