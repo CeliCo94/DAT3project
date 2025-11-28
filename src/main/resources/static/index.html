@@ -27,44 +27,136 @@
 
     <main class="content">
       <section class="card">
-        <h2>Aktive notifikationer</h2>
+        <h2>Notifikationer</h2>
+        <!-- Notification Filter -->
+        <button type="button" class="collapsible">Filter</button>
+        <div class="content">
+          <form>
+            <label for="department">Vælg afdeling:</label>
+            <select id="department">
+              <option value="Afdeling1">Afdeling 1</option>
+              <option value="Afdeling3">Afdeling 3</option>
+            </select>
 
-        <h3 class="section-heading">Service Center 1</h3>
-        <div class="table-wrap">
-          <table id="sc1-table" class="data-table">
-            <thead>
-              <tr>
-                <th>Notifikation</th>
-                <th>Regel</th>
-                <th>Vigtighed</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td></td><td></td><td></td><td></td></tr>
-              <tr><td></td><td></td><td></td><td></td></tr>
-              <tr><td></td><td></td><td></td><td></td></tr>
-            </tbody>
-          </table>
+            <br>
+
+            <label for="department">Vælg vigtighed:</label>
+            <select id="department">
+              <option value="kritisk">Høj</option>
+              <option value="vigtil">Mellem</option>
+              <option value="vigtil">Lav</option>
+            </select>
+
+            <br>
+
+            <input type="checkbox" id="filter1" value="choice1">
+            <label for="filter1">choice 1</label><br>
+
+            <br>
+
+            <input type="reset">
+            <input type="submit">
+          </form>
         </div>
 
-        <h3 class="section-heading">Service Center 2</h3>
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Notifikation</th>
-                <th>Regel</th>
-                <th>Vigtighed</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td></td><td></td><td></td><td></td></tr>
-              <tr><td></td><td></td><td></td><td></td></tr>
-              <tr><td></td><td></td><td></td><td></td></tr>
-            </tbody>
-          </table>
+        <br>
+
+        <button type="button" class="collapsible">Aktive notifikationer</button>
+        <!-- <h2>Aktive notifikationer</h2> -->
+        <div class="content">
+          <h3 class="section-heading">Service Center 1</h3>
+          <div class="table-wrap">
+            <table id="sc1-table" class="data-table">
+              <thead>
+                <tr>
+                  <th>Notifikation</th>
+                  <th>Regel</th>
+                  <th>Vigtighed</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="section-heading">Service Center 2</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Notifikation</th>
+                  <th>Regel</th>
+                  <th>Vigtighed</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <br>
+
+        <button type="button" class="collapsible">Historiske notifikationer</button>
+        <!-- <h2>Historiske notifikationer</h2> -->
+        <div class="content">
+          <h3 class="section-heading">Service Center 1</h3>
+          <div class="table-wrap">
+            <table id="sc1-table" class="data-table">
+              <thead>
+                <tr>
+                  <th>Notifikation</th>
+                  <th>Regel</th>
+                  <th>Vigtighed</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="section-heading">Service Center 2</h3>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Notifikation</th>
+                  <th>Regel</th>
+                  <th>Vigtighed</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="popup">
+          <!-- Afdeling/adresse -->
+          <!-- Regelnavn -->
+          <!-- Beskrivelse af regl -->
+          <!-- Tid -->
+          <!-- Relevante værdier ift målinger -->
+          <!-- Forbrugstype -->
+          <!-- Målerid/målertype -->
+          <!-- vigtighed (critical?) -->
+          <!-- Graf -->
         </div>
       </section>
     </main>
@@ -73,5 +165,6 @@
   <!-- load the include helper at the end of body -->
   <script src="/js/include-menu.js"></script>
   <script src="/js/fetchNotifications.js"></script>
+  <script src="/js/index.js"></script>
 </body>
 </html>
