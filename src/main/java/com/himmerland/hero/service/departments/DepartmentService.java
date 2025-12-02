@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-@Service
+
+@Service 
 public class DepartmentService {
 
     private final DepartmentRepository repository;
