@@ -7,7 +7,7 @@ import com.himmerland.hero.service.io.JsonStorage;
 import com.himmerland.hero.service.io.StorageStrategy;
 import com.himmerland.hero.domain.measurements.MeasurementHeat;
 import com.himmerland.hero.domain.notifications.Notification;
-import com.himmerland.hero.domain.rules.RuleThresholdHeat;
+import com.himmerland.hero.domain.rules.RuleHeat;
 import com.himmerland.hero.service.helperclasses.enums.Criticality;
 
 import static com.himmerland.hero.service.helperclasses.handlejson.ReadAllJsonToList.readAll;
@@ -56,7 +56,7 @@ public class Application {
   }
 
 
-  public static void evaluateRuleThresholdHeat(RuleThresholdHeat rule) {
+  public static void evaluateRuleThresholdHeat(RuleHeat rule) {
     String filePath = "src/main/resources/csv/twentyfourHoursTestData.csv";
     List<MeasurementHeat> measurements = readCSVFileToMeasurementsHeat(filePath);
 
@@ -66,7 +66,7 @@ public class Application {
     for (MeasurementHeat measurement : measurements) {
       if (measurement.getForwardTemperature() >= rule.getThresholdTempIn()
           && measurement.getReturnTemperature() >= rule.getThresholdTempOut()
-          && measurement.getVolume() >= rule.getThresholdWaterFlow()) {
+          && measurement.getVolume() >= rule.getThresholdHeatWaterFlow()) {
         System.out.println("Rule triggered for measurement at timestamp: " + measurement.getTimestamp());
         counter++;
       } else {

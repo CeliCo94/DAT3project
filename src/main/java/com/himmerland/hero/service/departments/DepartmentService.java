@@ -4,11 +4,14 @@ import com.himmerland.hero.domain.departments.Department;
 import com.himmerland.hero.service.helperclasses.handlejson.ReadAllJsonToList;
 import com.himmerland.hero.service.io.JsonStorage;
 import com.himmerland.hero.service.io.StorageStrategy;
+import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
+
+@Service 
 public class DepartmentService {
 
     private final StorageStrategy<Department> storage;
