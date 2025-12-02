@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.domain.notifications.Notification;
 import com.himmerland.hero.domain.rules.Rule;
-import com.himmerland.hero.domain.rules.RuleThresholdHeat;
+import com.himmerland.hero.domain.rules.RuleHeat;
 
 @Service
 public class SimpleRuleEngine implements RuleEngine {
@@ -56,7 +56,7 @@ public class SimpleRuleEngine implements RuleEngine {
     }
 
     private Rule createMockRule(){
-        RuleThresholdHeat rule = new RuleThresholdHeat("Test Rule", "This is the description", "Consumtion Type", 3, 60, 30, 20);
+        RuleHeat rule = new RuleHeat();
         return rule;
 
     }

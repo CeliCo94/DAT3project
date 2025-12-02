@@ -1,33 +1,26 @@
-document.getElementById("addRuleForm").addEventListener("submit", async function (e) {
-  e.preventDefault(); // Stopper browserens default submit-adfærd
-  
-  const formData = {
-    name: document.getElementById("name").value,
-    thresholdTempIn: parseInt(document.getElementById("thresholdTempIn").value, 10),
-    thresholdTempOut: parseInt(document.getElementById("thresholdTempOut").value, 10),
-    thresholdWaterFlow: parseFloat(document.getElementById("thresholdWaterFlow").value),
-    duration: parseInt(document.getElementById("duration").value, 10)
-  };
+document.getElementById("addRuleForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  try {
-    const response = await fetch("api/regler", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-        
-      },
-      body: JSON.stringify(formData)
+    const body = {
+        type: document.getElementById("selectRuleType").value,
+        name: document.getElementById("ruleName").value,
+        description: document.getElementById("ruleDescription").value,
+        duration: Number(document.getElementById("ruleDuration").value),
+        thresholdTempIn: Number(document.getElementById("thresholdTempIn")?.value) || null,
+        thresholdTempOut: Number(document.getElementById("thresholdTempOut")?.value) || null,
+        thresholdHeatWaterFlow: Number(document.getElementById("thresholdHeatWaterFlow")?.value) || null,
+        thresholdWaterFlow: Number(document.getElementById("thresholdWaterFlow")?.value) || null,
+        thresholdHumidity: Number(document.getElementById("thresholdHumidity")?.value) || null
+    };
+
+    console.log("fetch request body:", body);
+
+    const response = await fetch("/api/addRule", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
     });
 
-    if (response.ok) {
-      const result = await response.json();
-      alert(`Regel oprettet med navn: ${result.name}`);
-    } else {
-      console.error("Fejl ved POST:", response.statusText);
-      alert("Der opstod en fejl. Tjek konsollen.");
-    }
-  } catch (error) {
-    console.error("Netværksfejl:", error);
-    alert("Kunne ikke kommunikere med serveren.");
-  }
+    const data = await response.json();
+    console.log("Server replied:", data);
 });
