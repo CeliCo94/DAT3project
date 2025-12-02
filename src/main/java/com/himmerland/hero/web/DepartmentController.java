@@ -5,14 +5,13 @@ import com.himmerland.hero.service.departments.DepartmentService;
 import com.himmerland.hero.service.departments.DepartmentDTO;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
 
-@Controller
+@RestController
 @RequestMapping("/api/departments")
 @CrossOrigin
 public class DepartmentController {
@@ -20,8 +19,7 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     public DepartmentController(DepartmentService departmentService) {
-        Path dataDir = Path.of("data");
-        this.departmentService = new DepartmentService(dataDir);
+        this.departmentService = departmentService;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -29,23 +27,25 @@ public class DepartmentController {
         return ResponseEntity.ok(departmentService.findAll());
     }
 
-    @GetMapping(value = "/{id}", produces =MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Department> getById(@PathVariable String id) {
         return ResponseEntity.ok(departmentService.getDepartment(id));
     }
 
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-            public ResponseEntity<Department> create(@RequestBody DepartmentDTO payload) {
-                Department created = departmentService.createDepartment(new DepartmentDTO(payload.id(), payload.email(), payload.active()));
-                return ResponseEntity.created(URI.create("/api/departments/" + created.getId())).contentType(MediaType.APPLICATION_JSON).body(created);
-            }
+    public ResponseEntity<Department> create(@RequestBody DepartmentDTO payload) {
+        Department created = departmentService.createDepartment(payload);
+        return ResponseEntity.created(Objects.requireNonNull(URI.create("/api/departments/" + created.getId())))
+                .contentType(Objects.requireNonNull(MediaType.APPLICATION_JSON))
+                .body(created);
+    }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
                 produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Department> edit(@PathVariable String id, 
                 @RequestBody DepartmentDTO payload) {
-        Department edited = departmentService.editDepartment(id, new DepartmentDTO(payload.id(), payload.email(), payload.active()));
+        Department edited = departmentService.editDepartment(id, payload);
         return ResponseEntity.ok(edited);
     }
 
@@ -54,6 +54,4 @@ public class DepartmentController {
         departmentService.delete(id);
         return ResponseEntity.noContent().build();
     }
-    
-    
 }
