@@ -29,7 +29,6 @@ public class RuleService {
                 .orElseThrow(() -> new IllegalArgumentException("Rule not found: " + id));
     }
 
-
     public Rule createRule(Rule rule) {
         ruleRepository.save(rule);
         return rule;
@@ -47,5 +46,4 @@ public class RuleService {
 
         return existing;
     }
-
 }

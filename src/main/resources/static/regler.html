@@ -29,48 +29,25 @@
 
     <main class="content">
       <section class="card">
-        <h2>Opret / redigér regel</h2>
-          
-        <form id="ruleForm">
-          <input type="hidden" id="ruleId">
+        <h2>Regler</h2>
+          <form id="ruleForm">
+            <label for="name"><strong>Navngiv reglen</strong>:</label><br>
+            <input type="text" id="name" name="name"><br><br>
 
-          <label for="name"><strong>Navn</strong></label><br>
-          <input type="text" id="name" name="name"><br><br>
+            <label for="thresholdTempIn">Grænseværdi for fremløbstemperatur:</label><br>
+            <input type="number" id="thresholdTempIn" name="thresholdTempIn"><br><br>
 
-          <label for="description"><strong>Beskrivelse</strong></label><br>
-          <input type="text" id="description" name="description"><br><br>
+            <label for="thresholdTempOut">Grænseværdi for returløbstemperatur:</label><br>
+            <input type="number" id="thresholdTempOut" name="thresholdTempOut"><br><br>
 
-          <label for="thresholdTempIn">Grænseværdi for fremløbstemperatur</label><br>
-          <input type="number" id="thresholdTempIn" name="thresholdTempIn"><br><br>
+            <label for="thresholdWaterFlow">Grænseværdi for flow:</label><br>
+            <input type="number" id="thresholdWaterFlow" name="thresholdWaterFlow"><br><br>
 
-          <label for="thresholdTempOut">Grænseværdi for returløbstemperatur</label><br>
-          <input type="number" id="thresholdTempOut" name="thresholdTempOut"><br><br>
+            <label for="duration">Grænseværdi for varighed (timer):</label><br>
+            <input type="number" id="duration" name="duration"><br><br>
 
-          <label for="thresholdHeatWaterFlow">Grænseværdi for flow</label><br>
-          <input type="number" id="thresholdHeatWaterFlow" name="thresholdHeatWaterFlow"><br><br>
-
-          <label for="duration">Varighed (minutter)</label><br>
-          <input type="number" id="duration" name="duration"><br><br>
-
-          <button type="submit" id="submitButton">Opret regel</button>
-        </form>
-
-        <hr>
-
-        <h3>Eksisterende regler</h3>
-        <table style="width:100%; border-collapse: collapse;">
-          <thead>
-            <tr>
-              <th style="text-align:left;">Navn</th>
-              <th style="text-align:left;">Beskrivelse</th>
-              <th style="text-align:left;">Handling</th>
-            </tr>
-          </thead>
-          <tbody id="rulesTableBody">
-            <!-- fyldes via JS -->
-          </tbody>
-        </table>
-
+            <button type="submit">Send</button>
+          </form>
       </section>
     </main>
   </div>
@@ -80,4 +57,3 @@
   <script src="/js/form-handler.js"></script>
 </body>
 </html>
-

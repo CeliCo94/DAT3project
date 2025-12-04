@@ -19,7 +19,7 @@ public abstract class Rule extends IdentifiableBase {
     private String description = "";
     private String consumptionType;
     private int duration;
-    private boolean active = true;
+    private boolean active;
 
     protected Rule() {}
 
@@ -63,7 +63,7 @@ public abstract class Rule extends IdentifiableBase {
     }
 
     public boolean isActive() {
-    return active;
+        return active;
     }
 
     public void setActive(boolean active) {
