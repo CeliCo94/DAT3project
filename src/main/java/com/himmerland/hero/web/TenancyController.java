@@ -1,6 +1,5 @@
 package com.himmerland.hero.web;
 
-import com.himmerland.hero.domain.tenancies.Tenancy;
 import com.himmerland.hero.service.tenancies.TenancyDTO;
 import com.himmerland.hero.service.tenancies.TenancyService;
 import org.springframework.http.MediaType;
@@ -23,33 +22,33 @@ public class TenancyController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Tenancy>> getAll() {
+    public ResponseEntity<List<TenancyDTO>> getAll() {
         return ResponseEntity.ok(tenancyService.findAll());
     }
     
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Tenancy> getById(@PathVariable String id) {
+    public ResponseEntity<TenancyDTO> getById(@PathVariable String id) {
         return ResponseEntity.ok(tenancyService.getTenancy(id));
     }
 
     @GetMapping(value = "/{id}/edit", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Tenancy> showEditForm(@PathVariable String id) {
+    public ResponseEntity<TenancyDTO> showEditForm(@PathVariable String id) {
         return ResponseEntity.ok(tenancyService.getTenancy(id));
     }
 
-    @PostMapping(consumes =MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Tenancy> create(@RequestBody TenancyDTO payload) {
-        Tenancy created = tenancyService.createTenancy(payload);
-        return ResponseEntity.created(Objects.requireNonNull(URI.create("/api/tenancies/" + created.getId())))
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<TenancyDTO> create(@RequestBody TenancyDTO payload) {
+        TenancyDTO created = tenancyService.createTenancy(payload);
+        return ResponseEntity.created(Objects.requireNonNull(URI.create("/api/tenancies/" + created.id())))
             .contentType(Objects.requireNonNull(MediaType.APPLICATION_JSON))
             .body(created);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Tenancy> update(@PathVariable String id,@RequestBody TenancyDTO payload) {
+    public ResponseEntity<TenancyDTO> update(@PathVariable String id, @RequestBody TenancyDTO payload) {
         // Ensure the ID in the path matches the DTO
         TenancyDTO updatedDTO = new TenancyDTO(
-            id, //Use path variable ID
+            id, // Use path variable ID
             payload.meterNumber(),
             payload.departmentId(),
             payload.tennancyNumber(),
@@ -66,6 +65,4 @@ public class TenancyController {
         tenancyService.deleteTenancy(id);
         return ResponseEntity.noContent().build();
     }
-
-
 }
