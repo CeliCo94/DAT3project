@@ -15,6 +15,7 @@ public class MeterRuleState {
         this.rule = rule;
         this.consecutiveBrokenCount = 0;
     }
+    /* 
     public <T extends Rule> Optional<Notification> onNewMeasurement(Measurement m, RuleContext ctx) {
         if ((rule).isBroken(m)) {
             consecutiveBrokenCount++;
@@ -30,7 +31,7 @@ public class MeterRuleState {
         }
         return Optional.empty();
     }
-
+ */
     public int getConsecutiveBrokenCount() {
         return consecutiveBrokenCount;
     }

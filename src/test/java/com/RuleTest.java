@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.test.context.TestPropertySource;
 
 import com.himmerland.hero.Application;
-import com.himmerland.hero.domain.rules.RuleThresholdHeat;
+import com.himmerland.hero.domain.rules.RuleHeat;
 
 @SpringBootTest(
     classes = Application.class
@@ -17,7 +17,7 @@ import com.himmerland.hero.domain.rules.RuleThresholdHeat;
 public class RuleTest {
     @Test
     public void testRule() {
-        RuleThresholdHeat rule = new RuleThresholdHeat();
+        RuleHeat rule = new RuleHeat();
         Assertions.assertEquals(0, rule.getDuration());
     }
 }
