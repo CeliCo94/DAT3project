@@ -1,9 +1,6 @@
 package com.himmerland.hero.domain.tenancies;
 
 import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
-
-import com.himmerland.hero.domain.meters.Meter;
-import com.himmerland.hero.domain.departments.Department;
 public class Tenancy extends IdentifiableBase {
     private String Id;
     private String DepartmentId;
