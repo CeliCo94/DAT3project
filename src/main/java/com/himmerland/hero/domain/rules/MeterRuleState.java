@@ -1,9 +1,6 @@
 package com.himmerland.hero.domain.rules;
 
 import com.himmerland.hero.domain.meters.Meter;
-import com.himmerland.hero.domain.measurements.Measurement;
-import com.himmerland.hero.domain.notifications.Notification;
-import java.util.Optional;
 
 public class MeterRuleState {
     private Meter meter;
@@ -15,6 +12,7 @@ public class MeterRuleState {
         this.rule = rule;
         this.consecutiveBrokenCount = 0;
     }
+    /* 
     public <T extends Rule> Optional<Notification> onNewMeasurement(Measurement m, RuleContext ctx) {
         if ((rule).isBroken(m)) {
             consecutiveBrokenCount++;
@@ -30,7 +28,7 @@ public class MeterRuleState {
         }
         return Optional.empty();
     }
-
+ */
     public int getConsecutiveBrokenCount() {
         return consecutiveBrokenCount;
     }
