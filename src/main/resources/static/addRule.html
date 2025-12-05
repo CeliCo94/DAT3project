@@ -1,0 +1,76 @@
+<!doctype html>
+
+<html lang="da" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Himmerland HERO</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 64 40" aria-hidden="true">
+        <rect x="2" y="10" width="60" height="20" rx="6" ry="6"></rect>
+        <path d="M18 30c-5 0-9-4-9-9s4-9 9-9c3 0 5 1 7 3l3-3h9v6h-6l-3 3c1 2 2 4 2 6 0 5-4 9-9 9z"></path>
+      </svg>
+      <div class="brand-text">
+        <strong>Himmerland</strong><span>Boligforening</span>
+      </div>
+    </div>
+    <h1>Overvågning af energidata</h1>
+  </header>
+
+  <div class="layout">
+    <!-- Shared menu -->
+    <aside data-include="/partials/menu.html"></aside>
+
+    <main class="content">
+      <section class="card">
+        <h2>Tilføj regel</h2>
+          
+        <form id="addRuleForm">
+
+        <label for="selectRuleType">Vælg hvilken type regel</label>
+        <select name="selectRuleType" id="selectRuleType">
+            <option value="default" selected> </option>
+            <option value="ruleHeat">Varme</option>
+            <option value="ruleWater">Vand</option>
+            <option value="ruleHumidity">Luftfugtighed</option>
+        </select>
+
+            <div class="container" id="description">
+                <h3 class="container-title">Om reglen</h3>
+                <p id="ruleTypeDisplay"></p><br>
+                            
+                <label for="ruleName">Reglens navn:</label>
+                <input type="text" id="ruleName" name="ruleName" placeholder="Tilføj navn"><br><br>
+                
+                <label for="ruleDescription">Beskriv regel og mulige årsager:</label>
+                <input type="text" id="ruleDescription" name="ruleDescription" placeholder="Tilføj beskrivelse"><br><br>
+
+                <label for="ruleDuration">Varighed af regel i timer:</label>
+                <input type="number" id="ruleDuration" name="ruleDuration" placeholder="24"><br><br>
+            </div>
+
+            <div class="container" id="thresholds">
+                <h3 class="container-title">Tærskelværdier</h3>
+            </div>
+
+            <div class="container" id="submit">
+                <h3 class="container-title">Gem regel</h3>
+                <input type="submit" value="Start regel">
+            </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <!-- scripts -->
+  <script src="/js/include-menu.js"></script>
+  <script src="/js/addRuleForm.js"></script>
+  <script src="/js/addRuleSubmit.js"></script>
+</body>
+</html>
