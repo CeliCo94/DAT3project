@@ -31,10 +31,10 @@ public class HomeController {
         return "forward:/afdelinger.html";
     }
 
-    @GetMapping("/personale") //web starter dependency that makes it possible to map http requests to specific methods
-    public String personale() {
+    @GetMapping("/lejemaal") //web starter dependency that makes it possible to map http requests to specific methods
+    public String lejemaal() {
         // Forward til index.html under src/main/resources/static/
-        return "forward:/personale.html";
+        return "forward:/lejemaal.html";
     }
 
 }
