@@ -144,7 +144,7 @@ public class MeasurementHeat extends Measurement {
         this.averageFlow = averageFlow;
     }
 
-    public String getaverageFlownit() {
+    public String getaverageFlowUnit() {
         return averageFlowUnit;
     }
     public void setaverageFlowUnit(String averageFlowUnit) {

@@ -16,20 +16,21 @@ public class MeasurementService {
 
     public boolean CreateAndSaveMeasurement(MeasurementDTO measurement) {
         try {
-            //MeasurementHeat m = CreateNewMeasurement(measurement);
+            MeasurementHeat m = CreateNewMeasurement(measurement);
 
-            //MeasurementRepo.save(m);
+            MeasurementRepo.save(m);
+            /* 
+            List<MeasurementHeat> allMeasurements = MeasurementRepo.FilterMeterLastHours(10,m);
 
-            List<MeasurementHeat> allMeasurements = MeasurementRepo.findAllMeasurements();
-
-            for (MeasurementHeat m : allMeasurements) {
-            System.out.println("Volume: " + m.getVolume());
-            System.out.println("Meter Type: " + m.getConsumptionType());
-            System.out.println("Flow: " + m.getFlow());
-            System.out.println("RegisterE8: " + m.getRegisterE8());
+            for (MeasurementHeat meas : allMeasurements) {
+            System.out.println(meas.getTimestamp());
+            System.out.println("Volume: " + meas.getVolume());
+            System.out.println("Meter Type: " + meas.getConsumptionType());
+            System.out.println("Flow: " + meas.getFlow());
+            System.out.println("RegisterE8: " + meas.getRegisterE8());
             System.out.println("---------------------------");
             }
-
+*/
             return true;
         }
         catch (Exception e) {

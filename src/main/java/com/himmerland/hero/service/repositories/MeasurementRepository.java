@@ -1,54 +1,50 @@
 package com.himmerland.hero.service.repositories;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.ArrayList;
 
 import com.himmerland.hero.domain.measurements.MeasurementHeat;
-import com.himmerland.hero.service.io.JsonStorage;
-import com.himmerland.hero.service.io.ReadAll;
-import com.himmerland.hero.service.io.StorageStrategy;
 
-public class MeasurementRepository {
-    
-    private final StorageStrategy<MeasurementHeat> storage;
+public class MeasurementRepository extends BaseRepository<MeasurementHeat>{
 
-    public MeasurementRepository() {
-        Path dataDir = Path.of("data");
-        this.storage = new JsonStorage<MeasurementHeat>(dataDir, "measurements", MeasurementHeat.class);
+    public MeasurementRepository(Path dataDir) {
+        super(dataDir, "measurements", MeasurementHeat.class);
     }
-
-    public boolean save(MeasurementHeat measurement) {
-        try {
-            storage.write(measurement);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    /*
-    public List<MeasurementHeat> findAll() {
-        String id = "1";
-        return storage.read(id);
-    }
-        */
 
     public List<MeasurementHeat> FilterForMeterNumber(String MeterNumber) {
-        List<MeasurementHeat> MeasurementList = new ArrayList<>();
-
-        
+        List<MeasurementHeat> MeasurementList = findAll().stream()
+                .filter(m -> m.getMeterNumber().equals(MeterNumber))
+                .toList();
 
         return MeasurementList;
     }
 
-    public List<MeasurementHeat> findAllMeasurements() {
-        if (storage instanceof ReadAll) {
-            return ((ReadAll<MeasurementHeat>) storage).readAll();
-        } else {
-            throw new UnsupportedOperationException("readAll() not supported by this storage");
-        }
+    public List<MeasurementHeat> FilterMeterLastHours(int hours, MeasurementHeat measurement) {
+        List<MeasurementHeat> MeasurementList = FilterForMeterNumber(measurement.getMeterNumber());
+
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime cutoff = LocalDateTime.now().minusHours(hours);
+
+        return MeasurementList.stream()
+                // convert string timestamp -> LocalDateTime
+                .filter(m -> {
+                    try {
+                        LocalDateTime ts = LocalDateTime.parse(m.getTimestamp(), formatter);
+                        return ts.isAfter(cutoff);
+                    } catch (Exception e) {
+                        // skip malformed date entries
+                        return false;
+                    }
+                })
+                .toList();
+    }
+
+    @Override
+    protected Class<MeasurementHeat> getEntityClass() {
+        return MeasurementHeat.class;
     }
 
 }
