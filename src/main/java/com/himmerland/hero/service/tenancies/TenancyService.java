@@ -2,8 +2,9 @@ package com.himmerland.hero.service.tenancies;
 
 import com.himmerland.hero.domain.tenancies.Tenancy;
 import com.himmerland.hero.service.departments.DepartmentDTO;
-import com.himmerland.hero.service.tenancies.TenancyDTO;        
-import com.himmerland.hero.repositories.TenancyRepository;
+import com.himmerland.hero.service.repositories.TenancyRepository;
+import com.himmerland.hero.service.tenancies.TenancyDTO;
+
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;

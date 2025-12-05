@@ -1,4 +1,4 @@
-package com.himmerland.hero.repositories;
+package com.himmerland.hero.service.repositories;
 
 import com.himmerland.hero.service.helperclasses.handlejson.ReadAllJsonToList;
 import com.himmerland.hero.service.helperclasses.id.Identifiable;
