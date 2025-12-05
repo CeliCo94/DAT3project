@@ -1,7 +1,8 @@
 package com.himmerland.hero.service.departments;
 
 import com.himmerland.hero.domain.departments.Department;
-import com.himmerland.hero.repositories.DepartmentRepository;
+import com.himmerland.hero.service.repositories.DepartmentRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;

@@ -5,7 +5,10 @@ import com.himmerland.hero.service.helperclasses.id.Identifiable;
 
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.nio.file.StandardCopyOption.ATOMIC_MOVE;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
@@ -17,15 +20,18 @@ public final class JsonStorage<T extends Identifiable> implements StorageStrateg
     private final ObjectMapper mapper;
 
     public JsonStorage(Path rootPath, String type, Class<T> modelClass) {
-        this.baseDir   = rootPath.resolve(type);
-        this.modelClass= modelClass;
-        this.mapper    = new ObjectMapper();
+        this.baseDir    = rootPath.resolve(type);
+        this.modelClass = modelClass;
+        this.mapper     = new ObjectMapper();
         ensureDir();
     }
 
     private void ensureDir() {
-        try { Files.createDirectories(baseDir); }
-        catch (IOException e) { throw new RuntimeException("Failed to create directory " + baseDir, e); }
+        try {
+            Files.createDirectories(baseDir);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to create directory " + baseDir, e);
+        }
     }
 
     private Path file(String id) {
@@ -66,6 +72,29 @@ public final class JsonStorage<T extends Identifiable> implements StorageStrateg
             Files.deleteIfExists(file(id));
         } catch (IOException e) {
             throw new RuntimeException("Failed to delete file for id=" + id, e);
+        }
+    }
+
+    @Override
+    public List<T> findAll() {
+        if (!Files.exists(baseDir) || !Files.isDirectory(baseDir)) {
+            throw new IllegalStateException("Invalid base directory: " + baseDir);
+        }
+
+        try (Stream<Path> files = Files.list(baseDir)) {
+            return files
+                    .filter(Files::isRegularFile)
+                    .filter(f -> f.toString().endsWith(".json"))
+                    .map(f -> {
+                        try {
+                            return mapper.readValue(f.toFile(), modelClass);
+                        } catch (IOException e) {
+                            throw new RuntimeException("Failed to read file: " + f, e);
+                        }
+                    })
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to list files in " + baseDir, e);
         }
     }
 }

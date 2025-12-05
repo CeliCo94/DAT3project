@@ -1,6 +1,5 @@
-package com.himmerland.hero.repositories;
+package com.himmerland.hero.service.repositories;
 
-import com.himmerland.hero.service.helperclasses.handlejson.ReadAllJsonToList;
 import com.himmerland.hero.service.helperclasses.id.Identifiable;
 import com.himmerland.hero.service.io.JsonStorage;
 import com.himmerland.hero.service.io.StorageStrategy;
@@ -32,7 +31,7 @@ public abstract class BaseRepository<T extends Identifiable> {
 
     //Core operation 3: Find all
     public List<T> findAll() {
-        return ReadAllJsonToList.readAll(entityDir, getEntityClass());
+        return storage.findAll();
     }
 
     //Core operation 4: Delete by ID

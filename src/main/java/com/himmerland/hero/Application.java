@@ -21,9 +21,10 @@ public class Application {
 
   public static void main(String[] args) {
     SpringApplication.run(Application.class, args);
+    //runStorageStrategyExample();
   }
 
-/* 
+
   static void runStorageStrategyExample() {
     // Write to a real data directory, not resources
     Path dataDir = Path.of("data");
@@ -94,7 +95,7 @@ public class Application {
       System.out.println("No notification triggered. Rule was only triggered for " + counter + " measurements.");
       //writeObjectToJson(filePathNotification, "");
     }
-  } */
+  }
 }
 
   
