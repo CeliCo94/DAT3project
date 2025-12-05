@@ -25,10 +25,10 @@ public class HomeController {
         return "forward:/emails.html";
     }
 
-    @GetMapping("/servicecentre") //web starter dependency that makes it possible to map http requests to specific methods
-    public String servicecentre() {
+    @GetMapping("/afdelinger") //web starter dependency that makes it possible to map http requests to specific methods
+    public String afdelinger() {
         // Forward til index.html under src/main/resources/static/
-        return "forward:/servicecentre.html";
+        return "forward:/afdelinger.html";
     }
 
     @GetMapping("/personale") //web starter dependency that makes it possible to map http requests to specific methods

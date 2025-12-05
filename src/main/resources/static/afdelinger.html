@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Himmerland HERO</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 64 40" aria-hidden="true">
+        <rect x="2" y="10" width="60" height="20" rx="6" ry="6"></rect>
+        <path d="M18 30c-5 0-9-4-9-9s4-9 9-9c3 0 5 1 7 3l3-3h9v6h-6l-3 3c1 2 2 4 2 6 0 5-4 9-9 9z"></path>
+      </svg>
+      <div class="brand-text">
+        <strong>Himmerland</strong><span>Boligforening</span>
+      </div>
+    </div>
+    <h1>Overvågning af energidata</h1>
+  </header>
+
+  <div class="layout">
+    <!-- Shared menu -->
+    <aside data-include="/partials/menu.html"></aside>
+
+    <main class="content">
+      <section class="card">
+        <h2>Afdelinger</h2>
+
+        <!-- Button to open modal -->
+        <button class="add-department-btn" onclick="openDepartmentModal()">+ Opret ny afdeling</button>
+        
+        <!-- Modal for Create/Edit -->
+        <div id="department-modal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
+          <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+              <h3 id="modal-title">Opret ny afdeling</h3>
+              <button class="close-btn" onclick="closeDepartmentModal()">&times;</button>
+            </div>
+            <form id="department-form" class="modal-form">
+              <input type="hidden" id="department-id-hidden" />
+              
+              <label for="dept-id"><strong>ID:</strong></label>
+              <input type="text" id="dept-id" name="id" required 
+                     pattern="^[A-Za-z0-9_-]{3,32}$" 
+                     title="ID skal være 3-32 tegn langt og må kun indeholde bogstaver, tal og bindestreger" />
+              
+              <label for="dept-email"><strong>Email:</strong></label>
+              <input type="email" id="dept-email" name="email" required
+                     pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                     title="Indtast en gyldig email-adresse" />
+              
+              <div class="checkbox-label">
+                <input type="checkbox" id="dept-active" name="active" checked>
+                <label for="dept-active" style="margin: 0; font-weight: normal;"><strong>Aktiv</strong></label>
+              </div>
+
+              <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeDepartmentModal()">Annuller</button>
+                <button type="submit" id="submit-btn" class="btn btn-primary">Opret</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <div class="table-wrap">
+          <table class="data-table" id="afdelinger-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- scripts -->
+  <script src="/js/include-menu.js"></script>
+  <script src="/js/fetchDepartments.js"></script>
+</body>
+
+</html>
