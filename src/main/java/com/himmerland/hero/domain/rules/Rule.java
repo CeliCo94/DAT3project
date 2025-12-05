@@ -1,12 +1,25 @@
 package com.himmerland.hero.domain.rules;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
 
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = RuleHeat.class, name = "ruleHeat"),
+        @JsonSubTypes.Type(value = RuleWater.class, name = "ruleWater"),
+        @JsonSubTypes.Type(value = RuleHumidity.class, name = "ruleHumidity")
+})
 public abstract class Rule extends IdentifiableBase {
     private String name = "";
     private String description = "";
     private String consumptionType;
     private int duration;
+    private boolean active;
 
     protected Rule() {}
 
@@ -47,5 +60,13 @@ public abstract class Rule extends IdentifiableBase {
 
     public void setDescription(String description) {  // Add setter
         this.description = description;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

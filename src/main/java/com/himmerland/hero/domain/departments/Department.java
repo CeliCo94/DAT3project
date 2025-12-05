@@ -1,5 +1,7 @@
 package com.himmerland.hero.domain.departments;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
 
 public class Department extends IdentifiableBase  {
@@ -8,14 +10,25 @@ public class Department extends IdentifiableBase  {
     private boolean isActive;
 
 
-    public Department (String Id, String Email) {
-        this.Id = Id;
-        this.Email = Email;
+    public Department() {
+        super();
         this.isActive = true;
+    }
+
+    @JsonCreator
+    public Department(@JsonProperty("id") String id, @JsonProperty("email") String email) {
+        super();
+        this.Id = id;
+        this.Email = email;
+        this.isActive = true;
+        // Sync the Id with IdentifiableBase
+        if (Id != null){
+            super.setId(Id);
+        }
     }
     
     public String getId() {
-        return Id;
+        return Id != null ? Id : super.getId();
     }
 
     public String getEmail() {
@@ -24,6 +37,9 @@ public class Department extends IdentifiableBase  {
 
     public void setId(String Id) {
         this.Id = Id;
+        if (Id != null) {
+            super.setId(Id);
+        }
     }
 
     public void setEmail(String Email) {
