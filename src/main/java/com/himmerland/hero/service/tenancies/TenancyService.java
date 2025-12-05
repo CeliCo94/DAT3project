@@ -1,7 +1,8 @@
 package com.himmerland.hero.service.tenancies;
 
 import com.himmerland.hero.domain.tenancies.Tenancy;
-import com.himmerland.hero.repositories.TenancyRepository;
+import com.himmerland.hero.service.repositories.TenancyRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
