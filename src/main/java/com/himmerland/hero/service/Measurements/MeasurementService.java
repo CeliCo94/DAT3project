@@ -19,18 +19,7 @@ public class MeasurementService {
             MeasurementHeat m = CreateNewMeasurement(measurement);
 
             MeasurementRepo.save(m);
-            /* 
-            List<MeasurementHeat> allMeasurements = MeasurementRepo.FilterMeterLastHours(10,m);
 
-            for (MeasurementHeat meas : allMeasurements) {
-            System.out.println(meas.getTimestamp());
-            System.out.println("Volume: " + meas.getVolume());
-            System.out.println("Meter Type: " + meas.getConsumptionType());
-            System.out.println("Flow: " + meas.getFlow());
-            System.out.println("RegisterE8: " + meas.getRegisterE8());
-            System.out.println("---------------------------");
-            }
-*/
             return true;
         }
         catch (Exception e) {
@@ -41,6 +30,12 @@ public class MeasurementService {
 
     private MeasurementHeat CreateNewMeasurement(MeasurementDTO measurement) {
         return MeasurementFactory.fromDTO(measurement);
+    }
+
+    public List<MeasurementHeat> FindMeasurementsHours(int hours, String MeterNumber) {
+        List<MeasurementHeat> allMeasurements = MeasurementRepo.FilterMeterLastHours(hours,MeterNumber);
+
+        return allMeasurements;
     }
     
 }

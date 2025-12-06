@@ -21,8 +21,8 @@ public class MeasurementRepository extends BaseRepository<MeasurementHeat>{
         return MeasurementList;
     }
 
-    public List<MeasurementHeat> FilterMeterLastHours(int hours, MeasurementHeat measurement) {
-        List<MeasurementHeat> MeasurementList = FilterForMeterNumber(measurement.getMeterNumber());
+    public List<MeasurementHeat> FilterMeterLastHours(int hours, String MeterNumber) {
+        List<MeasurementHeat> MeasurementList = FilterForMeterNumber(MeterNumber);
 
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
