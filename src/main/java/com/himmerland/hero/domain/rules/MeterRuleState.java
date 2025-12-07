@@ -1,9 +1,6 @@
 package com.himmerland.hero.domain.rules;
 
 import com.himmerland.hero.domain.meters.Meter;
-import com.himmerland.hero.domain.measurements.Measurement;
-import com.himmerland.hero.domain.notifications.Notification;
-import java.util.Optional;
 
 public class MeterRuleState {
     private Meter meter;
