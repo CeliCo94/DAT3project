@@ -15,25 +15,31 @@ public class HomeController {
     
     @GetMapping("/regler") //web starter dependency that makes it possible to map http requests to specific methods
     public String rules() {
-        // Forward til index.html under src/main/resources/static/
+        // Forward til regler.html under src/main/resources/static/
         return "forward:/regler.html";
+    }
+
+    @GetMapping("/addRule")
+    public String addRule() {
+        // Forward til addRule.html under src/main/resources/static/
+        return "forward:/addRule.html";
     }
 
     @GetMapping("/emails") //web starter dependency that makes it possible to map http requests to specific methods
     public String emails() {
-        // Forward til index.html under src/main/resources/static/
+        // Forward til emails.html under src/main/resources/static/
         return "forward:/emails.html";
     }
 
     @GetMapping("/afdelinger") //web starter dependency that makes it possible to map http requests to specific methods
     public String afdelinger() {
-        // Forward til index.html under src/main/resources/static/
+        // Forward til afdelinger.html under src/main/resources/static/
         return "forward:/afdelinger.html";
     }
 
     @GetMapping("/lejemaal") //web starter dependency that makes it possible to map http requests to specific methods
     public String lejemaal() {
-        // Forward til index.html under src/main/resources/static/
+        // Forward til lejemaal.html under src/main/resources/static/
         return "forward:/lejemaal.html";
     }
 

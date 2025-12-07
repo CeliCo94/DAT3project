@@ -32,8 +32,12 @@ public class Application {
     StorageStrategy<MeasurementHeat> storageMeasurement =
         new JsonStorage<>(dataDir, "measurements", MeasurementHeat.class);
 
-    MeasurementHeat m1 = new MeasurementHeat("0000", "Heat", "Heat", "2024-01-01T00:00:00Z", 0, 100.0, "m3", 60.0, "C", 40.0, "C");
-    MeasurementHeat m2 = new MeasurementHeat("0001", "Heat", "Heat", "2024-01-01T01:00:00Z", 0, 120.0, "m3", 65.0, "C", 42.0, "C");
+    MeasurementHeat m1 = new MeasurementHeat("0000", "Heat", "Heat", "2024-01-01T00:00:00Z", 0, 
+    100.0, "m3", 60.0, "C", 40.0, "C", 
+    0.0, "m3/h", 0, "", 0, "", 0, "m3/h", 20.0, "C", 50.0, "%");
+    MeasurementHeat m2 = new MeasurementHeat("0001", "Heat", "Heat", "2024-01-01T01:00:00Z", 0, 
+    120.0, "m3", 65.0, "C", 42.0, "C", 
+    0.0, "m3/h", 0, "", 0, "", 0, "m3/h", 20.0, "C", 50.0, "%");
     
     storageMeasurement.write(m1);
     storageMeasurement.write(m2);
