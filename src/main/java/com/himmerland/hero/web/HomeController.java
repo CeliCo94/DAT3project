@@ -25,6 +25,11 @@ public class HomeController {
         return "forward:/emails.html";
     }
 
+    @GetMapping("/tilføjregel")
+    public String addrule() {
+        return "forward:/addRule.html";
+    }
+
     @GetMapping("/afdelinger") //web starter dependency that makes it possible to map http requests to specific methods
     public String afdelinger() {
         // Forward til index.html under src/main/resources/static/
