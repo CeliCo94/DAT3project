@@ -1,0 +1,49 @@
+package com.himmerland.hero.service.rules;
+
+import com.himmerland.hero.domain.rules.Rule;
+import com.himmerland.hero.service.repositories.RuleRepository;
+import org.springframework.stereotype.Service;
+
+import java.nio.file.Path;
+import java.util.List;
+
+@Service
+public class RuleService {
+
+    private final RuleRepository ruleRepository;
+
+    public RuleService(Path dataDir) {
+        this.ruleRepository = new RuleRepository(dataDir);
+    }
+
+    public List<Rule> showActiveRules() {
+        return ruleRepository.findActive();
+    }
+
+    public List<Rule> showHistoricRules(int amount) {
+        return ruleRepository.findLastN(amount);
+    }
+
+    public Rule getRule(String id) {
+        return ruleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Rule not found: " + id));
+    }
+
+    public Rule createRule(Rule rule) {
+        ruleRepository.save(rule);
+        return rule;
+    }
+
+    public Rule updateRule(String id, Rule updated) {
+        Rule existing = getRule(id); 
+
+        existing.setName(updated.getName());
+        existing.setDescription(updated.getDescription());
+        existing.setDuration(updated.getDuration());
+        existing.setActive(updated.isActive()); 
+
+        ruleRepository.save(existing);
+
+        return existing;
+    }
+}
