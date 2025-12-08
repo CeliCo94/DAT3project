@@ -1,6 +1,11 @@
-package com.himmerland.hero.domain.measurements;
+package com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto;
 
-public class MeasurementHeat extends Measurement {
+public class MeasurementDTO {
+    private String meterNumber;
+    private String meterType;
+    private String consumptionType;
+    private String timestamp;
+    private int infoCode;
     private double Volume;
     private String VolumeUnit;
     private double ForwardTemperature;
@@ -20,11 +25,7 @@ public class MeasurementHeat extends Measurement {
     private double Humidity;
     private String HumidityUnit;
 
-    public MeasurementHeat() {
-        super("", "", "", "", 0);
-    }
-
-    public MeasurementHeat(String meterNumber, String meterType, String consumptionType, String timestamp, int infoCode,
+    public MeasurementDTO(String meterNumber, String meterType, String consumptionType, String timestamp, int infoCode,
                           double volume, String volumeUnit,
                           double forwardTemperature, String forwardTemperatureUnit,
                           double returnTemperature, String returnTemperatureUnit, double Flow, String FlowUnit,
@@ -32,7 +33,11 @@ public class MeasurementHeat extends Measurement {
                             int averageFlow, String averageFlowUnit, double ambientTemperature, String ambientTemperatureUnit,
                             double Humidity, String HumidityUnit) {
 
-        super(meterNumber, meterType, consumptionType, timestamp, infoCode);
+        this.meterNumber = meterNumber;
+        this.meterType = meterType;
+        this.consumptionType = consumptionType;
+        this.timestamp = timestamp;
+        this.infoCode = infoCode;
         this.Volume = volume;
         this.VolumeUnit = volumeUnit;
         this.ForwardTemperature = forwardTemperature;
@@ -51,6 +56,26 @@ public class MeasurementHeat extends Measurement {
         this.ambientTemperatureUnit = ambientTemperatureUnit;
         this.Humidity = Humidity;
         this.HumidityUnit = HumidityUnit;
+    }
+
+    public String getmeterNumber() {
+        return meterNumber;
+    }
+
+    public String getmeterType() {
+        return meterType;
+    }
+
+    public String getconsumptionType() {
+        return consumptionType;
+    }
+
+    public String gettimeStamp() {
+        return timestamp;
+    }
+
+    public int getinfoCode() {
+        return infoCode;
     }
 
     public double getVolume() {

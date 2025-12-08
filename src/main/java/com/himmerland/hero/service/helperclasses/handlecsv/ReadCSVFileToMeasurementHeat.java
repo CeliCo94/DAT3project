@@ -30,11 +30,26 @@ public class ReadCSVFileToMeasurementHeat {
                 String forwardTemperatureUnit = values[8];
                 double returnTemperature = parseDouble(values[9]);
                 String returnTemperatureUnit = values[10];
+                double Flow = parseDouble(values[11]);
+                String FlowUnit = values[12];
+                int RegisterE8 = Integer.parseInt(values[13]);
+                String RegisterE8Unit = values[14];
+                int RegisterE9 = Integer.parseInt(values[15]);
+                String RegisterE9Unit = values[16];
+                int averageFlow = Integer.parseInt(values[17]);
+                String averageFlowUnit = values[18];
+                double ambientTemperature = parseDouble(values[19]);
+                String ambientTemperatureUnit = values[20];
+                double Humidity = parseDouble(values[21]);
+                String HumidityUnit = values[22];
 
                 MeasurementHeat measurement = new MeasurementHeat(
                         meterNumber, meterType, consumptionType, timestamp, infoCode,
                         volume, volumeUnit, forwardTemperature, forwardTemperatureUnit,
-                        returnTemperature, returnTemperatureUnit
+                        returnTemperature, returnTemperatureUnit, Flow, FlowUnit,
+                        RegisterE8, RegisterE8Unit, RegisterE9, RegisterE9Unit,
+                        averageFlow, averageFlowUnit, ambientTemperature, ambientTemperatureUnit,
+                        Humidity, HumidityUnit
                 );
 
                 measurements.add(measurement);

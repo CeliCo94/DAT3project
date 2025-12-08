@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/tenancies")
@@ -25,42 +24,40 @@ public class TenancyController {
     public ResponseEntity<List<TenancyDTO>> getAll() {
         return ResponseEntity.ok(tenancyService.findAll());
     }
-    
+
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TenancyDTO> getById(@PathVariable String id) {
-        return ResponseEntity.ok(tenancyService.getTenancy(id));
-    }
-
-    @GetMapping(value = "/{id}/edit", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TenancyDTO> showEditForm(@PathVariable String id) {
         return ResponseEntity.ok(tenancyService.getTenancy(id));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TenancyDTO> create(@RequestBody TenancyDTO payload) {
         TenancyDTO created = tenancyService.createTenancy(payload);
-        return ResponseEntity.created(Objects.requireNonNull(URI.create("/api/tenancies/" + created.id())))
-            .contentType(Objects.requireNonNull(MediaType.APPLICATION_JSON))
+
+        return ResponseEntity
+            .created(URI.create("/api/tenancies/" + created.id()))
+            .contentType(MediaType.APPLICATION_JSON)
             .body(created);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TenancyDTO> update(@PathVariable String id, @RequestBody TenancyDTO payload) {
-        // Ensure the ID in the path matches the DTO
+        // Ensure the ID in the path is used
         TenancyDTO updatedDTO = new TenancyDTO(
-            id, // Use path variable ID
-            payload.meterNumber(),
-            payload.departmentId(),
-            payload.tennancyNumber(),
-            payload.address(),
-            payload.city(),
-            payload.postalCode(),
-            payload.active()
+            id,                       // id
+            payload.meterNumber(),    // meterNumber
+            payload.departmentId(),   // departmentId
+            payload.tennancyNumber(), // tennancyNumber (same typo as in DTO)
+            payload.address(),        // address
+            payload.city(),           // city
+            payload.postalCode(),     // postalCode
+            payload.active()          // active
         );
+
         return ResponseEntity.ok(tenancyService.updateTenancy(updatedDTO));
     }
 
-    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteTenancy(@PathVariable String id) {
         tenancyService.deleteTenancy(id);
         return ResponseEntity.noContent().build();

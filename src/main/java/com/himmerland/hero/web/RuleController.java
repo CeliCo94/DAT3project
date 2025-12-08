@@ -3,6 +3,7 @@ package com.himmerland.hero.web;
 import com.himmerland.hero.domain.rules.Rule;
 import com.himmerland.hero.domain.rules.RuleFactory;
 import com.himmerland.hero.service.rules.RuleService;
+import com.himmerland.hero.web.RuleRequest;
 import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api/regler")
+@RequestMapping("/api/rules")
 @CrossOrigin
 public class RuleController {
 

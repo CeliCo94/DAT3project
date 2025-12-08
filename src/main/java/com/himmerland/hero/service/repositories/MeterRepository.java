@@ -1,4 +1,4 @@
-package com.himmerland.hero.repositories;
+package com.himmerland.hero.service.repositories;
 
 import com.himmerland.hero.domain.meters.Meter;
 import java.nio.file.Path;
