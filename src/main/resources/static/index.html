@@ -28,42 +28,37 @@
     <main class="content">
       <section class="card">
         <h2>Notifikationer</h2>
-        <!-- Notification Filter -->
-        <button type="button" class="collapsible">Filter</button>
-        <div class="content">
-          <form>
-            <label for="department">Vælg afdeling:</label>
-            <select id="department">
-              <option value="Afdeling1">Afdeling 1</option>
-              <option value="Afdeling3">Afdeling 3</option>
-            </select>
 
-            <br>
-
-            <label for="department">Vælg vigtighed:</label>
-            <select id="department">
-              <option value="kritisk">Høj</option>
-              <option value="vigtil">Mellem</option>
-              <option value="vigtil">Lav</option>
-            </select>
-
-            <br>
-
-            <input type="checkbox" id="filter1" value="choice1">
-            <label for="filter1">choice 1</label><br>
-
-            <br>
-
-            <input type="reset">
-            <input type="submit">
-          </form>
-        </div>
-
-        <br>
-
-        <button type="button" class="collapsible">Aktive notifikationer</button>
+        <button type="button" id="notifcolaps" class="collapsible">Aktive notifikationer</button>
         <!-- <h2>Aktive notifikationer</h2> -->
-        <div class="content">
+        <div class="contentcollapsible">
+          <br>
+           <!-- Notification Filter -->
+          <button type="button" id="filter" class="collapsible">Filter</button>
+          <div class="contentcollapsible">
+            <form>
+              <label for="department">Vælg afdeling:</label>
+              <select id="department">
+                <option value="default" selected> </option>
+                <option value="Afdeling1">Afdeling 1</option>
+                <option value="Afdeling3">Afdeling 3</option>
+              </select>
+
+              <br>
+
+              <label for="department">Vælg vigtighed:</label>
+              <select id="department">
+                <option value="default" selected> </option>
+                <option value="high">Høj</option>
+                <option value="medium">Mellem</option>
+                <option value="low">Lav</option>
+              </select>
+              
+            </form>
+          </div>
+
+          <br>
+
           <h3 class="section-heading">Service Center 1</h3>
           <div class="table-wrap">
             <table id="sc1-table" class="data-table">
@@ -103,11 +98,48 @@
           </div>
         </div>
         
-        <br>
+        <br> <br>
 
-        <button type="button" class="collapsible">Historiske notifikationer</button>
+        <button type="button" id="notifcolaps" class="collapsible">Historiske notifikationer</button>
         <!-- <h2>Historiske notifikationer</h2> -->
-        <div class="content">
+        <div class="contentcollapsible">
+          <br>
+           <!-- Notification Filter -->
+          <button type="button" id="filter" class="collapsible">Filter</button>
+          <div class="contentcollapsible">
+            <form>
+              <label for="department">Vælg tidsperiode:</label>
+              <select id="department">
+                <option value="default" selected> </option>
+                <option value="dag">1 dag</option>
+                <option value="uge">1 uge</option>
+                <option value="måned">1 måned</option>
+              </select>
+
+              <br>
+
+              <label for="department">Vælg afdeling:</label>
+              <select id="department">
+                <option value="default" selected> </option>
+                <option value="Afdeling1">Afdeling 1</option>
+                <option value="Afdeling3">Afdeling 3</option>
+              </select>
+
+              <br>
+
+              <label for="department">Vælg vigtighed:</label>
+              <select id="department">
+                <option value="default" selected> </option>
+                <option value="high">Høj</option>
+                <option value="medium">Mellem</option>
+                <option value="low">Lav</option>
+              </select>
+
+            </form>
+          </div>
+
+          <br>
+
           <h3 class="section-heading">Service Center 1</h3>
           <div class="table-wrap">
             <table id="sc1-table" class="data-table">
@@ -148,6 +180,20 @@
         </div>
 
         <div class="popup">
+          <h1>Notifikation X</h1> <br>
+          <h2>Afdeling/Adresse</h2> <br>
+          <h2>Regelnavn</h2> <br>
+          <h2>Regel Beskrivelse</h2> <br>
+          <h2>Tid</h2> <br>
+          <h2>Relevante værdier ift målinger</h2> <br>
+          <h2>Forbrugstype</h2> <br>
+          <h2>Målerid/Målertype</h2> <br>
+          <h2>Vigtighed (critical?)</h2> <br>
+
+          <h2>Graf</h2> <br>
+          <canvas id="myChart" style="width:100%;max-width:600px"></canvas> <br>
+
+          <button onclick="addRowHandlers()">Luk</button>
           <!-- Afdeling/adresse -->
           <!-- Regelnavn -->
           <!-- Beskrivelse af regl -->

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Himmerland HERO</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 64 40" aria-hidden="true">
+        <rect x="2" y="10" width="60" height="20" rx="6" ry="6"></rect>
+        <path d="M18 30c-5 0-9-4-9-9s4-9 9-9c3 0 5 1 7 3l3-3h9v6h-6l-3 3c1 2 2 4 2 6 0 5-4 9-9 9z"></path>
+      </svg>
+      <div class="brand-text">
+        <strong>Himmerland</strong><span>Boligforening</span>
+      </div>
+    </div>
+    <h1>Overvågning af energidata</h1>
+  </header>
+
+  <div class="layout">
+    <!-- Shared menu -->
+    <aside data-include="/partials/menu.html"></aside>
+
+    <main class="content">
+      <section class="card">
+        <h2>Lejemål</h2>
+
+        <!-- Button to open modal-->
+         <button class="add-tenancy-btn" onclick="openTenancyModal()">+ Opret nyt lejemål</button>
+
+         <!-- Modal for Create/Edit-->
+          <div id="tenancy-modal" class="modal-overlay" onclick="closeModalOverlay(event)">
+            <div class="modal-content" onclick="event.stopPropagation()">
+              <div class="modal-header">
+                <h3 id="tenancy-modal-title">Opret nyt lejemål</h3>
+                <button class="close-btn" onclick="closeTenancyModal()">&times;</button>
+                </div>
+                <form id="tenancy-form" class="modal-form">
+                  <input type="hidden" id="tenancy-id-hidden" />
+
+                  <label for="tenancy-id"><strong>ID:</strong></label>
+                  <input type="text" id="tenancy-id" name="id" required
+                         pattern="^[A-Za-z0-9_-]{3,32}$"
+                         title="ID skal være 3-32 tegn langt og må kun indeholde bogstaver, tal og bindestreger" />
+
+                  <label for="tenancy-meter-number"><strong>Måler nummer:</strong></label>
+                  <input type="text" id="tenancy-meter-number" name="meterNumber" required />
+
+                  <label for="tenancy-department-id"><strong>Afdelings ID:</strong></label>
+                  <select id="tenancy-department-id" name="departmentId" required>
+                    <option value="">Vælg afdeling</option>
+                  <!-- Departments will bo loaded here-->
+                   </select>
+
+                  <label for="tenancy-number"><strong>Lejemål nummer</strong></label>
+                  <input type="text" id="tenancy-number" name="tenancyNumber" required /> 
+
+                  <label for="tenancy-address"><strong>Adresse:</strong></label>
+                  <input type="text" id="tenancy-address" name="address" required />
+
+                  <label for="tenan-city"><strong>By:</strong></label>
+                  <input type="text" id="tenancy-city" name="city" required />
+
+                  <label for="tenancy-postal-code"><strong>Postnummer:</strong></label>
+                  <input type="text" id="tenancy-postal-code" name="postalCode" required />
+
+                  <div class="checkbox-label">
+                    <input type="checkbox" id="tenancy-active" name="active" checked>
+                    <label for="tenancy-active" style="margin: 0; font-weight: normal;"><strong>Aktiv</strong></label>
+                  </div>
+                  <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeTenancyModal()">Annuler</button>
+                    <button type="submit" id="tenancy-submit-btn" class="btn btn-primary">Opret</button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table" id="lejemaal-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Måler nummer</th>
+                  <th>Afdeling</th>
+                  <th>Lejemål nummer</th>
+                  <th>Adresse</th>
+                  <th>By</th>
+                  <th>Postnummer</th>
+                  <th>Status</th>
+                  <th>Handlinger</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Tenancies will be loaded here -->
+              </tbody>
+            </table>
+          </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- scripts -->
+  <script src="/js/include-menu.js"></script>
+  <script src="/js/fetchTenancies.js"></script>
+</body>
+
+</html>
