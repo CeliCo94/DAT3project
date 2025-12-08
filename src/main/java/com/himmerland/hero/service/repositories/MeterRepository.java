@@ -1,7 +1,8 @@
-package com.himmerland.hero.repositories;
+package com.himmerland.hero.service.repositories;
+
+import java.nio.file.Path;
 
 import com.himmerland.hero.domain.meters.Meter;
-import java.nio.file.Path;
 
 public class MeterRepository extends BaseRepository<Meter> {
 
