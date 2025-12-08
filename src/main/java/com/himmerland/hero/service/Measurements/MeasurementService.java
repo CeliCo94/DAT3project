@@ -1,9 +1,9 @@
-package com.himmerland.hero.service.measurements;
+package com.himmerland.hero.service.Measurements;
 
 import java.util.List;
 
 import com.himmerland.hero.domain.measurements.MeasurementHeat;
-import com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto.MeasurementDTO;
+import com.himmerland.hero.service.Measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 import com.himmerland.hero.service.repositories.MeasurementRepository;
 
 public class MeasurementService {
