@@ -51,16 +51,6 @@ public class NotificationNotifier {
     }
 
     /**
-     * Send kun, hvis autosend = true i properties.
-     */
-    public void sendNotificationIfAuto(Notification notification) {
-        if (!emailProperties.autosend()) {
-            return;
-        }
-        sendNotification(notification);
-    }
-
-    /**
      * Bruges af REST-endpointet, der skal sende "den aktuelle" notifikation.
      */
     public boolean sendCurrentNotification() {

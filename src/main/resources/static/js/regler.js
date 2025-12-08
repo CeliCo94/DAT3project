@@ -24,7 +24,13 @@ async function loadRules() {
             card.className = "rule-card";
 
             const active = !!rule.active;
-            const ruleType = rule.type || rule.ruleType || "Ukendt type";
+            const ruleTypeLabels = {
+                ruleHeat : "Varme",
+                ruleHumidity : "Luftfugtighed",
+                ruleWater : "Vand"
+            };
+            const ruleType = 
+            ruleTypeLabels[rule.type] || ruleTypeLabels[rule.ruleType] || rule.type || rule.ruleType || "Ukendt type";
 
             card.innerHTML = `
                 <div class="rule-main">
