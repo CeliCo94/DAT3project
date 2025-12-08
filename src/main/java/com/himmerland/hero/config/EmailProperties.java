@@ -6,5 +6,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public record EmailProperties(
         String from,
         String recipient,
-        boolean autosend
+        boolean autosend,
+        int time
 ) {}
