@@ -1,7 +1,7 @@
-package com.himmerland.hero.service.Measurements;
+package com.himmerland.hero.service.measurements;
 
 import com.himmerland.hero.domain.measurements.MeasurementHeat;
-import com.himmerland.hero.service.Measurements.MeasurementCSVImporter.dto.MeasurementDTO;
+import com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 
 public class MeasurementFactory {
 

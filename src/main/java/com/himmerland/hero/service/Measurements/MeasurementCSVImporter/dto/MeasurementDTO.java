@@ -1,4 +1,4 @@
-package com.himmerland.hero.service.Measurements.MeasurementCSVImporter.dto;
+package com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto;
 
 public class MeasurementDTO {
     private String meterNumber;
