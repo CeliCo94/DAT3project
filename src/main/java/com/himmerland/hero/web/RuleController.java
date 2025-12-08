@@ -32,7 +32,7 @@ public class RuleController {
 
     @GetMapping
     public ResponseEntity<List<Rule>> getAllRules() {
-        List<Rule> rules = ruleService.showActiveRules();
+        List<Rule> rules = ruleService.findAllRules();  
         return ResponseEntity.ok(rules);
     }
 
@@ -52,6 +52,12 @@ public class RuleController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Rule> updateRule(@PathVariable String id, @RequestBody Rule body) {
         Rule updated = ruleService.updateRule(id, body);
+        return ResponseEntity.ok(updated);
+    }
+
+    @PatchMapping("/{id}/toggle")
+    public ResponseEntity<Rule> toggleRule(@PathVariable String id) {
+        Rule updated = ruleService.toggleRule(id);
         return ResponseEntity.ok(updated);
     }
 

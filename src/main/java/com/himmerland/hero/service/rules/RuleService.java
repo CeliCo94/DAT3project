@@ -20,6 +20,10 @@ public class RuleService {
         return ruleRepository.findActive();
     }
 
+    public List<Rule> findAllRules() {
+        return ruleRepository.findAll();
+    }
+
     public List<Rule> showHistoricRules(int amount) {
         return ruleRepository.findLastN(amount);
     }
@@ -46,4 +50,13 @@ public class RuleService {
 
         return existing;
     }
+
+    public Rule toggleRule(String id) {
+        Rule rule = ruleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Rule not found"));
+
+        rule.setActive(!rule.isActive());
+        return ruleRepository.save(rule);
+    }
+    
 }
