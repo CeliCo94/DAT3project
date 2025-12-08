@@ -408,3 +408,19 @@ body {
 .add-department-btn:hover {
   background: #156b47;
 }
+
+.add-tenancy-btn {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background: #1c8b5e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.add-tenancy-btn:hover {
+  background: #156b47;
+}

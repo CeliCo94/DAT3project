@@ -31,11 +31,6 @@ public class TenancyController {
         return ResponseEntity.ok(tenancyService.getTenancy(id));
     }
 
-    @GetMapping(value = "/{id}/edit", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TenancyDTO> showEditForm(@PathVariable String id) {
-        return ResponseEntity.ok(tenancyService.getTenancy(id));
-    }
-
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TenancyDTO> create(@RequestBody TenancyDTO payload) {
         TenancyDTO created = tenancyService.createTenancy(payload);
@@ -47,15 +42,16 @@ public class TenancyController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TenancyDTO> update(@PathVariable String id, @RequestBody TenancyDTO payload) {
         // Ensure the ID in the path matches the DTO
+        // The service will handle departmentId/departmentName resolution
         TenancyDTO updatedDTO = new TenancyDTO(
             id, // Use path variable ID
             payload.meterNumber(),
-            payload.departmentId(),
-            payload.tennancyNumber(),
+            payload.departmentId(), // Service will resolve this if needed
+            payload.departmentName(), // Service will use this if departmentId is null
+            payload.tenancyNumber(),
             payload.address(),
             payload.city(),
-            payload.postalCode(),
-            payload.active()
+            payload.postalCode()
         );
         return ResponseEntity.ok(tenancyService.updateTenancy(updatedDTO));
     }
