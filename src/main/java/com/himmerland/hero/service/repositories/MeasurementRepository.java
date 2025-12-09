@@ -5,24 +5,24 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import com.himmerland.hero.domain.measurements.MeasurementHeat;
+import com.himmerland.hero.domain.measurements.Measurement;
 
-public class MeasurementRepository extends BaseRepository<MeasurementHeat>{
+public class MeasurementRepository extends BaseRepository<Measurement>{
 
     public MeasurementRepository(Path dataDir) {
-        super(dataDir, "measurements", MeasurementHeat.class);
+        super(dataDir, "measurements", Measurement.class);
     }
 
-    public List<MeasurementHeat> FilterForMeterNumber(String MeterNumber) {
-        List<MeasurementHeat> MeasurementList = findAll().stream()
+    public List<Measurement> FilterForMeterNumber(String MeterNumber) {
+        List<Measurement> MeasurementList = findAll().stream()
                 .filter(m -> m.getMeterNumber().equals(MeterNumber))
                 .toList();
 
         return MeasurementList;
     }
 
-    public List<MeasurementHeat> FilterMeterLastHours(int hours, String MeterNumber) {
-        List<MeasurementHeat> MeasurementList = FilterForMeterNumber(MeterNumber);
+    public List<Measurement> FilterMeterLastHours(int hours, String MeterNumber) {
+        List<Measurement> MeasurementList = FilterForMeterNumber(MeterNumber);
 
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -43,8 +43,8 @@ public class MeasurementRepository extends BaseRepository<MeasurementHeat>{
     }
 
     @Override
-    protected Class<MeasurementHeat> getEntityClass() {
-        return MeasurementHeat.class;
+    protected Class<Measurement> getEntityClass() {
+        return Measurement.class;
     }
 
 }
