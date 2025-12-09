@@ -71,7 +71,5 @@ public abstract class Rule extends IdentifiableBase {
         this.active = active;
     }
 
-    public boolean isBroken(Measurement measurement){
-        return false;
-    }
+    public abstract boolean isBroken(Measurement measurement);
 }

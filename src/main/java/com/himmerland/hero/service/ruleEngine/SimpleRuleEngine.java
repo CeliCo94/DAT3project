@@ -1,5 +1,6 @@
 package com.himmerland.hero.service.ruleEngine;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,11 +12,19 @@ import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.domain.notifications.Notification;
 import com.himmerland.hero.domain.rules.Rule;
 import com.himmerland.hero.domain.rules.RuleHeat;
+import com.himmerland.hero.service.repositories.RuleRepository;
 
 @Service
 public class SimpleRuleEngine implements RuleEngine {
 
     private final Map<String, List<MeterRuleState>> meterRuleStates = new HashMap<>();
+
+    private final RuleRepository ruleRepository;
+
+
+    public SimpleRuleEngine(RuleRepository ruleRepository){
+        this.ruleRepository = ruleRepository;
+    }
 
     @Override
     public List<Notification> onNewMeasurement(Measurement measurement, RuleContext ruleContext) {
@@ -30,31 +39,23 @@ public class SimpleRuleEngine implements RuleEngine {
         );
 
         for (MeterRuleState meterRuleState : statesForMeterRule) {
-            System.out.println("Following MeterRuleState exists in list:" + meterRuleState);
-        }
-
-        for (MeterRuleState meterRuleState : statesForMeterRule) {
             notifications.addAll(meterRuleState.onNewMeasurement(measurement, ruleContext));
-            System.out.println("notifications are added to list");
         }
 
-        System.out.println("Notifications will be returned from SimpleRuleEngine to MonitoringService");
         return notifications;
     }
 
-    private List<MeterRuleState> createInitialStatesForMeter(String meterId, RuleContext ruleContext) {
+    private List<MeterRuleState> createInitialStatesForMeter(String meterNumber, RuleContext ruleContext) {
+        String consumptionType = ruleContext.getConsumptionType(meterNumber);
+        
         List<MeterRuleState> instances = new ArrayList<>();
         
-        Rule mockRule = createMockRule();
+        List<Rule> rulesForType = ruleRepository.findRuleFromType("ruleHeat");
         
-        instances.add(new MeterRuleState(meterId, mockRule));
+        for (Rule rule : rulesForType) {
+            instances.add(new MeterRuleState(meterNumber, rule));
+        }
 
         return instances;
-    }
-
-    private Rule createMockRule(){
-        RuleHeat rule = new RuleHeat();
-        return rule;
-
     }
 }

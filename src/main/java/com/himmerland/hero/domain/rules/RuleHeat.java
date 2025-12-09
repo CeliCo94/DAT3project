@@ -41,8 +41,13 @@ public class RuleHeat extends Rule {
     public boolean isBroken(Measurement measurement){
 
         if(
-            thresholdTempIn > measurement.get
-        )
+            this.thresholdTempIn         < measurement.getForwardTemperature() &&
+            this.thresholdTempOut        < measurement.getReturnTemperature() &&
+            this.thresholdHeatWaterFlow  < measurement.getFlow()
+        ) 
+            {return true;}
+        else 
+            {return false;}
 
     }
 }
