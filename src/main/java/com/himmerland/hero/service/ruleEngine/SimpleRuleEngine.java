@@ -20,12 +20,9 @@ public class SimpleRuleEngine implements RuleEngine {
     @Override
     public List<Notification> onNewMeasurement(Measurement measurement, RuleContext ruleContext) {
 
-        System.out.println("SimpleRuleEngine is called from MonitoringService");
-
         List<Notification> notifications = new ArrayList<>();
 
         String meterNumber = measurement.getMeterNumber();
-        System.out.println("MeterNumber is collected");
 
         List<MeterRuleState> statesForMeterRule = meterRuleStates.computeIfAbsent(
             meterNumber,

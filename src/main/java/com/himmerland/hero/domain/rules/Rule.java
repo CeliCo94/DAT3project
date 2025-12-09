@@ -2,6 +2,7 @@ package com.himmerland.hero.domain.rules;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
 
 @JsonTypeInfo(
@@ -68,5 +69,9 @@ public abstract class Rule extends IdentifiableBase {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public boolean isBroken(Measurement measurement){
+        return false;
     }
 }
