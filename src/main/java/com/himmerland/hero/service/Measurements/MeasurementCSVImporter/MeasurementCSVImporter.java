@@ -1,7 +1,7 @@
-package com.himmerland.hero.service.measurements.MeasurementCSVImporter;
+package com.himmerland.hero.service.Measurements.MeasurementCSVImporter;
 
-import com.himmerland.hero.service.measurements.MeasurementService;
-import com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto.MeasurementDTO;
+import com.himmerland.hero.service.Measurements.MeasurementService;
+import com.himmerland.hero.service.Measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
