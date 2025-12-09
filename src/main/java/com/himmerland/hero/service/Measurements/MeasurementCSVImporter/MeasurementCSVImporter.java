@@ -1,13 +1,10 @@
 package com.himmerland.hero.service.Measurements.MeasurementCSVImporter;
 
-import com.himmerland.hero.domain.measurements.MeasurementHeat;
 import com.himmerland.hero.service.Measurements.MeasurementService;
 import com.himmerland.hero.service.Measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.IOException;
 
 public class MeasurementCSVImporter {

@@ -22,7 +22,7 @@ public class MeterRuleState {
 
     public List<Notification> onNewMeasurement(Measurement measurement, RuleContext ruleContext) {
 
-        List<Notification> notifications = new ArrayList();
+        List<Notification> notifications = new ArrayList<>();
 
         boolean brokenNow = isBroken(measurement, ruleContext); // single-measurement check
 
@@ -36,7 +36,7 @@ public class MeterRuleState {
 
         int duration = rule.getDuration();
 
-        if (consecutiveBrokenCount >= duration) {
+        if (duration > 0 && consecutiveBrokenCount >= duration) {
             Notification notification = buildNotification(measurement, ruleContext);
             notifications.add(notification);
             System.out.println("Notification is added to list");
@@ -50,7 +50,7 @@ public class MeterRuleState {
     }
 
     private boolean isBroken(Measurement measurement, RuleContext ruleContext) {
-        return measurement.getInfoCode() == 0;
+        return rule.isBroken(measurement);
     }
 
     private Notification buildNotification(Measurement measurement, RuleContext ruleContext) {

@@ -8,15 +8,19 @@ public class Meter extends IdentifiableBase {
     private String consumptionType;
     private String timestamp;
     private int infocode = 0;
+    private String address;
 
-    public Meter() {}
+    public Meter() {
+    }
 
-    public Meter(String meterNumber, String meterType, String consumptionType, String timestamp, int infocode) {
+    public Meter(String meterNumber, String meterType, String consumptionType, String timestamp, int infocode,
+            String address) {
         this.meterNumber = meterNumber;
         this.meterType = meterType;
         this.consumptionType = consumptionType;
         this.timestamp = timestamp;
         this.infocode = infocode;
+        this.address = address;
     }
 
     public String getMeterNumber() {
@@ -57,5 +61,13 @@ public class Meter extends IdentifiableBase {
 
     public void setInfocode(int infocode) {
         this.infocode = infocode;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

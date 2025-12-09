@@ -1,7 +1,8 @@
 package com.himmerland.hero.domain.rules;
 
-import com.himmerland.hero.web.RuleRequest;
 import org.springframework.stereotype.Component;
+
+import com.himmerland.hero.web.RuleRequest;
 
 @Component
 public class RuleFactory {
