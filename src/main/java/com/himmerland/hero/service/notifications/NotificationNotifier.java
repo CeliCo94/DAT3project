@@ -10,7 +10,6 @@ import java.util.List;
 public class NotificationNotifier {
 
     private final NotificationService notificationService;
-    private final EmailProperties emailProperties;
     private final List<NotificationChannel> channels;
 
     public NotificationNotifier(
@@ -19,7 +18,6 @@ public class NotificationNotifier {
             List<NotificationChannel> channels
     ) {
         this.notificationService = notificationService;
-        this.emailProperties = emailProperties;
         this.channels = channels;
     }
 

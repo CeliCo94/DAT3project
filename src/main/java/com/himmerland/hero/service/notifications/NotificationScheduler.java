@@ -1,8 +1,6 @@
 package com.himmerland.hero.service.notifications;
 
 import com.himmerland.hero.domain.notifications.Notification;
-import com.himmerland.hero.service.helperclasses.enums.Criticality;
-import com.himmerland.hero.domain.departments.Department;
 import com.himmerland.hero.config.EmailProperties;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
@@ -11,8 +9,6 @@ import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Component
 @EnableScheduling
