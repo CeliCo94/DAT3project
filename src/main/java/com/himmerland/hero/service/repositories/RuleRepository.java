@@ -20,6 +20,12 @@ public class RuleRepository extends BaseRepository<Rule>{
                 .toList();
     }
 
+    public List<Rule> findRuleFromType(String type) {
+        return findAll().stream()
+            .filter(rule -> type.equals(rule.getConsumptionType()))
+            .toList();
+    }
+
     public List<Rule> findLastN(int amount) {
         List<Rule> all = findAll();
         int fromIndex = Math.max(0, all.size() - amount);

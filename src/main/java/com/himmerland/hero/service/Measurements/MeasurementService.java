@@ -2,21 +2,29 @@ package com.himmerland.hero.service.Measurements;
 
 import java.util.List;
 
-import com.himmerland.hero.domain.measurements.MeasurementHeat;
+import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.service.Measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 import com.himmerland.hero.service.repositories.MeasurementRepository;
+import com.himmerland.hero.service.Measurements.MeasurementCSVImporter.MeasurementCSVImporter;
+import com.himmerland.hero.service.monitoring.MeterService;
 
 public class MeasurementService {
 
     private MeasurementRepository MeasurementRepo;
+    private MeasurementCSVImporter importer;
+    private MeterService meterService;
     
-    public MeasurementService(MeasurementRepository MeasurementRepo) {
+    public MeasurementService(MeasurementRepository MeasurementRepo, MeasurementCSVImporter importer, MeterService meterService) {
         this.MeasurementRepo = MeasurementRepo;
+        this.importer = importer;
+        this.meterService = meterService;
     }
 
     public boolean CreateAndSaveMeasurement(MeasurementDTO measurement) {
         try {
-            MeasurementHeat m = CreateNewMeasurement(measurement);
+            Measurement m = CreateNewMeasurement(measurement);
+
+            System.out.println(m.getMeterNumber());
 
             MeasurementRepo.save(m);
 
@@ -28,14 +36,25 @@ public class MeasurementService {
         }
     }
 
-    private MeasurementHeat CreateNewMeasurement(MeasurementDTO measurement) {
-        return MeasurementFactory.fromDTO(measurement);
+    private Measurement CreateNewMeasurement(MeasurementDTO measurement) {
+        Measurement m = MeasurementFactory.fromDTO(measurement);
+        System.out.println(m.getMeterNumber());
+        return m;
     }
 
-    public List<MeasurementHeat> FindMeasurementsHours(int hours, String MeterNumber) {
-        List<MeasurementHeat> allMeasurements = MeasurementRepo.FilterMeterLastHours(hours,MeterNumber);
+    public List<Measurement> FindMeasurementsHours(int hours, String MeterNumber) {
+        List<Measurement> allMeasurements = MeasurementRepo.FilterMeterLastHours(hours,MeterNumber);
 
         return allMeasurements;
+    }
+
+    public void ReadMeasurementData(String filepath) {
+        List<MeasurementDTO> csvData = importer.readCSVFileToMeasurementDTOs(filepath);
+
+        for (MeasurementDTO dto : csvData) {
+            meterService.ensureMeterExists(dto);
+            CreateAndSaveMeasurement(dto);
+        }
     }
     
 }

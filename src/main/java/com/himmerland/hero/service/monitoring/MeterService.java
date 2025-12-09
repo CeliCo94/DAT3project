@@ -1,8 +1,11 @@
 package com.himmerland.hero.service.monitoring;
 
 import com.himmerland.hero.domain.meters.Meter;
-import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.service.repositories.MeterRepository;
+import com.himmerland.hero.service.Measurements.MeasurementCSVImporter.dto.MeasurementDTO;
+
+import java.util.List;
+import java.util.Optional;
 
 public class MeterService {
 
@@ -12,29 +15,26 @@ public class MeterService {
         this.meterRepository = meterRepository;
     }
 
-    public void ensureMeterExists(Measurement measurement) {
+    public void ensureMeterExists(MeasurementDTO dto) {
 
-        String meterNumber = measurement.getMeterNumber();
+        String meterNumber = dto.getmeterNumber();
 
-        if (meterNumber == null || meterNumber.isBlank()) {
-            System.out.println("Missing meter number, measurement is invalid");
+        Optional<Meter> databaseMeter = meterRepository.findMeterByNumber(meterNumber);
+
+        if (databaseMeter.isPresent()) {
+            System.out.println(" Meter already exists: " + meterNumber);
+
+            return;
+        } else {
+            Meter meter = new Meter(
+            dto.getmeterNumber(),
+            dto.getconsumptionType(),
+            dto.getAddress());
+
+            meterRepository.save(meter);
+            System.out.println(" Created new meter: " + meterNumber);
             return;
         }
 
-        if (meterRepository.existsById(meterNumber)) {
-            return;
-        }
-
-        Meter meter = new Meter(
-                measurement.getMeterNumber(),
-                measurement.getMeterType(),
-                measurement.getConsumptionType(),
-                measurement.getTimestamp(),
-                measurement.getInfoCode(),
-                measurement.getAddress());
-
-        meterRepository.save(meter);
-
-        System.out.println(" Created new meter: " + meterNumber);
     }
 }
