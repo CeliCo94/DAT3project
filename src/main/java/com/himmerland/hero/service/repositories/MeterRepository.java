@@ -4,6 +4,9 @@ import com.himmerland.hero.domain.meters.Meter;
 import java.nio.file.Path;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+import java.util.Optional;
+
 @Repository
 public class MeterRepository extends BaseRepository<Meter> {
 
@@ -11,12 +14,10 @@ public class MeterRepository extends BaseRepository<Meter> {
         super(dataDir, "meters", Meter.class);
     }
 
-    public List<Meter> FilterForMeterNumber(String MeterNumber) {
-        List<Meter> MeterList = findAll().stream()
-                .filter(m -> m.getMeterNumber().equals(MeterNumber))
-                .toList();
-
-        return MeterList;
+    public Optional<Meter> findMeterByNumber(String meterNumber) {
+        return findAll().stream()
+            .filter(meter -> meterNumber != null && meterNumber.equals(meter.getMeterNumber()))
+            .findFirst();
     }
 
     @Override

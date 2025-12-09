@@ -5,6 +5,7 @@ import com.himmerland.hero.service.repositories.MeterRepository;
 import com.himmerland.hero.service.Measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public class MeterService {
 
@@ -18,10 +19,13 @@ public class MeterService {
 
         String meterNumber = dto.getmeterNumber();
 
-        List<Meter> meterlist = meterRepository.FilterForMeterNumber(meterNumber);
+        Optional<Meter> databaseMeter = meterRepository.findMeterByNumber(meterNumber);
 
-        if (meterlist.size() == 0) {
+        if (databaseMeter.isPresent()) {
+            System.out.println(" Meter already exists: " + meterNumber);
 
+            return;
+        } else {
             Meter meter = new Meter(
             dto.getmeterNumber(),
             dto.getconsumptionType(),
@@ -30,10 +34,7 @@ public class MeterService {
             meterRepository.save(meter);
             System.out.println(" Created new meter: " + meterNumber);
             return;
-        } else {
-            System.out.println(" Meter already exists: " + meterNumber);
-
-            return;
         }
+
     }
 }
