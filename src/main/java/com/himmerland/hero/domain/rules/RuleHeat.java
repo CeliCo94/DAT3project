@@ -1,5 +1,7 @@
 package com.himmerland.hero.domain.rules;
 
+import com.himmerland.hero.domain.measurements.Measurement;
+
 public class RuleHeat extends Rule {
 
     private Integer thresholdTempIn;
@@ -33,5 +35,19 @@ public class RuleHeat extends Rule {
 
     public void setThresholdHeatWaterFlow(Integer thresholdHeatWaterFlow) {
         this.thresholdHeatWaterFlow = thresholdHeatWaterFlow;
+    }
+
+    @Override
+    public boolean isBroken(Measurement measurement){
+
+        if(
+            this.thresholdTempIn         < measurement.getForwardTemperature() &&
+            this.thresholdTempOut        < measurement.getReturnTemperature() &&
+            this.thresholdHeatWaterFlow  < measurement.getFlow()
+        ) 
+            {return true;}
+        else 
+            {return false;}
+
     }
 }

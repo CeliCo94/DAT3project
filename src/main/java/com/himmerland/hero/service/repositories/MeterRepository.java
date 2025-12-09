@@ -4,6 +4,7 @@ import com.himmerland.hero.domain.meters.Meter;
 import java.nio.file.Path;
 import java.util.List;
 
+@Repository
 public class MeterRepository extends BaseRepository<Meter> {
 
     public MeterRepository(Path dataDir) {
