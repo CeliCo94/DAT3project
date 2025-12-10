@@ -1,48 +1,48 @@
 package com.himmerland.hero.domain.tenancies;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Tenancy extends IdentifiableBase {
     private String Id;
     private String DepartmentId;
     private String MeterNumber;
-    private String TennancyNumber;
-    private String Address;
-    private String City;
-    private String PostalCode;
-    private boolean isActive;
-
-    public Tenancy() {
-        super();
-        this.isActive = true;
-    }
+    private String TenancyNumber;
+    private String Address; 
+    private String City; 
+    private String PostalCode; 
 
     // Convenience constructor for tests (without id - will use auto-generated from IdentifiableBase)
-    public Tenancy(String meterNumber, String departmentId, String tennancyNumber, String address, String city, String postalCode) {
+    public Tenancy(String meterNumber, String departmentId, String tenancyNumber, String address, String city, String postalCode) {
         super();
         this.MeterNumber = meterNumber;
         this.DepartmentId = departmentId;
-        this.TennancyNumber = tennancyNumber;
-        this.Address = address;
-        this.City = city;
+        this.TenancyNumber = tenancyNumber;
+        this.Address = address; 
+        this.City = city; 
         this.PostalCode = postalCode;
-        this.isActive = true;
     }
 
     @JsonCreator
-    public Tenancy(@JsonProperty("id") String id, @JsonProperty("meterNumber") String meterNumber, @JsonProperty("departmentId") String departmentId, @JsonProperty("tennancyNumber") String tennancyNumber, @JsonProperty("address") String address, @JsonProperty("city") String city, @JsonProperty("postalCode") String postalCode) {
+    public Tenancy(@JsonProperty("id") String id, 
+                   @JsonProperty("meterNumber") String meterNumber, 
+                   @JsonProperty("departmentId") String departmentId, 
+                   @JsonProperty("tenancyNumber") @JsonAlias("tennancyNumber") String tenancyNumber, 
+                   @JsonProperty("address") String address, 
+                   @JsonProperty("city") String city, 
+                   @JsonProperty("postalCode") String postalCode) {
         super();
         this.Id = id;
         this.MeterNumber = meterNumber;
         this.DepartmentId = departmentId;
-        this.TennancyNumber = tennancyNumber;
-        this.Address = address;
-        this.City = city;
-        this.PostalCode = postalCode;
-        this.isActive = true;
-        // Sync the Id with IdentifiableBase
+        this.TenancyNumber = tenancyNumber;
+        this.Address = address; 
+        this.City = city; 
+        this.PostalCode = postalCode; 
         if (id != null) {
             super.setId(id);
         }
@@ -60,8 +60,8 @@ public class Tenancy extends IdentifiableBase {
         return MeterNumber;
     }
     
-    public String getTennancyNumber() {
-        return TennancyNumber;
+    public String getTenancyNumber() {
+        return TenancyNumber;
     }
     
     public String getAddress() {
@@ -76,9 +76,7 @@ public class Tenancy extends IdentifiableBase {
         return PostalCode;
     }
     
-    public boolean isActive() {
-        return isActive;
-    }
+    
     
     public void setId(String id) {
         this.Id = id;
@@ -95,8 +93,8 @@ public class Tenancy extends IdentifiableBase {
         this.DepartmentId = departmentId;
     }
     
-    public void setTennancyNumber(String tennancyNumber) {
-        this.TennancyNumber = tennancyNumber;
+    public void setTenancyNumber(String tenancyNumber) {
+        this.TenancyNumber = tenancyNumber;
     }
     
     public void setAddress(String address) {
@@ -111,7 +109,4 @@ public class Tenancy extends IdentifiableBase {
         this.PostalCode = postalCode;
     }
     
-    public void setActive(boolean isActive) {
-        this.isActive = isActive;
-    }
 }

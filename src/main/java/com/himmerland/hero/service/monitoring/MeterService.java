@@ -31,7 +31,7 @@ public class MeterService {
                 measurement.getConsumptionType(),
                 measurement.getTimestamp(),
                 measurement.getInfoCode(),
-                measurement.getAddress());
+                null); // address is not used in this context   
 
         meterRepository.save(meter);
 

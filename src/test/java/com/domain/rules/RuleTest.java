@@ -1,4 +1,4 @@
-package com;
+package com.domain.rules;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;

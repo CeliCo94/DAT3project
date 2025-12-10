@@ -44,14 +44,14 @@ public class TenancyController {
     public ResponseEntity<TenancyDTO> update(@PathVariable String id, @RequestBody TenancyDTO payload) {
         // Ensure the ID in the path is used
         TenancyDTO updatedDTO = new TenancyDTO(
-            id,                       // id
-            payload.meterNumber(),    // meterNumber
-            payload.departmentId(),   // departmentId
-            payload.tennancyNumber(), // tennancyNumber (same typo as in DTO)
-            payload.address(),        // address
-            payload.city(),           // city
-            payload.postalCode(),     // postalCode
-            payload.active()          // active
+            id,                       
+            payload.meterNumber(),   
+            payload.departmentId(),   
+            payload.departmentName(), 
+            payload.tenancyNumber(), 
+            payload.address(),        
+            payload.city(),           
+            payload.postalCode()      
         );
 
         return ResponseEntity.ok(tenancyService.updateTenancy(updatedDTO));

@@ -37,7 +37,7 @@ public class RuleHeat extends Rule {
         this.thresholdHeatWaterFlow = thresholdHeatWaterFlow;
     }
 
-    @Override
+    /*@Override
     public boolean isBroken(Measurement measurement){
 
         if(
@@ -49,5 +49,12 @@ public class RuleHeat extends Rule {
         else 
             {return false;}
 
-    }
+    }*/
+    
+    @Override
+    public boolean isBroken(Measurement measurement) {
+    if (!(measurement instanceof MeasurementHeat heat)) return false; 
+    return thresholdTempIn < heat.getForwardTemperature()
+        && thresholdTempOut < heat.getReturnTemperature()
+        && thresholdHeatWaterFlow < heat.getFlow();
 }
