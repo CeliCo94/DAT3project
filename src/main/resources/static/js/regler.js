@@ -1,5 +1,18 @@
 document.addEventListener("DOMContentLoaded", loadRules);
 
+const RULE_TYPE_LABELS = {
+    ruleHeat: "Varme",
+    ruleHumidity: "Luftfugtighed",
+    ruleWater: "Vand"
+};
+
+function getRuleTypeLabel(rule) {
+    const typeKey = rule.type || rule.ruleType;  
+    if (!typeKey) return "Ukendt type";
+
+    return RULE_TYPE_LABELS[typeKey] || typeKey || "Ukendt type";
+}
+
 async function loadRules() {
     try {
         const res = await fetch("/api/rules");
@@ -24,13 +37,7 @@ async function loadRules() {
             card.className = "rule-card";
 
             const active = !!rule.active;
-            const ruleTypeLabels = {
-                ruleHeat : "Varme",
-                ruleHumidity : "Luftfugtighed",
-                ruleWater : "Vand"
-            };
-            const ruleType = 
-            ruleTypeLabels[rule.type] || ruleTypeLabels[rule.ruleType] || rule.type || rule.ruleType || "Ukendt type";
+            const ruleType = getRuleTypeLabel(rule);
             const thresholdsSummary = buildThresholdSummary(rule);
 
             card.innerHTML = `
@@ -132,8 +139,7 @@ async function openEditRule(id) {
         currentRule = rule;
 
         document.getElementById("rule-id").value = rule.id;
-        document.getElementById("rule-type-display").textContent =
-            rule.type || rule.ruleType || "Ukendt type";
+        document.getElementById("rule-type-display").textContent = getRuleTypeLabel(rule);
 
         document.getElementById("rule-name-input").value = rule.name || "";
         document.getElementById("rule-desc-input").value = rule.description || "";
