@@ -24,8 +24,9 @@ public class MeasurementDTO {
     private String ambientTemperatureUnit;
     private double Humidity;
     private String HumidityUnit;
+    private String address;
 
-    public MeasurementDTO(String meterNumber, String meterType, String consumptionType, String timestamp, int infoCode,
+    public MeasurementDTO(String address, String meterNumber, String meterType, String consumptionType, String timestamp, int infoCode,
                           double volume, String volumeUnit,
                           double forwardTemperature, String forwardTemperatureUnit,
                           double returnTemperature, String returnTemperatureUnit, double Flow, String FlowUnit,
@@ -33,6 +34,7 @@ public class MeasurementDTO {
                             int averageFlow, String averageFlowUnit, double ambientTemperature, String ambientTemperatureUnit,
                             double Humidity, String HumidityUnit) {
 
+        this.address = address;
         this.meterNumber = meterNumber;
         this.meterType = meterType;
         this.consumptionType = consumptionType;
@@ -56,6 +58,10 @@ public class MeasurementDTO {
         this.ambientTemperatureUnit = ambientTemperatureUnit;
         this.Humidity = Humidity;
         this.HumidityUnit = HumidityUnit;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public String getmeterNumber() {

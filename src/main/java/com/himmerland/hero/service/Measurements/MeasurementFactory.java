@@ -1,29 +1,31 @@
 package com.himmerland.hero.service.Measurements;
 
-import com.himmerland.hero.domain.measurements.MeasurementHeat;
+import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.service.Measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 
 public class MeasurementFactory {
 
-    public static MeasurementHeat fromDTO(MeasurementDTO dto) {
+    public static Measurement fromDTO(MeasurementDTO dto) {
 
-        if (dto.getmeterNumber() == null) {
+        if (dto.getmeterNumber() == null || dto.getmeterNumber().isBlank()) {
             throw new IllegalArgumentException("MeterNumber cannot be null");
         }
 
-        if (dto.getmeterType() == null) {
+        if (dto.getmeterType() == null || dto.getmeterType().isBlank()) {
             throw new IllegalArgumentException("MeterType cannot be null");
         }
 
-        if (dto.getconsumptionType() == null) {
+        if (dto.getconsumptionType() == null || dto.getconsumptionType().isBlank()) {
             throw new IllegalArgumentException("ConsumptionType cannot be null");
         }
 
-        if (dto.gettimeStamp() == null) {
+        if (dto.gettimeStamp() == null || dto.gettimeStamp().isBlank()) {
             throw new IllegalArgumentException("TimeStamp cannot be null");
         }
 
-        return new MeasurementHeat(dto.getmeterNumber(), dto.getmeterType(), dto.getconsumptionType(), 
+        System.out.println(dto.getmeterNumber());
+
+        return new Measurement(dto.getAddress(), dto.getmeterNumber(), dto.getmeterType(), dto.getconsumptionType(), 
                         dto.gettimeStamp(), dto.getinfoCode(), dto.getVolume(), dto.getVolumeUnit(),
                         dto.getForwardTemperature(), dto.getForwardTemperatureUnit(),
                         dto.getReturnTemperature(), dto.getReturnTemperatureUnit(), dto.getFlow(),

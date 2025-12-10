@@ -1,6 +1,6 @@
 package com.himmerland.hero.web;
 
-import com.himmerland.hero.domain.measurements.MeasurementHeat;
+import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.service.monitoring.MonitoringService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +28,13 @@ public class NewMeasurementRestController {
         if (!testEndPointsEnabled) {
             return ResponseEntity.notFound().build();
         }
-
+/*
         for (int i = 0; i < 9; i++) {
-            MeasurementHeat measurement = new MeasurementHeat();
+            Measurement measurement = new Measurement();
             measurement.setVolume(ThreadLocalRandom.current().nextInt(0, 1000));
             monitoringService.handleNewMeasurement(measurement);
         }
-
+*/
         return ResponseEntity.ok().build();
     }
 }
