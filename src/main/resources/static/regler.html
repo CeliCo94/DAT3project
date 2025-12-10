@@ -7,21 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Himmerland HERO</title>
   <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="css/regler.css" />
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <svg class="brand-mark" viewBox="0 0 64 40" aria-hidden="true">
-        <rect x="2" y="10" width="60" height="20" rx="6" ry="6"></rect>
-        <path d="M18 30c-5 0-9-4-9-9s4-9 9-9c3 0 5 1 7 3l3-3h9v6h-6l-3 3c1 2 2 4 2 6 0 5-4 9-9 9z"></path>
-      </svg>
-      <div class="brand-text">
-        <strong>Himmerland</strong><span>Boligforening</span>
-      </div>
-    </div>
-    <h1>Overvågning af energidata</h1>
-  </header>
+    <!-- This is where the shared header is injected -->
+    <aside data-include="/partials/header.html"></aside>
 
   <div class="layout">
     <!-- Shared menu -->
@@ -30,30 +21,61 @@
     <main class="content">
       <section class="card">
         <h2>Regler</h2>
-          <form id="ruleForm">
-            <label for="name"><strong>Navngiv reglen</strong>:</label><br>
-            <input type="text" id="name" name="name"><br><br>
 
-            <label for="thresholdTempIn">Grænseværdi for fremløbstemperatur:</label><br>
-            <input type="number" id="thresholdTempIn" name="thresholdTempIn"><br><br>
+          <div id="rules-list" class="rules-list">
+            <!-- Cards will be injected here by rules.js -->
+          </div>
 
-            <label for="thresholdTempOut">Grænseværdi for returløbstemperatur:</label><br>
-            <input type="number" id="thresholdTempOut" name="thresholdTempOut"><br><br>
-
-            <label for="thresholdWaterFlow">Grænseværdi for flow:</label><br>
-            <input type="number" id="thresholdWaterFlow" name="thresholdWaterFlow"><br><br>
-
-            <label for="duration">Grænseværdi for varighed (timer):</label><br>
-            <input type="number" id="duration" name="duration"><br><br>
-
-            <button type="submit">Send</button>
-          </form>
       </section>
     </main>
   </div>
 
+  <div id="rule-modal" class="modal hidden">
+    <div class="modal-backdrop" onclick="closeRuleModal()"></div>
+
+    <div class="modal-content">
+        <h3>Redigér regel</h3>
+
+        <form id="rule-form" onsubmit="saveRule(event)">
+            <input type="hidden" id="rule-id">
+
+            <div class="form-row">
+                <label>Type af regel:</label>
+                <div id="rule-type-display" class="readonly-field"></div>
+            </div>
+
+            <div class="form-row">
+                <label for="rule-name-input">Reglens navn:</label>
+                <input id="rule-name-input" type="text">
+            </div>
+
+            <div class="form-row">
+                <label for="rule-desc-input">Beskrivelse:</label>
+                <textarea id="rule-desc-input" rows="3"></textarea>
+            </div>
+
+            <div class="form-row">
+                <label for="rule-duration-input">Varighed (timer):</label>
+                <input id="rule-duration-input" type="number" min="1" step="1">
+            </div>
+
+            <!-- Her kan du senere tilføje type-specifikke felter -->
+
+            <div class="modal-actions">
+                <button type="button" class="secondary" onclick="closeRuleModal()">
+                    Annullér
+                </button>
+                <button type="submit" class="primary">
+                    Gem
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
   <!-- scripts -->
   <script src="/js/include-menu.js"></script>
   <script src="/js/form-handler.js"></script>
+  <script src="/js/regler.js"></script>
 </body>
 </html>
