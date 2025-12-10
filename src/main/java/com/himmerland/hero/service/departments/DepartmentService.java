@@ -5,7 +5,6 @@ import com.himmerland.hero.service.repositories.DepartmentRepository;
 
 import org.springframework.stereotype.Service;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;

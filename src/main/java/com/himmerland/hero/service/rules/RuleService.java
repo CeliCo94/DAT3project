@@ -4,7 +4,6 @@ import com.himmerland.hero.domain.rules.Rule;
 import com.himmerland.hero.service.repositories.RuleRepository;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.Path;
 import java.util.List;
 
 @Service
