@@ -7,6 +7,9 @@ import java.util.List;
 
 import com.himmerland.hero.domain.measurements.Measurement;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class MeasurementRepository extends BaseRepository<Measurement>{
 
     public MeasurementRepository(Path dataDir) {

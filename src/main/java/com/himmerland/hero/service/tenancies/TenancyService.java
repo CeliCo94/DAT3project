@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 public class TenancyService {
     private final TenancyRepository repository;
 
-    public TenancyService(Path dataDir) {
-        this.repository = new TenancyRepository(dataDir);
+    public TenancyService(TenancyRepository tenancyRepo) {
+        this.repository = tenancyRepo;
     }
 
     public List<TenancyDTO> findAll() {

@@ -2,6 +2,7 @@ package com.himmerland.hero.domain.notifications;
 
 import com.himmerland.hero.service.helperclasses.enums.*;
 import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
+import java.time.Instant;
 
 public class Notification extends IdentifiableBase{
     private String address;
@@ -17,12 +18,12 @@ public class Notification extends IdentifiableBase{
     public Notification() {
     }
 
-    public Notification(String address, String cause, String rule, Criticality criticality, String timeStamp, boolean isActive, boolean isSent) {
+    public Notification(String address, String cause, String rule, Criticality criticality) {
         this.address = address;
         this.cause = cause;
         this.rule = rule;
         this.criticality = criticality;
-        this.timeStamp = timeStamp;
+        this.timeStamp = Instant.now().toString();
         this.isActive = true;
         this.isSent = false;
     }

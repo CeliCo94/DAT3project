@@ -12,8 +12,8 @@ public class RuleService {
 
     private final RuleRepository ruleRepository;
 
-    public RuleService(Path dataDir) {
-        this.ruleRepository = new RuleRepository(dataDir);
+    public RuleService(RuleRepository ruleRepo) {
+        this.ruleRepository = ruleRepo;
     }
 
     public List<Rule> showActiveRules() {

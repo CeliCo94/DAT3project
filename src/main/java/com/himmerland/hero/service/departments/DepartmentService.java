@@ -17,8 +17,8 @@ public class DepartmentService {
     private final DepartmentRepository repository;
     private static final Pattern VALID_ID = Pattern.compile("^[A-Za-z0-9_-]{3,32}$");
 
-    public DepartmentService(Path dataDir) {
-        this.repository = new DepartmentRepository(dataDir);
+    public DepartmentService(DepartmentRepository depRepo) {
+        this.repository = depRepo;
     }
 
     public List<Department> findAll() {

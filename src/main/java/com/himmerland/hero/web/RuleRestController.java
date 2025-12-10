@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/rules")
 @CrossOrigin
-public class RuleController {
+public class RuleRestController {
 
   private final RuleService ruleService;
   private final RuleFactory ruleFactory;
 
-  public RuleController(RuleService ruleService, RuleFactory ruleFactory) {
+  public RuleRestController(RuleService ruleService, RuleFactory ruleFactory) {
         this.ruleService = ruleService;
         this.ruleFactory = ruleFactory;
     }

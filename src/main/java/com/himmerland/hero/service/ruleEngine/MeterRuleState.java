@@ -57,7 +57,7 @@ public class MeterRuleState {
 
         Notification notification = new Notification("Test address",
                 rule.getDescription(), rule.getName(),
-                Criticality.Low, "2024-01-01T02:00:00Z", false, false);
+                Criticality.Low);
 
         return notification;
     }

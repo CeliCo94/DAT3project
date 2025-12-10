@@ -13,8 +13,8 @@ public class NotificationService {
 
     private final NotificationRepository repository;
 
-    public NotificationService(Path dataDir) {
-        this.repository = new NotificationRepository(dataDir);
+    public NotificationService(NotificationRepository notifRepo) {
+        this.repository = notifRepo;
     }
 
     public List<Notification> findAll() {

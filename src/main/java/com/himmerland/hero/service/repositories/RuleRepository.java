@@ -8,12 +8,9 @@ import java.util.List;
 @Repository
 public class RuleRepository extends BaseRepository<Rule>{
 
-
-
     public RuleRepository(Path dataDir) {
         super(dataDir, "Rules", Rule.class);
     }
-   
 
     public List<Rule> findActive() {
         return findAll().stream()
