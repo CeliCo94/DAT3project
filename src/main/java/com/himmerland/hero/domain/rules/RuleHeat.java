@@ -10,7 +10,7 @@ public class RuleHeat extends Rule {
 
     public RuleHeat() {
         super();
-        setConsumptionType("HEAT");  // optional but convenient
+        setConsumptionType("HEAT");
     }
 
     public Integer getThresholdTempIn() {

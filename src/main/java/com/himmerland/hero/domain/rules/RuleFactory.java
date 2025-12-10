@@ -15,6 +15,7 @@ public class RuleFactory {
                 RuleHeat rule = new RuleHeat();
                 rule.setName(dto.getName());
                 rule.setDescription(dto.getDescription());
+                rule.setCriticality(dto.getCriticality());
                 rule.setDuration(dto.getDuration());
                 rule.setThresholdTempIn(dto.getThresholdTempIn());
                 rule.setThresholdTempOut(dto.getThresholdTempOut());
@@ -26,6 +27,7 @@ public class RuleFactory {
                 RuleWater rule = new RuleWater();
                 rule.setName(dto.getName());
                 rule.setDescription(dto.getDescription());
+                rule.setCriticality(dto.getCriticality());
                 rule.setDuration(dto.getDuration());
                 rule.setThresholdWaterFlow(dto.getThresholdWaterFlow());
                 return rule;
@@ -35,6 +37,7 @@ public class RuleFactory {
                 RuleHumidity rule = new RuleHumidity();
                 rule.setName(dto.getName());
                 rule.setDescription(dto.getDescription());
+                rule.setCriticality(dto.getCriticality());
                 rule.setDuration(dto.getDuration());
                 rule.setThresholdHumidity(dto.getThresholdHumidity());
                 return rule;

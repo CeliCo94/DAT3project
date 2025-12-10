@@ -41,6 +41,13 @@
                 <label for="ruleDescription">Beskriv regel og mulige årsager:</label>
                 <input type="text" id="ruleDescription" name="ruleDescription" placeholder="Tilføj beskrivelse"><br><br>
 
+                <label for="ruleCriticality">Vælg kritikalitet:</label>
+                <select name="selectRuleCriticality" id="selectRuleCriticality">
+                  <option value="High">Høj</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Lav</option>
+                </select>
+                
                 <label for="ruleDuration">Varighed af regel i timer:</label>
                 <input type="number" id="ruleDuration" name="ruleDuration" placeholder="24"><br><br>
             </div>
@@ -50,7 +57,6 @@
             </div>
 
             <div class="container" id="submit">
-                <h3 class="container-title">Gem regel</h3>
                 <input type="submit" value="Start regel">
             </div>
         </form>
