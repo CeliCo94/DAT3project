@@ -12,11 +12,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/tenancies")
 @CrossOrigin
-public class TenancyController {
+public class TenancyRestController {
 
     private final TenancyService tenancyService;
 
-    public TenancyController(TenancyService tenancyService) {
+    public TenancyRestController(TenancyService tenancyService) {
         this.tenancyService = tenancyService;
     }
 

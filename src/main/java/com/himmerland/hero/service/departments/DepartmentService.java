@@ -5,7 +5,6 @@ import com.himmerland.hero.service.repositories.DepartmentRepository;
 
 import org.springframework.stereotype.Service;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +13,8 @@ public class DepartmentService {
 
     private final DepartmentRepository repository;
 
-    public DepartmentService(Path dataDir) {
-        this.repository = new DepartmentRepository(dataDir);
+    public DepartmentService(DepartmentRepository depRepo) {
+        this.repository = depRepo;
     }
 
     public List<Department> findAll() {

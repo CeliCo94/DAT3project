@@ -4,7 +4,6 @@ import com.himmerland.hero.domain.notifications.Notification;
 import com.himmerland.hero.service.repositories.NotificationRepository;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,8 +12,8 @@ public class NotificationService {
 
     private final NotificationRepository repository;
 
-    public NotificationService(Path dataDir) {
-        this.repository = new NotificationRepository(dataDir);
+    public NotificationService(NotificationRepository notifRepo) {
+        this.repository = notifRepo;
     }
 
     public List<Notification> findAll() {

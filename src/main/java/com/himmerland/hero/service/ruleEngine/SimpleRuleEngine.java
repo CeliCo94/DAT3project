@@ -1,6 +1,5 @@
 package com.himmerland.hero.service.ruleEngine;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.domain.notifications.Notification;
 import com.himmerland.hero.domain.rules.Rule;
-import com.himmerland.hero.domain.rules.RuleHeat;
 import com.himmerland.hero.service.repositories.RuleRepository;
 
 @Service

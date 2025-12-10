@@ -7,7 +7,7 @@ import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 
-import com.himmerland.hero.service.Measurements.MeasurementService;
+import com.himmerland.hero.service.measurements.MeasurementService;
 
 public class DirectoryWatcher {
 

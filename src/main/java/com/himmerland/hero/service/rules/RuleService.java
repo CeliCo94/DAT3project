@@ -4,7 +4,6 @@ import com.himmerland.hero.domain.rules.Rule;
 import com.himmerland.hero.service.repositories.RuleRepository;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.Path;
 import java.util.List;
 
 @Service
@@ -12,8 +11,8 @@ public class RuleService {
 
     private final RuleRepository ruleRepository;
 
-    public RuleService(Path dataDir) {
-        this.ruleRepository = new RuleRepository(dataDir);
+    public RuleService(RuleRepository ruleRepo) {
+        this.ruleRepository = ruleRepo;
     }
 
     public List<Rule> showActiveRules() {

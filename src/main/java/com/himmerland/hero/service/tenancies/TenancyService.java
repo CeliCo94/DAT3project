@@ -6,7 +6,6 @@ import com.himmerland.hero.service.departments.DepartmentService;
 
 import org.springframework.stereotype.Service;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -16,9 +15,8 @@ public class TenancyService {
     private final TenancyRepository repository;
     private final DepartmentService departmentService;
 
-    public TenancyService(Path dataDir, DepartmentService departmentService) {
-        this.repository = new TenancyRepository(dataDir);
-        this.departmentService = departmentService;
+    public TenancyService(TenancyRepository tenancyRepo) {
+        this.repository = tenancyRepo;
     }
 
     public List<TenancyDTO> findAll() {

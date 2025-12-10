@@ -1,12 +1,12 @@
-package com.himmerland.hero.service.Measurements.MeasurementCSVImporter;
-
-import com.himmerland.hero.service.Measurements.MeasurementCSVImporter.dto.MeasurementDTO;
+package com.himmerland.hero.service.measurements.MeasurementCSVImporter;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 
 public class MeasurementCSVImporter {
     private final String SEMICOLON_DELIMITER = ";";

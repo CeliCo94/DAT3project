@@ -1,25 +1,45 @@
 document.addEventListener("DOMContentLoaded", () => {
-  fetchNotification();
+  loadNotifications();
 });
 
-async function fetchNotification() {
+async function loadNotifications() {
   try {
-    const res = await fetch("/notifications/fetch", { credentials: "same-origin" });
-    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    const response = await fetch("/api/notifications");
+    if (!response.ok) {
+      throw new Error("Failed to fetch notifications");
+    }
 
-    const n = await res.json();
-    if (!n) return;
+    const notifications = await response.json();
+    renderTables(notifications);
 
-    // Første række i første tabel (Service Center 1)
-    const row = document.querySelector("#sc1-table tbody tr");
-    if (!row) return;
-
-    const [tdNotif, tdRule, tdCrit, tdStatus] = row.children;
-    tdNotif.textContent = `${n.address} — ${n.cause}`;
-    tdRule.textContent = n.rule;
-    tdCrit.textContent = n.criticality;
-    tdStatus.textContent = `${n.active ? "Aktiv" : "Inaktiv"} · ${n.sent ? "Sendt" : "Ikke sendt"}`;
   } catch (err) {
-    console.error("Fetching notification failed:", err);
+    console.error("Error loading notifications:", err);
   }
+}
+
+function renderTables(notifications) {
+
+  const activeBody = document.getElementById("active-table-body");
+  const historicalBody = document.getElementById("historical-table-body");
+
+  // Clear old rows
+  activeBody.innerHTML = "";
+  historicalBody.innerHTML = "";
+
+  notifications.forEach(n => {
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${n.address}</td>
+      <td>${n.rule}</td>
+      <td>${n.criticality}</td>
+      <td>${n.active ? "Aktiv" : "Lukket"}</td>
+    `;
+
+    if (n.active) {
+      activeBody.appendChild(row);
+    } else {
+      historicalBody.appendChild(row);
+    }
+  });
 }
