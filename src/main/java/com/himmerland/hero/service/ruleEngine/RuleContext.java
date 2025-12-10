@@ -1,15 +1,22 @@
 package com.himmerland.hero.service.ruleEngine;
 
-import com.himmerland.hero.domain.buildings.Building;
+import com.himmerland.hero.domain.meters.Meter;
+import com.himmerland.hero.service.repositories.MeterRepository;
+
 public class RuleContext {
 
-    private Building building;
+    private final MeterRepository meterRepository;
 
-    public RuleContext(){
-        this.building = new Building();
+    public RuleContext(MeterRepository meterRepository) {
+        this.meterRepository = meterRepository;
     }
 
-    public String getContextInfo(){
-        return building.getAddress();
+    public Meter getMeter(String meterNumber) {
+    return meterRepository.findMeterByNumber(meterNumber)
+            .orElseThrow(() -> new IllegalArgumentException("Meter not found: " + meterNumber));
+    }
+
+    public String getConsumptionType(String meterNumber) {
+        return getMeter(meterNumber).getConsumptionType();
     }
 }

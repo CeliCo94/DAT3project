@@ -1,6 +1,5 @@
 package com.himmerland.hero.service.monitoring;
 
-import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.StandardWatchEventKinds;
@@ -8,16 +7,16 @@ import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 
-import com.himmerland.hero.service.Measurements.MeasurementCSVImporter.MeasurementCSVImporter;
+import com.himmerland.hero.service.Measurements.MeasurementService;
 
 public class DirectoryWatcher {
 
     private final Path directory;
-    private final MeasurementCSVImporter importer;
+    private final MeasurementService service;
 
-    public DirectoryWatcher(Path directory, MeasurementCSVImporter importer) {
+    public DirectoryWatcher(Path directory, MeasurementService service) {
         this.directory = directory;
-        this.importer = importer;
+        this.service = service;
     }
 
     public void startWatching() {
@@ -37,8 +36,12 @@ public class DirectoryWatcher {
                     String fileName = event.context().toString();
                     Path filePath = directory.resolve(fileName);
 
+                    try {
+                        Thread.sleep(500);   // 0.5 seconds — adjust if needed
+                    } catch (InterruptedException ignored) {}
+
                     // run the CSV import
-                    importer.readCSVFileToMeasurementDTOs(filePath.toString());
+                    service.ReadMeasurementData(filePath.toString());
                 }
 
                 key.reset();
