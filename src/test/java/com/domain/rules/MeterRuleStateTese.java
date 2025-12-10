@@ -26,12 +26,32 @@ public class MeterRuleStateTese {
     return rule;
 }
 
+    private Measurement measurement(String meterNumber, int infoCode) {
+        return new Measurement(
+                "addr-1",
+                meterNumber,
+                "heat-meter",
+                "HEAT",
+                "2025-01-01T00:00Z",
+                infoCode,
+                0.0, "m3",
+                0.0, "C",
+                0.0, "C",
+                0.0, "l/h",
+                0, "kWh",
+                0, "kWh",
+                0, "l/h",
+                0.0, "C",
+                0.0, "%"
+        );
+    }
+
     private Measurement brokenMeasurement(String meterNumber) {
-        return new Measurement(meterNumber, "heat", "HEAT", "2025-01-01T00:00Z", 0); // infoCode 0 => broken
+        return measurement(meterNumber, 0);
     }
 
     private Measurement okMeasurement(String meterNumber) {
-        return new Measurement(meterNumber, "heat", "HEAT", "2025-01-01T00:00Z", 1); // inforCode 1 => ok
+        return measurement(meterNumber, 1);
     }
 
     @Test
