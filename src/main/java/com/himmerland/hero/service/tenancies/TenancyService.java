@@ -18,10 +18,8 @@ public class TenancyService {
         this.repository = tenancyRepo;
     }
 
-    public List<TenancyDTO> findAll() {
-        return repository.findAll().stream()
-            .map(TenancyDTO::fromDomain)
-            .collect(Collectors.toList());
+    public List<Tenancy> findAll() {
+        return repository.findAll();
     }
 
     public TenancyDTO getTenancy(String id) {
@@ -29,6 +27,14 @@ public class TenancyService {
         return repository.findById(id)
             .map(TenancyDTO::fromDomain)
             .orElseThrow(() -> new IllegalArgumentException("Tenancy not found: " + id));
+    }
+
+    public String getDepartmentFromAddress(String address) {
+        return repository.findAll().stream()
+            .filter(n -> address.equals(n.getAddress()))
+            .map(n -> n.getDepartmentName())
+            .findFirst()
+            .orElse(null);
     }
 
     public TenancyDTO createTenancy(TenancyDTO dto) {

@@ -1,5 +1,6 @@
 package com.himmerland.hero.web;
 
+import com.himmerland.hero.domain.tenancies.Tenancy;
 import com.himmerland.hero.service.tenancies.TenancyDTO;
 import com.himmerland.hero.service.tenancies.TenancyService;
 
@@ -23,7 +24,7 @@ public class TenancyRestController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TenancyDTO>> getAll() {
+    public ResponseEntity<List<Tenancy>> getAll() {
         return ResponseEntity.ok(tenancyService.findAll());
     }
 
