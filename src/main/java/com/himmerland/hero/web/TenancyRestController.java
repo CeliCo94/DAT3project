@@ -2,6 +2,8 @@ package com.himmerland.hero.web;
 
 import com.himmerland.hero.service.tenancies.TenancyDTO;
 import com.himmerland.hero.service.tenancies.TenancyService;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +37,9 @@ public class TenancyRestController {
         TenancyDTO created = tenancyService.createTenancy(payload);
 
         return ResponseEntity
-            .created(URI.create("/api/tenancies/" + created.id()))
-            .contentType(MediaType.APPLICATION_JSON)
+            //.created(URI.create("/api/tenancies/" + created.id()))
+            //.contentType(MediaType.APPLICATION_JSON)
+            .status(HttpStatus.CREATED)
             .body(created);
     }
 
@@ -44,14 +47,11 @@ public class TenancyRestController {
     public ResponseEntity<TenancyDTO> update(@PathVariable String id, @RequestBody TenancyDTO payload) {
         // Ensure the ID in the path is used
         TenancyDTO updatedDTO = new TenancyDTO(
-            id,                       // id
-            payload.meterNumber(),    // meterNumber
-            payload.departmentId(),   // departmentId
+            payload.departmentName(),   // departmentId
             payload.tennancyNumber(), // tennancyNumber (same typo as in DTO)
             payload.address(),        // address
             payload.city(),           // city
-            payload.postalCode(),     // postalCode
-            payload.active()          // active
+            payload.postalCode()     // postalCode
         );
 
         return ResponseEntity.ok(tenancyService.updateTenancy(updatedDTO));

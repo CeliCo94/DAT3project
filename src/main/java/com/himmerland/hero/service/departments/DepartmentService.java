@@ -5,6 +5,7 @@ import com.himmerland.hero.service.repositories.DepartmentRepository;
 
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -49,9 +50,6 @@ public class DepartmentService {
         });
 
         Department department = new Department(payload.id(), payload.email());
-        if (payload.active() != null) {
-            department.setActive(payload.active());
-        }
         return repository.save(department);
     }
 
@@ -60,10 +58,6 @@ public class DepartmentService {
 
         if (payload.email() != null && !payload.email().isBlank()) {
             existing.setEmail(payload.email());
-        }
-
-        if (payload.active() != null) {
-            existing.setActive(payload.active());
         }
         return repository.save(existing);
     }
