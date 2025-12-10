@@ -1,4 +1,4 @@
-package com.domain.measurement;
+package com.himmerland.hero.domain.measurement;
 
 import org.junit.jupiter.api.Test;
 

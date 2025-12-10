@@ -1,4 +1,4 @@
-package com.domain.rules;
+package com.himmerland.hero.domain.rules;
 
 import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.domain.notifications.Notification;
