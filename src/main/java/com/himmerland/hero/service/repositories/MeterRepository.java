@@ -1,11 +1,11 @@
-package com.himmerland.hero.repositories;
+package com.himmerland.hero.service.repositories;
 
-import com.himmerland.hero.domain.meters.Meter;
 import java.nio.file.Path;
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
-import java.util.Optional;
+
+import com.himmerland.hero.domain.meters.Meter;
 
 @Repository
 public class MeterRepository extends BaseRepository<Meter> {
