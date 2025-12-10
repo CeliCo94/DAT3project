@@ -4,7 +4,6 @@ import com.himmerland.hero.domain.notifications.Notification;
 import com.himmerland.hero.service.repositories.NotificationRepository;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
