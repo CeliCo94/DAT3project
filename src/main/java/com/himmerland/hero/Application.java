@@ -4,7 +4,9 @@ import java.nio.file.Path;
 import java.util.List;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.himmerland.hero.config.EmailProperties;
 
 import com.himmerland.hero.service.io.JsonStorage;
 import com.himmerland.hero.service.io.StorageStrategy;
@@ -19,6 +21,7 @@ import static com.himmerland.hero.service.helperclasses.handlecsv.ReadCSVFileToM
 import java.nio.file.Path;
 import java.util.List;
 
+@EnableConfigurationProperties(EmailProperties.class)
 @SpringBootApplication
 public class Application {
 
