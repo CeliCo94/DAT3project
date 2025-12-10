@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Himmerland HERO</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+    <!-- This is where the shared header is injected -->
+    <aside data-include="/partials/header.html"></aside>
+
+  <div class="layout">
+    <!-- This is where the shared menu is injected -->
+    <aside data-include="/partials/menu.html"></aside>
+
+    <main class="content">
+      <section class="card">
+        <h2>E-mails / Notifikation</h2>
+
+        <!-- Loading tekst -->
+        <p id="email-status-loading">Henter notifikation...</p>
+
+        <!-- Fejltekst -->
+        <p
+            id="email-status-error"
+            class="badge red"
+            style="margin-top: 12px; display: none;"
+        ></p>
+
+        <!-- Ingen notifikation -->
+        <p
+            id="email-status-empty"
+            style="display: none;"
+        >
+            Der er ingen aktiv notifikation.
+        </p>
+
+        <!-- Selve notifikationen -->
+        <div id="email-notification" style="margin-top: 16px; display: none;">
+            <p>
+            <strong>Adresse:</strong>
+            <span id="notif-address"></span>
+            </p>
+            <p>
+            <strong>Årsag:</strong>
+            <span id="notif-cause"></span>
+            </p>
+            <p>
+            <strong>Regel:</strong>
+            <span id="notif-rule"></span>
+            </p>
+            <p>
+            <strong>Kritikalitet:</strong>
+            <span id="notif-criticality"></span>
+            </p>
+            <p>
+            <strong>Tidspunkt:</strong>
+            <span id="notif-timestamp"></span>
+            </p>
+            <p>
+            <strong>Aktiv:</strong>
+            <span id="notif-active"></span>
+            </p>
+            <p>
+            <strong>Sendt som e-mail:</strong>
+            <span id="notif-sent"></span>
+            </p>
+
+            <br />
+
+            <button
+            type="button"
+            id="email-send-button"
+            >
+            Send e-mail
+            </button>
+
+            <p
+            id="email-send-error"
+            class="badge red"
+            style="margin-top: 8px; display: none;"
+            >
+            Kunne ikke sende e-mail.
+            </p>
+            <p
+            id="email-send-success"
+            class="badge blue"
+            style="margin-top: 8px; display: none;"
+            >
+            E-mail er sendt!
+            </p>
+        </div>
+        
+      </section>
+    </main>
+  </div>
+
+  <!-- load the include helper at the end of body -->
+  <script src="/js/include-menu.js"></script>
+  <script src="/js/fetchNotifications.js"></script>
+  <script src="/js/index.js"></script>
+  <script src="/js/email.js"></script>
+</body>
+</html>

@@ -1,10 +1,11 @@
 package com.himmerland.hero.service.repositories;
 
+import org.springframework.stereotype.Repository;
 import com.himmerland.hero.domain.rules.Rule;
 import java.nio.file.Path;
 import java.util.List;
 
-
+@Repository
 public class RuleRepository extends BaseRepository<Rule>{
 
 

@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import com.himmerland.hero.domain.measurements.MeasurementHeat;
+import com.himmerland.hero.domain.measurements.Measurement;
 
 class JsonStorageTest {
 
@@ -19,11 +19,11 @@ class JsonStorageTest {
 
     @Test
     void testWriteAndRead() {
-        JsonStorage<MeasurementHeat> storage =
-                new JsonStorage<>(tempDir, "measurements", MeasurementHeat.class);
+        JsonStorage<Measurement> storage =
+                new JsonStorage<>(tempDir, "measurements", Measurement.class);
 
-        MeasurementHeat m =
-                new MeasurementHeat("0000", "Heat", "Heat",
+        Measurement m =
+                new Measurement("adresse","0000", "Heat", "Heat",
                         "2024-01-01T00:00:00Z", 0,
                         100.0, "m3",
                         60.0, "C",
@@ -43,7 +43,7 @@ class JsonStorageTest {
 
         assertTrue(Files.exists(expectedFile), "JSON file should be created");
 
-        Optional<MeasurementHeat> read = storage.read(m.getId());
+        Optional<Measurement> read = storage.read(m.getId());
         assertTrue(read.isPresent(), "Object should be readable");
 
         assertEquals(m.getVolume(), read.get().getVolume());
@@ -53,11 +53,11 @@ class JsonStorageTest {
 
     @Test
     void testDelete() {
-        JsonStorage<MeasurementHeat> storage =
-                new JsonStorage<>(tempDir, "measurements", MeasurementHeat.class);
+        JsonStorage<Measurement> storage =
+                new JsonStorage<>(tempDir, "measurements", Measurement.class);
 
-        MeasurementHeat m =
-                new MeasurementHeat("0001", "Heat", "Heat",
+        Measurement m =
+                new Measurement("adresse","0001", "Heat", "Heat",
                         "2024-01-01T01:00:00Z", 0,
                         120.0, "m3",
                         65.0, "C",
@@ -84,10 +84,10 @@ class JsonStorageTest {
 
     @Test
     void testReadMissingReturnsEmptyOptional() {
-        JsonStorage<MeasurementHeat> storage =
-                new JsonStorage<>(tempDir, "measurements", MeasurementHeat.class);
+        JsonStorage<Measurement> storage =
+                new JsonStorage<>(tempDir, "measurements", Measurement.class);
 
-        Optional<MeasurementHeat> result = storage.read("does-not-exist");
+        Optional<Measurement> result = storage.read("does-not-exist");
 
         assertTrue(result.isEmpty(), "Unknown file should return Optional.empty()");
     }

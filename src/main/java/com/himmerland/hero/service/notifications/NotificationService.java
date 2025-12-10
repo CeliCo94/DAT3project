@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class NotificationService {
@@ -18,6 +19,25 @@ public class NotificationService {
 
     public List<Notification> findAll() {
        return repository.findAll();
+    }
+
+    public Notification save(Notification notification) {
+        return repository.save(notification);
+    }
+    
+    public Notification findCurrentNotification() {
+        return repository.findAll().stream()
+                .filter(Notification::isActive)
+                .filter(n -> !n.isSent())
+                .findFirst()
+                .orElse(null);
+    }
+
+    public List<Notification> findAllActiveAndUnsent() {
+    return repository.findAll().stream()
+            .filter(Notification::isActive)
+            .filter(n -> !n.isSent())
+            .collect(Collectors.toList());
     }
     
 }
