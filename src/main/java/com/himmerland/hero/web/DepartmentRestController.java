@@ -14,11 +14,11 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/api/departments")
 @CrossOrigin
-public class DepartmentController {
+public class DepartmentRestController {
     
     private final DepartmentService departmentService;
 
-    public DepartmentController(DepartmentService departmentService) {
+    public DepartmentRestController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
 

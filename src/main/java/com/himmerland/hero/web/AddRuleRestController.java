@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/addRule")
 @CrossOrigin
-public class AddRuleController {
+public class AddRuleRestController {
 
   RuleFactory ruleFactory;
 
-  public AddRuleController(RuleFactory ruleFactory){
+  public AddRuleRestController(RuleFactory ruleFactory){
     this.ruleFactory = ruleFactory;
     System.out.println("ruleFactory instatiated");
   }
