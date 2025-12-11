@@ -223,3 +223,9 @@
 .modal-actions .secondary:hover {
     background: #dde6e0;
 }
+
+.rule-thresholds {
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: #555;
+}

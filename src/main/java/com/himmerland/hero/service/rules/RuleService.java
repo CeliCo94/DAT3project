@@ -1,10 +1,12 @@
 package com.himmerland.hero.service.rules;
 
 import com.himmerland.hero.domain.rules.Rule;
+import com.himmerland.hero.domain.rules.RuleHeat;
+import com.himmerland.hero.domain.rules.RuleHumidity;
+import com.himmerland.hero.domain.rules.RuleWater;
 import com.himmerland.hero.service.repositories.RuleRepository;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.Path;
 import java.util.List;
 
 @Service
@@ -45,6 +47,29 @@ public class RuleService {
         existing.setDescription(updated.getDescription());
         existing.setDuration(updated.getDuration());
         existing.setActive(updated.isActive()); 
+
+        if (existing instanceof RuleHeat && updated instanceof RuleHeat) {
+        RuleHeat existingHeat = (RuleHeat) existing;
+        RuleHeat updatedHeat  = (RuleHeat) updated;
+
+        existingHeat.setThresholdTempIn(updatedHeat.getThresholdTempIn());
+        existingHeat.setThresholdTempOut(updatedHeat.getThresholdTempOut());
+        existingHeat.setThresholdHeatWaterFlow(updatedHeat.getThresholdHeatWaterFlow());
+        }
+
+        if (existing instanceof RuleWater && updated instanceof RuleWater) {
+            RuleWater existingWater = (RuleWater) existing;
+            RuleWater updatedWater  = (RuleWater) updated;
+
+            existingWater.setThresholdWaterFlow(updatedWater.getThresholdWaterFlow());
+        }
+
+        if (existing instanceof RuleHumidity && updated instanceof RuleHumidity) {
+            RuleHumidity existingHum = (RuleHumidity) existing;
+            RuleHumidity updatedHum  = (RuleHumidity) updated;
+
+            existingHum.setThresholdHumidity(updatedHum.getThresholdHumidity());
+        }
 
         ruleRepository.save(existing);
 

@@ -8,197 +8,63 @@
 </head>
 
 <body>
-    <!-- This is where the shared header is injected -->
-    <aside data-include="/partials/header.html"></aside>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 64 40" aria-hidden="true">
+        <rect x="2" y="10" width="60" height="20" rx="6" ry="6"></rect>
+        <path d="M18 30c-5 0-9-4-9-9s4-9 9-9c3 0 5 1 7 3l3-3h9v6h-6l-3 3c1 2 2 4 2 6 0 5-4 9-9 9z"></path>
+      </svg>
+      <div class="brand-text">
+        <strong>Himmerland</strong><span>Boligforening</span>
+      </div>
+    </div>
+    <h1>Overvågning af energidata</h1>
+  </header>
 
   <div class="layout">
-    <!-- This is where the shared menu is injected -->
     <aside data-include="/partials/menu.html"></aside>
 
     <main class="content">
       <section class="card">
         <h2>Notifikationer</h2>
 
-        <button type="button" id="notifcolaps" class="collapsible">Aktive notifikationer</button>
-        <!-- <h2>Aktive notifikationer</h2> -->
-        <div class="contentcollapsible">
-          <br>
-           <!-- Notification Filter -->
-          <button type="button" id="filter" class="collapsible">Filter</button>
-          <div class="contentcollapsible">
-            <form>
-              <label for="department">Vælg afdeling:</label>
-              <select id="department">
-                <option value="default" selected> </option>
-                <option value="Afdeling1">Afdeling 1</option>
-                <option value="Afdeling3">Afdeling 3</option>
-              </select>
-
-              <br>
-
-              <label for="department">Vælg vigtighed:</label>
-              <select id="department">
-                <option value="default" selected> </option>
-                <option value="high">Høj</option>
-                <option value="medium">Mellem</option>
-                <option value="low">Lav</option>
-              </select>
-              
-            </form>
-          </div>
-
-          <br>
-
-          <h3 class="section-heading">Service Center 1</h3>
-          <div class="table-wrap">
-            <table id="sc1-table" class="data-table">
-              <thead>
-                <tr>
-                  <th>Notifikation</th>
-                  <th>Regel</th>
-                  <th>Vigtighed</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td></td><td></td><td></td><td></td></tr>
-                <tr><td></td><td></td><td></td><td></td></tr>
-                <tr><td></td><td></td><td></td><td></td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h3 class="section-heading">Service Center 2</h3>
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Notifikation</th>
-                  <th>Regel</th>
-                  <th>Vigtighed</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td></td><td></td><td></td><td></td></tr>
-                <tr><td></td><td></td><td></td><td></td></tr>
-                <tr><td></td><td></td><td></td><td></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        
-        <br> <br>
-
-        <button type="button" id="notifcolaps" class="collapsible">Historiske notifikationer</button>
-        <!-- <h2>Historiske notifikationer</h2> -->
-        <div class="contentcollapsible">
-          <br>
-           <!-- Notification Filter -->
-          <button type="button" id="filter" class="collapsible">Filter</button>
-          <div class="contentcollapsible">
-            <form>
-              <label for="department">Vælg tidsperiode:</label>
-              <select id="department">
-                <option value="default" selected> </option>
-                <option value="dag">1 dag</option>
-                <option value="uge">1 uge</option>
-                <option value="måned">1 måned</option>
-              </select>
-
-              <br>
-
-              <label for="department">Vælg afdeling:</label>
-              <select id="department">
-                <option value="default" selected> </option>
-                <option value="Afdeling1">Afdeling 1</option>
-                <option value="Afdeling3">Afdeling 3</option>
-              </select>
-
-              <br>
-
-              <label for="department">Vælg vigtighed:</label>
-              <select id="department">
-                <option value="default" selected> </option>
-                <option value="high">Høj</option>
-                <option value="medium">Mellem</option>
-                <option value="low">Lav</option>
-              </select>
-
-            </form>
-          </div>
-
-          <br>
-
-          <h3 class="section-heading">Service Center 1</h3>
-          <div class="table-wrap">
-            <table id="sc1-table" class="data-table">
-              <thead>
-                <tr>
-                  <th>Notifikation</th>
-                  <th>Regel</th>
-                  <th>Vigtighed</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td></td><td></td><td></td><td></td></tr>
-                <tr><td></td><td></td><td></td><td></td></tr>
-                <tr><td></td><td></td><td></td><td></td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <h3 class="section-heading">Service Center 2</h3>
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Notifikation</th>
-                  <th>Regel</th>
-                  <th>Vigtighed</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td></td><td></td><td></td><td></td></tr>
-                <tr><td></td><td></td><td></td><td></td></tr>
-                <tr><td></td><td></td><td></td><td></td></tr>
-              </tbody>
-            </table>
-          </div>
+        <h3>Aktive notifikationer</h3>
+        <div class="table-wrap">
+          <table class="data-table" id="active-table">
+            <thead>
+              <tr>
+                <th>Notifikation</th>
+                <th>Regel</th>
+                <th>Vigtighed</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="active-table-body">
+              <!-- Rækker indsættes af JavaScript -->
+            </tbody>
+          </table>
         </div>
 
-        <div class="popup">
-          <h1>Notifikation X</h1> <br>
-          <h2>Afdeling/Adresse</h2> <br>
-          <h2>Regelnavn</h2> <br>
-          <h2>Regel Beskrivelse</h2> <br>
-          <h2>Tid</h2> <br>
-          <h2>Relevante værdier ift målinger</h2> <br>
-          <h2>Forbrugstype</h2> <br>
-          <h2>Målerid/Målertype</h2> <br>
-          <h2>Vigtighed (critical?)</h2> <br>
-
-          <h2>Graf</h2> <br>
-          <canvas id="myChart" style="width:100%;max-width:600px"></canvas> <br>
-
-          <button onclick="addRowHandlers()">Luk</button>
-          <!-- Afdeling/adresse -->
-          <!-- Regelnavn -->
-          <!-- Beskrivelse af regl -->
-          <!-- Tid -->
-          <!-- Relevante værdier ift målinger -->
-          <!-- Forbrugstype -->
-          <!-- Målerid/målertype -->
-          <!-- vigtighed (critical?) -->
-          <!-- Graf -->
+        <h3>Historiske notifikationer</h3>
+        <div class="table-wrap">
+          <table class="data-table" id="historical-table">
+            <thead>
+              <tr>
+                <th>Notifikation</th>
+                <th>Regel</th>
+                <th>Vigtighed</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="historical-table-body">
+              <!-- Rækker indsættes af JavaScript -->
+            </tbody>
+          </table>
         </div>
       </section>
     </main>
   </div>
 
-  <!-- load the include helper at the end of body -->
   <script src="/js/include-menu.js"></script>
   <script src="/js/fetchNotifications.js"></script>
   <script src="/js/index.js"></script>

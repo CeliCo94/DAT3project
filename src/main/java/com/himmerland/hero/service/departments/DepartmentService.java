@@ -50,9 +50,6 @@ public class DepartmentService {
         });
 
         Department department = new Department(payload.id(), payload.email());
-        if (payload.active() != null) {
-            department.setActive(payload.active());
-        }
         return repository.save(department);
     }
 
@@ -61,10 +58,6 @@ public class DepartmentService {
 
         if (payload.email() != null && !payload.email().isBlank()) {
             existing.setEmail(payload.email());
-        }
-
-        if (payload.active() != null) {
-            existing.setActive(payload.active());
         }
         return repository.save(existing);
     }

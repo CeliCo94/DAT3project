@@ -18,10 +18,8 @@ public class TenancyService {
         this.repository = tenancyRepo;
     }
 
-    public List<TenancyDTO> findAll() {
-        return repository.findAll().stream()
-            .map(TenancyDTO::fromDomain)
-            .collect(Collectors.toList());
+    public List<Tenancy> findAll() {
+        return repository.findAll();
     }
 
     public TenancyDTO getTenancy(String id) {
@@ -31,15 +29,25 @@ public class TenancyService {
             .orElseThrow(() -> new IllegalArgumentException("Tenancy not found: " + id));
     }
 
+    public String getDepartmentFromAddress(String address) {
+        return repository.findAll().stream()
+            .filter(n -> address.equals(n.getAddress()))
+            .map(n -> n.getDepartmentName())
+            .findFirst()
+            .orElse(null);
+    }
+
     public TenancyDTO createTenancy(TenancyDTO dto) {
         Objects.requireNonNull(dto, "Create payload cannot be null");
 
+        /*
         // Check if tenancy already exists
         if (dto.id() != null && !dto.id().isBlank()) {
             repository.findById(dto.id()).ifPresent(existing -> {
                 throw new IllegalArgumentException("Tenancy already exists: " + dto.id());
             });
         }
+        */
 
         // Convert DTO to domain object
         Tenancy tenancy = dto.toDomain();
@@ -49,19 +57,22 @@ public class TenancyService {
         return TenancyDTO.fromDomain(saved);
     }
 
+    
     public TenancyDTO updateTenancy(TenancyDTO dto) {
+        /*
         Objects.requireNonNull(dto, "Update payload cannot be null");
-        validateId(dto.id());
+        //validateId(dto.id());
 
+        
         Tenancy existing = repository.findById(dto.id())
             .orElseThrow(() -> new IllegalArgumentException("Tenancy not found: " + dto.id()));
 
         if (dto.meterNumber() != null && !dto.meterNumber().isBlank()) {
             existing.setMeterNumber(dto.meterNumber());
         }
-
-        if (dto.departmentId() != null && !dto.departmentId().isBlank()) {
-            existing.setDepartmentId(dto.departmentId());
+        
+        if (dto.departmentName() != null && !dto.departmentName().isBlank()) {
+            existing.setDepartmentName(dto.departmentName());
         }
         
         if (dto.tennancyNumber() != null && !dto.tennancyNumber().isBlank()) {
@@ -83,10 +94,12 @@ public class TenancyService {
         if (dto.active() != null) {
             existing.setActive(dto.active());
         }
-
-        Tenancy updated = repository.save(existing);
-        return TenancyDTO.fromDomain(updated);
+        */
+        //Tenancy updated = repository.save(existing);
+        return dto; //TenancyDTO.fromDomain(updated);
+        
     }
+    
 
     public void deleteTenancy(String id) {
         validateId(id);

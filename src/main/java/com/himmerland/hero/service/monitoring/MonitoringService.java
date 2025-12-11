@@ -14,15 +14,15 @@ public class MonitoringService {
 
     private final RuleEngine ruleEngine;
     private final MeterRepository meterRepository;
+    private final RuleContext ruleContext;
 
-    public MonitoringService(RuleEngine ruleEngine, MeterRepository meterRepository) {
+    public MonitoringService(RuleEngine ruleEngine, MeterRepository meterRepository, RuleContext ruleContext) {
         this.ruleEngine = ruleEngine;
         this.meterRepository = meterRepository;
+        this.ruleContext = ruleContext;
     }
 
     public void handleNewMeasurement(Measurement measurement) {
-        RuleContext ruleContext = new RuleContext(meterRepository);
-
         List<Notification> notifications =
                 ruleEngine.onNewMeasurement(measurement, ruleContext);
 

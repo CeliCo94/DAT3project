@@ -5,6 +5,7 @@ document.getElementById("addRuleForm").addEventListener("submit", async (e) => {
         type: document.getElementById("selectRuleType").value,
         name: document.getElementById("ruleName").value,
         description: document.getElementById("ruleDescription").value,
+        criticality: document.getElementById("selectRuleCriticality").value,
         duration: Number(document.getElementById("ruleDuration").value),
         thresholdTempIn: Number(document.getElementById("thresholdTempIn")?.value) || null,
         thresholdTempOut: Number(document.getElementById("thresholdTempOut")?.value) || null,
