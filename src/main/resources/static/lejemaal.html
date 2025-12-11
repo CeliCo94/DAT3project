@@ -38,17 +38,11 @@
                          pattern="^[A-Za-z0-9_-]{3,32}$"
                          title="ID skal være 3-32 tegn langt og må kun indeholde bogstaver, tal og bindestreger" />
 
-                  <label for="tenancy-meter-number"><strong>Måler nummer:</strong></label>
-                  <input type="text" id="tenancy-meter-number" name="meterNumber" required />
-
                   <label for="tenancy-department-id"><strong>Afdelings ID:</strong></label>
                   <select id="tenancy-department-id" name="departmentId" required>
                     <option value="">Vælg afdeling</option>
                   <!-- Departments will bo loaded here-->
                    </select>
-
-                  <label for="tenancy-number"><strong>Lejemål nummer</strong></label>
-                  <input type="text" id="tenancy-number" name="tenancyNumber" required /> 
 
                   <label for="tenancy-address"><strong>Adresse:</strong></label>
                   <input type="text" id="tenancy-address" name="address" required />
@@ -76,9 +70,7 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Måler nummer</th>
                   <th>Afdeling</th>
-                  <th>Lejemål nummer</th>
                   <th>Adresse</th>
                   <th>By</th>
                   <th>Postnummer</th>
