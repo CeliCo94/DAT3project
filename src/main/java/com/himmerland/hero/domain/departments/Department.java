@@ -12,7 +12,7 @@ public class Department extends IdentifiableBase  {
     public Department() {
         super();
     }
-
+    /*
     @JsonCreator
     public Department(@JsonProperty("id") String Name, @JsonProperty("email") String email) {
         super();
@@ -23,9 +23,15 @@ public class Department extends IdentifiableBase  {
             super.setId(Name);
         }
     }
+*/
+    public Department(String Name, String email) {
+        super();
+        this.Name = Name;
+        this.Email = email;
+    }
     
     public String getName() {
-        return Name != null ? Name : super.getId();
+        return Name;
     }
 
     public String getEmail() {

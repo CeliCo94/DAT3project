@@ -1,12 +1,9 @@
 package com.himmerland.hero.domain.tenancies;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
 
 public class Tenancy extends IdentifiableBase {
     private String DepartmentName;
-    private String TennancyNumber;
     private String Address;
     private String City;
     private String PostalCode;
@@ -16,10 +13,9 @@ public class Tenancy extends IdentifiableBase {
     }
 
     // Convenience constructor for tests (without id - will use auto-generated from IdentifiableBase)
-    public Tenancy(String departmentName, String tennancyNumber, String address, String city, String postalCode) {
+    public Tenancy(String departmentName, String address, String city, String postalCode) {
         super();
         this.DepartmentName = departmentName;
-        this.TennancyNumber = tennancyNumber;
         this.Address = address;
         this.City = city;
         this.PostalCode = postalCode;
@@ -27,10 +23,6 @@ public class Tenancy extends IdentifiableBase {
     
     public String getDepartmentName() {
         return DepartmentName;
-    }
-    
-    public String getTennancyNumber() {
-        return TennancyNumber;
     }
     
     public String getAddress() {
@@ -47,10 +39,6 @@ public class Tenancy extends IdentifiableBase {
     
     public void setDepartmentName(String departmentName) {
         this.DepartmentName = departmentName;
-    }
-    
-    public void setTennancyNumber(String tennancyNumber) {
-        this.TennancyNumber = tennancyNumber;
     }
     
     public void setAddress(String address) {

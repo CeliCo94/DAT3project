@@ -1,7 +1,11 @@
 package com.himmerland.hero.service.tenancies;
 
+import com.himmerland.hero.domain.departments.Department;
 import com.himmerland.hero.domain.tenancies.Tenancy;
+import com.himmerland.hero.service.departments.DepartmentDTO;
+import com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 import com.himmerland.hero.service.repositories.TenancyRepository;
+import com.himmerland.hero.service.importer.TenancyCSVImporter;
 
 import org.springframework.stereotype.Service;
 
@@ -9,19 +13,54 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TenancyService {
     private final TenancyRepository repository;
+    private TenancyCSVImporter importer;
 
-    public TenancyService(TenancyRepository tenancyRepo) {
+    public TenancyService(TenancyRepository tenancyRepo, TenancyCSVImporter importer) {
         this.repository = tenancyRepo;
+        this.importer = importer;
     }
 
-    public List<TenancyDTO> findAll() {
-        return repository.findAll().stream()
-            .map(TenancyDTO::fromDomain)
-            .collect(Collectors.toList());
+    public boolean CreateAndSaveTenancy(TenancyDTO tenancy) {
+        try {
+            if (checkIfTenancyExists(tenancy)) {
+                return false;
+            } else {
+                Tenancy t = CreateNewTenancy(tenancy);
+
+                repository.save(t);
+
+                return true;
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private Tenancy CreateNewTenancy(TenancyDTO tenancy) {
+        Tenancy t = new Tenancy(tenancy.getdepartmentName(), tenancy.getAddress(), tenancy.getcity(),
+                                tenancy.getpostalCode());
+        return t;
+    }
+
+    public Tenancy GetTenancyFromAddress(String address) {
+        return repository.getFromAddress(address)
+            .orElseThrow(() -> new RuntimeException("Tenancy not found for address: " + address));
+    }
+
+    public void ReadTenancyData(String filepath) {
+        List<TenancyDTO> csvData = importer.readCSVFileToTenancyDTOs(filepath);
+
+        for (TenancyDTO dto : csvData) {
+            CreateAndSaveTenancy(dto);
+        }
     }
 
     public TenancyDTO getTenancy(String id) {
@@ -31,29 +70,26 @@ public class TenancyService {
             .orElseThrow(() -> new IllegalArgumentException("Tenancy not found: " + id));
     }
 
-    public TenancyDTO createTenancy(TenancyDTO dto) {
-        Objects.requireNonNull(dto, "Create payload cannot be null");
-
-        /*
-        // Check if tenancy already exists
-        if (dto.id() != null && !dto.id().isBlank()) {
-            repository.findById(dto.id()).ifPresent(existing -> {
-                throw new IllegalArgumentException("Tenancy already exists: " + dto.id());
-            });
+    public List<TenancyDTO> findAll() {
+        List<Tenancy> tenancies = repository.findAll();
+        List<TenancyDTO> dtos = new ArrayList();
+        for (Tenancy t : tenancies) {
+            dtos.add(new TenancyDTO(t.getDepartmentName(), t.getAddress(), t.getCity(), t.getPostalCode()));
         }
-        */
-
-        // Convert DTO to domain object
-        Tenancy tenancy = dto.toDomain();
-        
-        // Save and convert back to DTO
-        Tenancy saved = repository.save(tenancy);
-        return TenancyDTO.fromDomain(saved);
+        return dtos;
     }
 
-    
+    public Boolean checkIfTenancyExists(TenancyDTO dto) {
+        try {
+            GetTenancyFromAddress(dto.getAddress());
+            return true; // found
+        } catch (RuntimeException e) {
+            return false; // not found
+        }
+    }
+/*
     public TenancyDTO updateTenancy(TenancyDTO dto) {
-        /*
+        
         Objects.requireNonNull(dto, "Update payload cannot be null");
         //validateId(dto.id());
 
@@ -88,12 +124,12 @@ public class TenancyService {
         if (dto.active() != null) {
             existing.setActive(dto.active());
         }
-        */
+        
         //Tenancy updated = repository.save(existing);
         return dto; //TenancyDTO.fromDomain(updated);
         
     }
-    
+    */
 
     public void deleteTenancy(String id) {
         validateId(id);

@@ -2,6 +2,7 @@ package com.himmerland.hero.web;
 
 import com.himmerland.hero.service.tenancies.TenancyDTO;
 import com.himmerland.hero.service.tenancies.TenancyService;
+import com.himmerland.hero.domain.tenancies.Tenancy;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,7 +32,7 @@ public class TenancyRestController {
     public ResponseEntity<TenancyDTO> getById(@PathVariable String id) {
         return ResponseEntity.ok(tenancyService.getTenancy(id));
     }
-
+/*
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TenancyDTO> create(@RequestBody TenancyDTO payload) {
         TenancyDTO created = tenancyService.createTenancy(payload);
@@ -42,21 +43,21 @@ public class TenancyRestController {
             .status(HttpStatus.CREATED)
             .body(created);
     }
+            
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TenancyDTO> update(@PathVariable String id, @RequestBody TenancyDTO payload) {
         // Ensure the ID in the path is used
         TenancyDTO updatedDTO = new TenancyDTO(
-            payload.departmentName(),   // departmentId
-            payload.tennancyNumber(), // tennancyNumber (same typo as in DTO)
-            payload.address(),        // address
-            payload.city(),           // city
-            payload.postalCode()     // postalCode
+            payload.getdepartmentName(),   // departmentId
+            payload.getAddress(),        // address
+            payload.getcity(),           // city
+            payload.getpostalCode()     // postalCode
         );
 
         return ResponseEntity.ok(tenancyService.updateTenancy(updatedDTO));
     }
-
+*/
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteTenancy(@PathVariable String id) {
         tenancyService.deleteTenancy(id);
