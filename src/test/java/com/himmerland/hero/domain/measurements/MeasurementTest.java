@@ -1,4 +1,4 @@
-package com.himmerland.hero.domain.measurement;
+package com.himmerland.hero.domain.measurements;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +28,7 @@ public class MeasurementTest {
             40.0, "%"
         );
 
-        assertEquals("Street 123", m.getAddress());
+        assertEquals("Street 132", m.getAddress());
         assertEquals("12345", m.getMeterNumber());
         assertEquals("heat", m.getMeterType());
         assertEquals("consumption", m.getConsumptionType());

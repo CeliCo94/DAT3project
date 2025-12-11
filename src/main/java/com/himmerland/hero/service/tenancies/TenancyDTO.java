@@ -5,7 +5,7 @@ import com.himmerland.hero.domain.tenancies.Tenancy;
 
 public record TenancyDTO(
     String departmentName,
-    String tennancyNumber,
+    String tenancyNumber,
     String address,
     String city,
     String postalCode
@@ -13,22 +13,19 @@ public record TenancyDTO(
     public static TenancyDTO fromDomain(Tenancy tenancy) {
         return new TenancyDTO(
             tenancy.getDepartmentName(),
-            tenancy.getTennancyNumber(),
+            tenancy.getTenancyNumber(),
             tenancy.getAddress(),
             tenancy.getCity(),
             tenancy.getPostalCode()
         );
     }
     
-    // Helper method to get departmentId, using departmentName if departmentId is null
-    public String getDepartmentId() {
-        return departmentId != null && !departmentId.isBlank() ? departmentId : departmentName;
-    }
+    
     
     public Tenancy toDomain() {
         Tenancy tenancy = new Tenancy(
             departmentName,
-            tennancyNumber,
+            tenancyNumber,
             address,
             city,
             postalCode

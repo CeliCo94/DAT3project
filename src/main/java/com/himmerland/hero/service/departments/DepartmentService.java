@@ -64,4 +64,10 @@ public class DepartmentService {
         }
         return repository.save(existing);
     }
+
+    private void validateId(String id) {
+        if (id == null || id.isBlank()) {
+            throw new IllegalArgumentException("Id cannot be null og blank");
+        }
+    }
 }

@@ -9,7 +9,7 @@ import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Tenancy extends IdentifiableBase {
     private String DepartmentName;
-    private String TennancyNumber;
+    private String TenancyNumber;
     private String Address;
     private String City;
     private String PostalCode;
@@ -19,10 +19,10 @@ public class Tenancy extends IdentifiableBase {
     }
 
     // Convenience constructor for tests (without id - will use auto-generated from IdentifiableBase)
-    public Tenancy(String departmentName, String tennancyNumber, String address, String city, String postalCode) {
+    public Tenancy(String departmentName, String tenancyNumber, String address, String city, String postalCode) {
         super();
         this.DepartmentName = departmentName;
-        this.TennancyNumber = tennancyNumber;
+        this.TenancyNumber = tenancyNumber;
         this.Address = address;
         this.City = city;
         this.PostalCode = postalCode;

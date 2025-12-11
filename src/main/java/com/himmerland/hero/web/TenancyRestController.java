@@ -49,7 +49,7 @@ public class TenancyRestController {
         // Ensure the ID in the path is used
         TenancyDTO updatedDTO = new TenancyDTO(
             payload.departmentName(),   // departmentId
-            payload.tennancyNumber(), // tennancyNumber (same typo as in DTO)
+            payload.tenancyNumber(), // tenancyNumber 
             payload.address(),        // address
             payload.city(),           // city
             payload.postalCode()     // postalCode

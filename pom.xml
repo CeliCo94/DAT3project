@@ -28,7 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
-		<junit.platform.version>1.11.1</junit.platform.version>
+		<mockito.version>5.13.0</mockito.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -53,12 +53,12 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
     		<groupId>org.junit.platform</groupId>
     		<artifactId>junit-platform-launcher</artifactId>
-   			<version>${junit.platform.version}</version> 
+   			<version>1.11.3</version> 
     		<scope>test</scope>
-  		</dependency>
+  		</dependency>-->
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -111,6 +111,16 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.1.2</version>
+				<configuration>
+					<useSystemClassLoader>false</useSystemClassLoader>
+					<additionalClasspathElements>
+						<additionalClasspathElement>${project.basedir}/src/test/resources</additionalClasspathElement>
+					</additionalClasspathElements>
 				</configuration>
 			</plugin>
 		</plugins>

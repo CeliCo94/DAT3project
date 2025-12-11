@@ -5,6 +5,7 @@ import com.himmerland.hero.domain.notifications.Notification;
 import com.himmerland.hero.domain.rules.Rule;
 import com.himmerland.hero.service.ruleEngine.MeterRuleState;
 import com.himmerland.hero.service.ruleEngine.RuleContext;
+import com.himmerland.hero.service.helperclasses.enums.Criticality;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -16,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MeterRuleStateTese {
     
     public Rule ruleWithDuration(int duration) {
-    Rule rule = new Rule("Test Rule", "Test Description", "HEAT", duration) {
+    Rule rule =new Rule("Test Rule", "Test Description", Criticality.Low, duration) {
         @Override
         public boolean isBroken(Measurement m) {
-            return m.getInfoCode() == 0; // match MeterRuleState.isBroken logic
+            return m.getInfoCode() == 0;
         }
     };
     rule.setDuration(duration);
@@ -57,7 +58,7 @@ public class MeterRuleStateTese {
     @Test
     void ReturnsNotificationAfterConsecutiveBrokenMeasurementsReachesDuration() {
         MeterRuleState state = new MeterRuleState("m-1", ruleWithDuration(2));
-        RuleContext ctx = new RuleContext(null);
+        RuleContext ctx = new RuleContext(null, null);
 
         List<Notification> first = state.onNewMeasurement(brokenMeasurement("m-1"),ctx);
         List<Notification> second = state.onNewMeasurement(brokenMeasurement("m-1!"), ctx);
@@ -72,7 +73,7 @@ public class MeterRuleStateTese {
     @Test
     void ResetsCounterWhenMeasurementIsHealthy() {
         MeterRuleState state = new MeterRuleState("m-1", ruleWithDuration(2));
-        RuleContext ctx = new RuleContext(null);
+        RuleContext ctx = new RuleContext(null, null);
 
         state.onNewMeasurement(brokenMeasurement("m-1"), ctx); // counter = 1
         List<Notification> reset = state.onNewMeasurement(okMeasurement("m-1"), ctx); // counter reset

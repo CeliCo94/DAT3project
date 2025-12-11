@@ -16,8 +16,9 @@ public class TenancyService {
     private final TenancyRepository repository;
     private final DepartmentService departmentService;
 
-    public TenancyService(TenancyRepository tenancyRepo) {
+    public TenancyService(TenancyRepository tenancyRepo, DepartmentService departmentService) {
         this.repository = tenancyRepo;
+        this.departmentService = departmentService;
     }
 
     public List<Tenancy> findAll() {
@@ -114,13 +115,10 @@ public class TenancyService {
         }
     }
 
-    private String resolveDepartmentId(TenancyDTO dto) {
-        // If departmentId is provided, use it
-        if (dto.departmentId() != null && !dto.departmentId().isBlank()) {
-            return dto.departmentId();
-        }
+    
         
         // If departmentName is provided, try to find the department by name
+    private String resolveDepartmentId(TenancyDTO dto) {
         if (dto.departmentName() != null && !dto.departmentName().isBlank()) {
             return departmentService.findAll().stream()
                 .filter(dept -> dept.getName() != null && dept.getName().equals(dto.departmentName()))
