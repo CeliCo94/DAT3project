@@ -74,6 +74,7 @@ public class TenancyService {
         List<Tenancy> tenancies = repository.findAll();
         List<TenancyDTO> dtos = new ArrayList();
         for (Tenancy t : tenancies) {
+            System.out.println(t.getAddress());
             dtos.add(new TenancyDTO(t.getDepartmentName(), t.getAddress(), t.getCity(), t.getPostalCode()));
         }
         return dtos;

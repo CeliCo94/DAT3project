@@ -12,24 +12,20 @@ public class Department extends IdentifiableBase  {
     public Department() {
         super();
     }
-    /*
+    
     @JsonCreator
-    public Department(@JsonProperty("id") String Name, @JsonProperty("email") String email) {
+    public Department(@JsonProperty("Name") String Name, @JsonProperty("email") String email) {
         super();
         this.Name = Name;
         this.Email = email;
-        // Sync the Id with IdentifiableBase
-        if (Name != null){
-            super.setId(Name);
-        }
     }
-*/
+/* 
     public Department(String Name, String email) {
         super();
         this.Name = Name;
         this.Email = email;
     }
-    
+    */
     public String getName() {
         return Name;
     }
