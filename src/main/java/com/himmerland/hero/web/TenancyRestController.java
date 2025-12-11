@@ -1,7 +1,10 @@
 package com.himmerland.hero.web;
 
+import com.himmerland.hero.domain.tenancies.Tenancy;
 import com.himmerland.hero.service.tenancies.TenancyDTO;
 import com.himmerland.hero.service.tenancies.TenancyService;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +24,7 @@ public class TenancyRestController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TenancyDTO>> getAll() {
+    public ResponseEntity<List<Tenancy>> getAll() {
         return ResponseEntity.ok(tenancyService.findAll());
     }
 
@@ -35,8 +38,9 @@ public class TenancyRestController {
         TenancyDTO created = tenancyService.createTenancy(payload);
 
         return ResponseEntity
-            .created(URI.create("/api/tenancies/" + created.id()))
-            .contentType(MediaType.APPLICATION_JSON)
+            //.created(URI.create("/api/tenancies/" + created.id()))
+            //.contentType(MediaType.APPLICATION_JSON)
+            .status(HttpStatus.CREATED)
             .body(created);
     }
 
@@ -44,14 +48,11 @@ public class TenancyRestController {
     public ResponseEntity<TenancyDTO> update(@PathVariable String id, @RequestBody TenancyDTO payload) {
         // Ensure the ID in the path is used
         TenancyDTO updatedDTO = new TenancyDTO(
-            id,                       
-            payload.meterNumber(),   
-            payload.departmentId(),   
-            payload.departmentName(), 
-            payload.tenancyNumber(), 
-            payload.address(),        
-            payload.city(),           
-            payload.postalCode()      
+            payload.departmentName(),   // departmentId
+            payload.tennancyNumber(), // tennancyNumber (same typo as in DTO)
+            payload.address(),        // address
+            payload.city(),           // city
+            payload.postalCode()     // postalCode
         );
 
         return ResponseEntity.ok(tenancyService.updateTenancy(updatedDTO));

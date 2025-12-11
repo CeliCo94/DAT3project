@@ -55,9 +55,7 @@ public class MeterRuleState {
 
     private Notification buildNotification(Measurement measurement, RuleContext ruleContext) {
 
-        Notification notification = new Notification("Test address",
-                rule.getDescription(), rule.getName(),
-                Criticality.Low);
+        Notification notification = new Notification(ruleContext.getDepartment(measurement.getAddress()), measurement.getAddress(), rule.getDescription(), rule.getName(), rule.getCriticality());
 
         return notification;
     }

@@ -5,6 +5,7 @@ import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
 import java.time.Instant;
 
 public class Notification extends IdentifiableBase{
+    private String departmentName;
     private String address;
     private String cause;
     private String rule;
@@ -18,7 +19,8 @@ public class Notification extends IdentifiableBase{
     public Notification() {
     }
 
-    public Notification(String address, String cause, String rule, Criticality criticality) {
+    public Notification(String departmentName, String address, String cause, String rule, Criticality criticality) {
+        this.departmentName = departmentName;
         this.address = address;
         this.cause = cause;
         this.rule = rule;

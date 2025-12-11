@@ -5,6 +5,7 @@ import com.himmerland.hero.service.repositories.DepartmentRepository;
 
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,18 +43,12 @@ public class DepartmentService {
     }
 
     public Department createDepartment(DepartmentDTO payload) {
-        // Create department without ID - IdentifiableBase will auto-generate UUID
-        Department department = new Department(null, payload.name(), payload.email());
-        
-        // If ID was provided in payload, use it (for backward compatibility or specific cases)
-        if (payload.id() != null && !payload.id().isBlank()) {
-            // Check if ID already exists
-            repository.findById(payload.id()).ifPresent(existing -> {
-                throw new IllegalArgumentException("Department already exists: " + payload.id());
-            });
-            department.setId(payload.id());
-        }
-        
+        validateId(payload.id());
+        repository.findById(payload.id()).ifPresent(existing -> {
+            throw new IllegalArgumentException("Department already exists: " + payload.id());
+        });
+
+        Department department = new Department(payload.id(), payload.email());
         return repository.save(department);
     }
 
@@ -67,7 +62,6 @@ public class DepartmentService {
         if (payload.email() != null && !payload.email().isBlank()) {
             existing.setEmail(payload.email());
         }
-
         return repository.save(existing);
     }
 }

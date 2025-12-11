@@ -8,56 +8,28 @@ import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Tenancy extends IdentifiableBase {
-    private String Id;
-    private String DepartmentId;
-    private String MeterNumber;
-    private String TenancyNumber;
-    private String Address; 
-    private String City; 
-    private String PostalCode; 
+    private String DepartmentName;
+    private String TennancyNumber;
+    private String Address;
+    private String City;
+    private String PostalCode;
+
+    public Tenancy() {
+        super();
+    }
 
     // Convenience constructor for tests (without id - will use auto-generated from IdentifiableBase)
-    public Tenancy(String meterNumber, String departmentId, String tenancyNumber, String address, String city, String postalCode) {
+    public Tenancy(String departmentName, String tennancyNumber, String address, String city, String postalCode) {
         super();
-        this.MeterNumber = meterNumber;
-        this.DepartmentId = departmentId;
-        this.TenancyNumber = tenancyNumber;
-        this.Address = address; 
-        this.City = city; 
+        this.DepartmentName = departmentName;
+        this.TennancyNumber = tennancyNumber;
+        this.Address = address;
+        this.City = city;
         this.PostalCode = postalCode;
     }
-
-    @JsonCreator
-    public Tenancy(@JsonProperty("id") String id, 
-                   @JsonProperty("meterNumber") String meterNumber, 
-                   @JsonProperty("departmentId") String departmentId, 
-                   @JsonProperty("tenancyNumber") @JsonAlias("tennancyNumber") String tenancyNumber, 
-                   @JsonProperty("address") String address, 
-                   @JsonProperty("city") String city, 
-                   @JsonProperty("postalCode") String postalCode) {
-        super();
-        this.Id = id;
-        this.MeterNumber = meterNumber;
-        this.DepartmentId = departmentId;
-        this.TenancyNumber = tenancyNumber;
-        this.Address = address; 
-        this.City = city; 
-        this.PostalCode = postalCode; 
-        if (id != null) {
-            super.setId(id);
-        }
-    }
     
-    public String getId() {
-        return Id != null ? Id : super.getId();
-    }
-    
-    public String getDepartmentId() {
-        return DepartmentId;
-    }
-    
-    public String getMeterNumber() {
-        return MeterNumber;
+    public String getDepartmentName() {
+        return DepartmentName;
     }
     
     public String getTenancyNumber() {
@@ -76,21 +48,8 @@ public class Tenancy extends IdentifiableBase {
         return PostalCode;
     }
     
-    
-    
-    public void setId(String id) {
-        this.Id = id;
-        if (id != null) {
-            super.setId(id);
-        }
-    }
-    
-    public void setMeterNumber(String meterNumber) {
-        this.MeterNumber = meterNumber;
-    }
-    
-    public void setDepartmentId(String departmentId) {
-        this.DepartmentId = departmentId;
+    public void setDepartmentName(String departmentName) {
+        this.DepartmentName = departmentName;
     }
     
     public void setTenancyNumber(String tenancyNumber) {
@@ -108,5 +67,4 @@ public class Tenancy extends IdentifiableBase {
     public void setPostalCode(String postalCode) {
         this.PostalCode = postalCode;
     }
-    
 }

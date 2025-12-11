@@ -3,6 +3,7 @@ package com.himmerland.hero.domain.rules;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.himmerland.hero.domain.measurements.Measurement;
+import com.himmerland.hero.service.helperclasses.enums.Criticality;
 import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
 
 @JsonTypeInfo(
@@ -19,15 +20,16 @@ public abstract class Rule extends IdentifiableBase {
     private String name = "";
     private String description = "";
     private String consumptionType;
+    private Criticality criticality;
     private int duration;
     private boolean active;
 
     protected Rule() {}
 
-    protected Rule(String name, String description, String consumptionType, int duration){
+    protected Rule(String name, String description, Criticality criticality, int duration){
         this.name = name;
         this.description = description;
-        this.consumptionType = consumptionType;   // FIXED
+        this.criticality = criticality;
         this.duration = duration;
     }
 
@@ -61,6 +63,14 @@ public abstract class Rule extends IdentifiableBase {
 
     public void setDescription(String description) {  // Add setter
         this.description = description;
+    }
+
+    public Criticality getCriticality(){
+        return criticality;
+    }
+
+    public void setCriticality(Criticality criticality){
+        this.criticality = criticality;
     }
 
     public boolean isActive() {

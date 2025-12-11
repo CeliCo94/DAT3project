@@ -1,10 +1,13 @@
 package com.himmerland.hero.web;
 
+import com.himmerland.hero.service.helperclasses.enums.Criticality;
+
 public class RuleRequest {
 
     private String type;
     private String name;
     private String description;
+    private Criticality criticality;
     private Integer duration;
 
     private Integer thresholdTempIn;
@@ -22,6 +25,9 @@ public class RuleRequest {
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
+
+    public Criticality getCriticality(){ return criticality; }
+    public void setCriticality(Criticality criticality) { this.criticality = criticality; }
 
     public Integer getDuration() { return duration; }
     public void setDuration(Integer duration) { this.duration = duration; }
