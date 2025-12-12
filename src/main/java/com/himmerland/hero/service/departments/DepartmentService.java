@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Pattern;
-
 
 @Service 
 public class DepartmentService {
@@ -93,7 +91,9 @@ public class DepartmentService {
     }
 
     public Department getDepartment(String id) {
-        validateId(id);
+        if (id == null || id.isBlank()) {
+            throw new IllegalArgumentException("Id cannot be null or blank");
+        }
         return repository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Department not found: " + id));
     }
@@ -111,18 +111,19 @@ public class DepartmentService {
     public Department editDepartment(String id, DepartmentDTO payload) {
         Department existing = getDepartment(id);
 
+        if (payload.name() != null && !payload.name().isBlank()) {
+            existing.setName(payload.name());
+        }
+
         if (payload.email() != null && !payload.email().isBlank()) {
             existing.setEmail(payload.email());
         }
         return repository.save(existing);
     }
 
-    public void validateId(String id) {
+    private void validateId(String id) {
         if (id == null || id.isBlank()) {
-            throw new IllegalArgumentException("Id cannot be null or blank");
-        }
-        if (!VALID_ID.matcher(id).matches()) {
-            throw new IllegalArgumentException("Invalid id format: " + id);
+            throw new IllegalArgumentException("Id cannot be null og blank");
         }
     }
 }
