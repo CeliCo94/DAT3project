@@ -23,53 +23,55 @@
         <!-- Button to open modal -->
         <button class="add-department-btn" onclick="openDepartmentModal()">+ Opret ny afdeling</button>
         
-        <!-- Modal for Create/Edit -->
-        <div id="department-modal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
-          <div class="modal-content" onclick="event.stopPropagation()">
-            <div class="modal-header">
-              <h3 id="modal-title">Opret ny afdeling</h3>
-              <button class="close-btn" onclick="closeDepartmentModal()">&times;</button>
+        <!-- Search Section -->
+        <div class="search-section">
+          <h3>Søg efter afdeling</h3>
+          <div class="search-container">
+            <div style="flex: 1;">
+              <label for="search-department-name" style="display: block; margin-bottom: 6px; font-weight: 600;">Navn:</label>
+              <input type="text" id="search-department-name" placeholder="Indtast afdeling navn..." 
+                     onkeypress="if(event.key === 'Enter') searchDepartment()" />
             </div>
-            <form id="department-form" class="modal-form">
-              <input type="hidden" id="department-id-hidden" />
-              
-              <label for="dept-id"><strong>ID:</strong></label>
-              <input type="text" id="dept-id" name="id" required 
-                     pattern="^[A-Za-z0-9_-]{3,32}$" 
-                     title="ID skal være 3-32 tegn langt og må kun indeholde bogstaver, tal og bindestreger" />
-              
-              <label for="dept-email"><strong>Email:</strong></label>
-              <input type="email" id="dept-email" name="email" required
-                     pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                     title="Indtast en gyldig email-adresse" />
-              
-              <div class="checkbox-label">
-                <input type="checkbox" id="dept-active" name="active" checked>
-                <label for="dept-active" style="margin: 0; font-weight: normal;"><strong>Aktiv</strong></label>
-              </div>
-
-              <div class="modal-actions">
-                <button type="button" class="btn btn-secondary" onclick="closeDepartmentModal()">Annuller</button>
-                <button type="submit" id="submit-btn" class="btn btn-primary">Opret</button>
-              </div>
-            </form>
+            <button onclick="searchDepartment()">Søg</button>
           </div>
-        </div>
-        
-        <div class="table-wrap">
-          <table class="data-table" id="afdelinger-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Email</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
+          <div id="search-error" class="error-massage"></div>
 
-            </tbody>
-          </table>
-        </div>
+          <!-- Search Results-->
+          <div id="search-results" class="search-results">
+            <h4>Fundne afdelinger:</h4>
+            <div class="result-info">
+              <p><strong>Navn:</strong> <span id=result-name></span></p>
+              <p><strong>Email:</strong> <span id=result-email></span></p>
+            </div>
+            <div class="result-actions">
+              <button onclick="editDepartment(searchedDepartment.id)">Rediger</button>
+              <button onclick="deleteDepartment(searchedDepartment.id)">Slet</button>
+            </div>
+          </div>
+          </div>
+
+          <!-- Modal for Create/Edit -->
+          <div id="department-modal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
+            <div class="modal-content" onclick="event.stopPropagation()">
+              <div class="modal-header">
+                <h3 id="modal-title">Opret ny afdeling</h3>
+                <button class="close-btn" onclick="closeDepartmentModal()">&times;</button>
+              </div>
+              <form id="department-form" class="modal-form">
+                <input type="hidden" id="department-id-hidden" />
+                <label for="dept-name"><strong>Navn:</strong></label>
+                <input type="text" id="dept-name" name="name" required />
+                <label for="dept-email"><strong>Email:</strong></label>
+                <input type="email" id="dept-email" name="email" required
+                       pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                       title="Indtast en gyldig email-adresse" />
+                <div class="modal-actions">
+                  <button type="button" class="btn btn-secondary" onclick="closeDepartmentModal()">Annuler</button>
+                  <button type="submit" id="submit-btn" class="btn btn-primary">Opret</button>
+                </div>
+              </form>
+            </div>
+          </div>
       </section>
     </main>
   </div>

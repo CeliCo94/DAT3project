@@ -1,5 +1,6 @@
 package com.himmerland.hero.service.tenancies;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.himmerland.hero.domain.tenancies.Tenancy;
 
 public class TenancyDTO {

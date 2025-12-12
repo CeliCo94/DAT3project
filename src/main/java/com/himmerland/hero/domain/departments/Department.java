@@ -41,8 +41,8 @@ public class Department extends IdentifiableBase  {
         }
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setEmail(String email) {
+        this.Email = email;
     }
     
 }

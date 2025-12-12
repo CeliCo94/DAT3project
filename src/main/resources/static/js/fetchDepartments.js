@@ -1,28 +1,9 @@
 let editingDepartmentId = null;
+let searchedDepartment = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetchDepartments();
   setupFormHandler();
 });
-
-// READ: Get all departments
-async function fetchDepartments() {
-  try {
-    const res = await fetch("/api/departments", { credentials: "same-origin" });
-    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-
-    const departments = await res.json();
-    if (!departments || departments.length === 0) {
-      displayNoDepartments();
-      return;
-    }
-
-    displayDepartments(departments);
-  } catch (err) {
-    console.error("Fetching departments failed:", err);
-    displayError();
-  }
-}
 
 // READ: Get single department by ID
 async function getDepartmentById(id) {
@@ -36,89 +17,67 @@ async function getDepartmentById(id) {
   }
 }
 
-function displayDepartments(departments) {
-  const tbody = document.querySelector("#afdelinger-table tbody");
-  if (!tbody) return;
-
-  tbody.innerHTML = "";
-
-  departments.forEach(dept => {
-    const row = document.createElement("tr");
+// Search for department by name (searches all departments and filters by name)
+async function searchDepartment() {
+  const searchInput = document.getElementById("search-department-name");
+  const departmentName = searchInput.value.trim();
+  const errorDiv = document.getElementById("search-error");
+  const resultDiv = document.getElementById("search-results");
+  
+  // Hide previous results and errors
+  resultDiv.classList.remove("active");
+  errorDiv.classList.remove("active");
+  errorDiv.textContent = "";
+  
+  if (!departmentName) {
+    errorDiv.textContent = "Indtast venligst et afdeling navn";
+    errorDiv.classList.add("active");
+    return;
+  }
+  
+  try {
+    // Fetch all departments and search by name
+    const res = await fetch("/api/departments", { credentials: "same-origin" });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
     
-    const idCell = document.createElement("td");
-    idCell.textContent = dept.id || "-";
+    const departments = await res.json();
+    const found = departments.find(dept => 
+      dept.name && dept.name.toLowerCase() === departmentName.toLowerCase()
+    );
     
-    const emailCell = document.createElement("td");
-    emailCell.textContent = dept.email || "-";
+    if (!found) {
+      errorDiv.textContent = `Afdeling med navn "${departmentName}" blev ikke fundet.`;
+      errorDiv.classList.add("active");
+      searchedDepartment = null;
+      return;
+    }
     
-    const statusCell = document.createElement("td");
-    statusCell.textContent = dept.isActive ? "Aktiv" : "Inaktiv";
+    searchedDepartment = found;
     
-    const actionsCell = document.createElement("td");
-    actionsCell.style.display = "flex";
-    actionsCell.style.gap = "8px";
+    // Display result
+    document.getElementById("result-name").textContent = found.name || "-";
+    document.getElementById("result-email").textContent = found.email || "-";
     
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "Rediger";
-    editBtn.style.padding = "4px 12px";
-    editBtn.style.background = "#085a6b";
-    editBtn.style.color = "white";
-    editBtn.style.border = "none";
-    editBtn.style.borderRadius = "4px";
-    editBtn.style.cursor = "pointer";
-    editBtn.style.fontSize = "13px";
-    editBtn.onclick = () => editDepartment(dept.id);
-    
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Slet";
-    deleteBtn.style.padding = "4px 12px";
-    deleteBtn.style.background = "#d32f2f";
-    deleteBtn.style.color = "white";
-    deleteBtn.style.border = "none";
-    deleteBtn.style.borderRadius = "4px";
-    deleteBtn.style.cursor = "pointer";
-    deleteBtn.style.fontSize = "13px";
-    deleteBtn.onclick = () => deleteDepartment(dept.id);
-    
-    actionsCell.appendChild(editBtn);
-    actionsCell.appendChild(deleteBtn);
-    
-    row.appendChild(idCell);
-    row.appendChild(emailCell);
-    row.appendChild(statusCell);
-    row.appendChild(actionsCell);
-    
-    tbody.appendChild(row);
-  });
+    resultDiv.classList.add("active");
+  } catch (err) {
+    errorDiv.textContent = `Fejl ved søgning: ${err.message}`;
+    errorDiv.classList.add("active");
+    searchedDepartment = null;
+  }
 }
 
-function displayNoDepartments() {
-  const tbody = document.querySelector("#afdelinger-table tbody");
-  if (!tbody) return;
-  
-  const row = document.createElement("tr");
-  const cell = document.createElement("td");
-  cell.colSpan = 4;
-  cell.textContent = "Ingen afdelinger fundet";
-  cell.style.textAlign = "center";
-  cell.style.padding = "20px";
-  row.appendChild(cell);
-  tbody.appendChild(row);
+function editSearchedDepartment() {
+  if (!searchedDepartment) return;
+  editDepartment(searchedDepartment.id);
 }
 
-function displayError() {
-  const tbody = document.querySelector("#afdelinger-table tbody");
-  if (!tbody) return;
-  
-  const row = document.createElement("tr");
-  const cell = document.createElement("td");
-  cell.colSpan = 4;
-  cell.textContent = "Fejl ved indlæsning af afdelinger";
-  cell.style.textAlign = "center";
-  cell.style.padding = "20px";
-  cell.style.color = "#d32f2f";
-  row.appendChild(cell);
-  tbody.appendChild(row);
+async function deleteSearchedDepartment() {
+  if (!searchedDepartment) return;
+  await deleteDepartment(searchedDepartment.id);
+  // Clear search result after deletion
+  document.getElementById("search-results").classList.remove("active");
+  document.getElementById("search-department-name").value = "";
+  searchedDepartment = null;
 }
 
 function setupFormHandler() {
@@ -155,14 +114,13 @@ function closeModalOnOverlay(event) {
 
 // CREATE: Create new department
 async function createDepartment() {
-  const id = document.getElementById("dept-id").value.trim();
+  const name = document.getElementById("dept-name").value.trim();
   const email = document.getElementById("dept-email").value.trim();
-  const active = document.getElementById("dept-active").checked;
 
+  // Backend will auto-generate ID, so we only send name and email
   const payload = {
-    id: id,
-    email: email,
-    active: active
+    name: name,
+    email: email
   };
 
   try {
@@ -181,9 +139,8 @@ async function createDepartment() {
     }
 
     const created = await res.json();
-    alert(`Afdeling "${created.id}" er oprettet!`);
+    alert(`Afdeling "${created.name || created.id}" er oprettet!`);
     closeDepartmentModal();
-    fetchDepartments();
   } catch (err) {
     console.error("Creating department failed:", err);
     alert(`Fejl ved oprettelse: ${err.message}`);
@@ -196,10 +153,8 @@ async function editDepartment(id) {
     const dept = await getDepartmentById(id);
     
     document.getElementById("department-id-hidden").value = dept.id;
-    document.getElementById("dept-id").value = dept.id;
-    document.getElementById("dept-id").disabled = true;
+    document.getElementById("dept-name").value = dept.name || "";
     document.getElementById("dept-email").value = dept.email;
-    document.getElementById("dept-active").checked = dept.isActive;
     
     document.getElementById("modal-title").textContent = "Rediger afdeling";
     document.getElementById("submit-btn").textContent = "Opdater";
@@ -217,13 +172,12 @@ async function editDepartment(id) {
 // UPDATE: Update department
 async function updateDepartment() {
   const id = editingDepartmentId;
+  const name = document.getElementById("dept-name").value.trim();
   const email = document.getElementById("dept-email").value.trim();
-  const active = document.getElementById("dept-active").checked;
 
   const payload = {
-    id: id,
-    email: email,
-    active: active
+    name: name,
+    email: email
   };
 
   try {
@@ -242,9 +196,15 @@ async function updateDepartment() {
     }
 
     const updated = await res.json();
-    alert(`Afdeling "${updated.id}" er opdateret!`);
+    alert(`Afdeling "${updated.name || updated.id}" er opdateret!`);
     closeDepartmentModal();
-    fetchDepartments();
+    
+    // Update search result if this department was searched
+    if (searchedDepartment && searchedDepartment.id === id) {
+      searchedDepartment = updated;
+      document.getElementById("result-name").textContent = updated.name || "-";
+      document.getElementById("result-email").textContent = updated.email;
+    }
   } catch (err) {
     console.error("Updating department failed:", err);
     alert(`Fejl ved opdatering: ${err.message}`);
@@ -253,7 +213,7 @@ async function updateDepartment() {
 
 // DELETE: Delete department
 async function deleteDepartment(id) {
-  if (!confirm(`Er du sikker på, at du vil slette afdeling "${id}"?`)) {
+  if (!confirm(`Er du sikker på, at du vil slette denne afdeling?`)) {
     return;
   }
 
@@ -268,8 +228,14 @@ async function deleteDepartment(id) {
       throw new Error(errorText || `HTTP ${res.status}`);
     }
 
-    alert(`Afdeling "${id}" er slettet!`);
-    fetchDepartments();
+    alert(`Afdeling er slettet!`);
+    
+    // Clear search result after deletion
+    if (searchedDepartment && searchedDepartment.id === id) {
+      document.getElementById("search-results").classList.remove("active");
+      document.getElementById("search-department-name").value = "";
+      searchedDepartment = null;
+    }
   } catch (err) {
     console.error("Deleting department failed:", err);
     alert(`Fejl ved sletning: ${err.message}`);
@@ -279,7 +245,6 @@ async function deleteDepartment(id) {
 function resetForm() {
   document.getElementById("department-form").reset();
   document.getElementById("department-id-hidden").value = "";
-  document.getElementById("dept-id").disabled = false;
   document.getElementById("modal-title").textContent = "Opret ny afdeling";
   document.getElementById("submit-btn").textContent = "Opret";
   editingDepartmentId = null;
