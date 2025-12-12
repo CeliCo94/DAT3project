@@ -1,5 +1,6 @@
 package com.himmerland.hero.service.ruleEngine;
 
+
 import org.springframework.stereotype.Service;
 
 import com.himmerland.hero.domain.meters.Meter;
