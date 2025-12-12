@@ -6,7 +6,6 @@ import com.himmerland.hero.service.helperclasses.id.IdentifiableBase;
 
 public class Tenancy extends IdentifiableBase {
     private String DepartmentName;
-    private String TennancyNumber;
     private String Address;
     private String City;
     private String PostalCode;
@@ -14,12 +13,20 @@ public class Tenancy extends IdentifiableBase {
     public Tenancy() {
         super();
     }
-
+/*
     // Convenience constructor for tests (without id - will use auto-generated from IdentifiableBase)
-    public Tenancy(String departmentName, String tennancyNumber, String address, String city, String postalCode) {
+    public Tenancy(String departmentName, String address, String city, String postalCode) {
         super();
         this.DepartmentName = departmentName;
-        this.TennancyNumber = tennancyNumber;
+        this.Address = address;
+        this.City = city;
+        this.PostalCode = postalCode;
+    }
+*/
+    @JsonCreator
+    public Tenancy(@JsonProperty("departmentName") String departmentname, @JsonProperty("address") String address, @JsonProperty("city") String city, @JsonProperty("postalCode") String postalCode) {
+        super();
+        this.DepartmentName = departmentname;
         this.Address = address;
         this.City = city;
         this.PostalCode = postalCode;
@@ -27,10 +34,6 @@ public class Tenancy extends IdentifiableBase {
     
     public String getDepartmentName() {
         return DepartmentName;
-    }
-    
-    public String getTennancyNumber() {
-        return TennancyNumber;
     }
     
     public String getAddress() {
@@ -47,10 +50,6 @@ public class Tenancy extends IdentifiableBase {
     
     public void setDepartmentName(String departmentName) {
         this.DepartmentName = departmentName;
-    }
-    
-    public void setTennancyNumber(String tennancyNumber) {
-        this.TennancyNumber = tennancyNumber;
     }
     
     public void setAddress(String address) {
