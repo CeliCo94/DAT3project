@@ -1,12 +1,12 @@
 package com.himmerland.hero.service.ruleEngine;
 
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.himmerland.hero.domain.meters.Meter;
 import com.himmerland.hero.service.repositories.MeterRepository;
 import com.himmerland.hero.service.tenancies.TenancyService;
-@Service
+@Component
 public class RuleContext {
 
     private final MeterRepository meterRepository;
@@ -18,8 +18,9 @@ public class RuleContext {
     }
 
     public Meter getMeter(String meterNumber) {
-    return meterRepository.findMeterByNumber(meterNumber)
-            .orElseThrow(() -> new IllegalArgumentException("Meter not found: " + meterNumber));
+        System.out.println("[RuleContext] Resolving meter " + meterNumber);
+        return meterRepository.findMeterByNumber(meterNumber)
+                .orElseThrow(() -> new IllegalArgumentException("Meter not found: " + meterNumber));
     }
 
     public String getConsumptionType(String meterNumber) {

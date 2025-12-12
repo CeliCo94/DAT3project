@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class NotificationRepository extends BaseRepository<Notification> {
-    
+
     public NotificationRepository(Path dataDir) {
         super(dataDir, "notifications", Notification.class);
     }
