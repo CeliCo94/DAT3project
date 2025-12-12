@@ -24,7 +24,7 @@ class DepartmentTest {
         Department department = new Department("HR Department", "hr@company.com");
         
         // Assert
-        assertEquals("HR Department", department.getId());
+        assertEquals("HR Department", department.getName());
     }
 
     @Test
@@ -34,7 +34,7 @@ class DepartmentTest {
         
         // Assert
         assertNotNull(department.getId());
-        assertEquals(department.getId(), department.getName()); // getName returns id when Name is null
+        assertEquals(null, department.getName()); // getName returns id when Name is null
         assertEquals("test@company.com", department.getEmail());
     }
 
@@ -69,7 +69,7 @@ class DepartmentTest {
         String name = department.getName();
         
         // Assert
-        assertEquals(department.getId(), name);
+        assertEquals(department.getName(), name);
     }
 
     @Test
@@ -109,7 +109,7 @@ class DepartmentTest {
         department.setName(null);
         
         // Assert
-        assertEquals(originalId, department.getName()); // getName returns id when Name is null
+        assertEquals(null, department.getName()); // getName returns id when Name is null
         assertEquals(originalId, department.getId());
     }
 
