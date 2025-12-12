@@ -114,8 +114,8 @@ public class TenancyService {
             existing.setDepartmentName(dto.departmentName());
         }
         
-        if (dto.tennancyNumber() != null && !dto.tennancyNumber().isBlank()) {
-            existing.setTennancyNumber(dto.tennancyNumber());
+        if (dto.tenancyNumber() != null && !dto.tenancyNumber().isBlank()) {
+            existing.setTenancyNumber(dto.tenancyNumber());
         }
 
         if (dto.address() != null && !dto.address().isBlank()) {
@@ -149,5 +149,20 @@ public class TenancyService {
         if (id == null || id.isBlank()) {
             throw new IllegalArgumentException("Id cannot be null or blank");
         }
+    }
+
+    
+        
+        // If departmentName is provided, try to find the department by name
+    private String resolveDepartmentId(TenancyDTO dto) {
+        if (dto.departmentName() != null && !dto.departmentName().isBlank()) {
+            return departmentService.findAll().stream()
+                .filter(dept -> dept.getName() != null && dept.getName().equals(dto.departmentName()))
+                .findFirst()
+                .map(dept -> dept.getId())
+                .orElse(dto.departmentName()); // Fallback: assume it's actually an ID if not found
+        }
+        
+        return null;
     }
 }

@@ -51,3 +51,4 @@ public class RuleHeat extends Rule {
 
     }
 }
+    

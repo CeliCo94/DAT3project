@@ -30,6 +30,14 @@ public class Notification extends IdentifiableBase{
         this.isSent = false;
     }
 
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
     public String getAddress() {
         return address;
     }
