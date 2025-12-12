@@ -1,4 +1,4 @@
-package com.himmerland.hero;
+/* package com.himmerland.hero;
 
 import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.domain.meters.Meter;
@@ -84,3 +84,4 @@ public class RuleEngineTestRunner {
         };
     }
 }
+ */
