@@ -31,7 +31,7 @@ public class DepartmentRestController {
     public ResponseEntity<Department> getById(@PathVariable String id) {
         return ResponseEntity.ok(departmentService.getDepartment(id));
     }
-
+    /*
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Department> create(@RequestBody DepartmentDTO payload) {
@@ -40,6 +40,7 @@ public class DepartmentRestController {
                 .contentType(Objects.requireNonNull(MediaType.APPLICATION_JSON))
                 .body(created);
     }
+                */
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
                 produces = MediaType.APPLICATION_JSON_VALUE)

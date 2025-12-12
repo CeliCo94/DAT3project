@@ -78,14 +78,8 @@ function displayTenancies(tenancies) {
     const idCell = document.createElement("td");
     idCell.textContent = tenancy.id || "-";
     
-    const meterNumberCell = document.createElement("td");
-    meterNumberCell.textContent = tenancy.meterNumber || "-";
-    
     const departmentCell = document.createElement("td");
-    departmentCell.textContent = tenancy.departmentId || "-";
-    
-    const tenancyNumberCell = document.createElement("td");
-    tenancyNumberCell.textContent = tenancy.tennancyNumber || "-";
+    departmentCell.textContent = tenancy.departmentName || "-";
     
     const addressCell = document.createElement("td");
     addressCell.textContent = tenancy.address || "-";
@@ -95,9 +89,6 @@ function displayTenancies(tenancies) {
     
     const postalCodeCell = document.createElement("td");
     postalCodeCell.textContent = tenancy.postalCode || "-";
-    
-    const statusCell = document.createElement("td");
-    statusCell.textContent = tenancy.active ? "Aktiv" : "Inaktiv";
     
     const actionsCell = document.createElement("td");
     actionsCell.style.display = "flex";
@@ -129,13 +120,10 @@ function displayTenancies(tenancies) {
     actionsCell.appendChild(deleteBtn);
     
     row.appendChild(idCell);
-    row.appendChild(meterNumberCell);
     row.appendChild(departmentCell);
-    row.appendChild(tenancyNumberCell);
     row.appendChild(addressCell);
     row.appendChild(cityCell);
     row.appendChild(postalCodeCell);
-    row.appendChild(statusCell);
     row.appendChild(actionsCell);
     
     tbody.appendChild(row);
