@@ -52,17 +52,11 @@
                          title="ID skal være 3-32 tegn langt og må kun indeholde bogstaver, tal og bindestreger" 
                          placeholder="Lad stå tom for automatisk generering" />
 
-                  <label for="tenancy-meter-number"><strong>Måler nummer:</strong></label>
-                  <input type="text" id="tenancy-meter-number" name="meterNumber" required />
-
-                  <label for="tenancy-department-id"><strong>Afdeling</strong></label>
+                  <label for="tenancy-department-id"><strong>Afdelings ID:</strong></label>
                   <select id="tenancy-department-id" name="departmentId" required>
                     <option value="">Vælg afdeling</option>
                   <!-- Departments will bo loaded here-->
                    </select>
-
-                  <label for="tenancy-number"><strong>Lejemål nummer</strong></label>
-                  <input type="text" id="tenancy-number" name="tenancyNumber" required /> 
 
                   <label for="tenancy-address"><strong>Adresse:</strong></label>
                   <input type="text" id="tenancy-address" name="address" required />
@@ -89,8 +83,7 @@
             <table class="data-table" id="lejemaal-table">
               <thead>
                 <tr>
-                  <th>Lejemål nr.</th>
-                  <th>Måler nr.</th>
+                  <th>ID</th>
                   <th>Afdeling</th>
                   <th>Adresse</th>
                   <th>By</th>

@@ -1,10 +1,12 @@
 package com.himmerland.hero.service.ruleEngine;
 
+
+import org.springframework.stereotype.Service;
+
 import com.himmerland.hero.domain.meters.Meter;
 import com.himmerland.hero.service.repositories.MeterRepository;
-import com.himmerland.hero.service.repositories.TenancyRepository;
 import com.himmerland.hero.service.tenancies.TenancyService;
-
+@Service
 public class RuleContext {
 
     private final MeterRepository meterRepository;

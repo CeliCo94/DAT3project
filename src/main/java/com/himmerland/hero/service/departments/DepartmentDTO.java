@@ -2,9 +2,8 @@ package com.himmerland.hero.service.departments;
 
 
 
-public record DepartmentDTO(String id, String name,String email) {
+public record DepartmentDTO(String name, String email) {
     public DepartmentDTO {
-        // name is required
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Name cannot be null or blank");
         }

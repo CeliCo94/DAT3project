@@ -80,22 +80,68 @@ function filterByDepartment() {
   applyFilter();
 }
 
-function applyFilter() {
-  const selectedDepartment = document.getElementById("department-filter")?.value || "";
-  
-  let filteredTenancies = allTenancies;
-  
-  if (selectedDepartment) {
-    filteredTenancies = allTenancies.filter(tenancy => 
-      tenancy.departmentId === selectedDepartment
-    );
-  }
-  
-  if (filteredTenancies.length === 0) {
-    displayNoTenancies();
-  } else {
-    displayTenancies(filteredTenancies);
-  }
+function displayTenancies(tenancies) {
+  const tbody = document.querySelector("#lejemaal-table tbody");
+  if (!tbody) return;
+
+  tbody.innerHTML = "";
+
+  tenancies.forEach(tenancy => {
+    const row = document.createElement("tr");
+    
+    const idCell = document.createElement("td");
+    idCell.textContent = tenancy.id || "-";
+    
+    const departmentCell = document.createElement("td");
+    departmentCell.textContent = tenancy.departmentName || "-";
+    
+    const addressCell = document.createElement("td");
+    addressCell.textContent = tenancy.address || "-";
+    
+    const cityCell = document.createElement("td");
+    cityCell.textContent = tenancy.city || "-";
+    
+    const postalCodeCell = document.createElement("td");
+    postalCodeCell.textContent = tenancy.postalCode || "-";
+    
+    const actionsCell = document.createElement("td");
+    actionsCell.style.display = "flex";
+    actionsCell.style.gap = "8px";
+    
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Rediger";
+    editBtn.style.padding = "4px 12px";
+    editBtn.style.background = "#085a6b";
+    editBtn.style.color = "white";
+    editBtn.style.border = "none";
+    editBtn.style.borderRadius = "4px";
+    editBtn.style.cursor = "pointer";
+    editBtn.style.fontSize = "13px";
+    editBtn.onclick = () => editTenancy(tenancy.id);
+    
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Slet";
+    deleteBtn.style.padding = "4px 12px";
+    deleteBtn.style.background = "#d32f2f";
+    deleteBtn.style.color = "white";
+    deleteBtn.style.border = "none";
+    deleteBtn.style.borderRadius = "4px";
+    deleteBtn.style.cursor = "pointer";
+    deleteBtn.style.fontSize = "13px";
+    deleteBtn.onclick = () => deleteTenancy(tenancy.id);
+    
+    actionsCell.appendChild(editBtn);
+    actionsCell.appendChild(deleteBtn);
+    
+    row.appendChild(idCell);
+    row.appendChild(departmentCell);
+    row.appendChild(addressCell);
+    row.appendChild(cityCell);
+    row.appendChild(postalCodeCell);
+    row.appendChild(actionsCell);
+    
+    tbody.appendChild(row);
+  });
 }
 
 function clearFilter() {
