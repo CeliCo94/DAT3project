@@ -1,8 +1,12 @@
 let editingDepartmentId = null;
 let searchedDepartment = null;
+let allDepartments = [];
+let filteredDepartments = [];
 
 document.addEventListener("DOMContentLoaded", () => {
   setupFormHandler();
+  setupListUI();
+  fetchAllDepartments();
 });
 
 // READ: Get single department by ID
@@ -139,6 +143,7 @@ async function createDepartment() {
     }
 
     const created = await res.json();
+    await fetchAllDepartments();
     alert(`Afdeling "${created.name || created.id}" er oprettet!`);
     closeDepartmentModal();
   } catch (err) {
@@ -196,6 +201,7 @@ async function updateDepartment() {
     }
 
     const updated = await res.json();
+    await fetchAllDepartments();
     alert(`Afdeling "${updated.name || updated.id}" er opdateret!`);
     closeDepartmentModal();
     
@@ -228,6 +234,7 @@ async function deleteDepartment(id) {
       throw new Error(errorText || `HTTP ${res.status}`);
     }
 
+    await fetchAllDepartments();
     alert(`Afdeling er slettet!`);
     
     // Clear search result after deletion
@@ -248,4 +255,136 @@ function resetForm() {
   document.getElementById("modal-title").textContent = "Opret ny afdeling";
   document.getElementById("submit-btn").textContent = "Opret";
   editingDepartmentId = null;
+}
+
+
+
+
+function setupListUI() {
+  const searchInput = document.getElementById("dept-search-input");
+  const clearBtn = document.getElementById("dept-clear-btn");
+
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      const q = searchInput.value.trim().toLowerCase();
+      filteredDepartments = filterDepartments(allDepartments, q);
+      renderDepartmentList(filteredDepartments);
+    });
+  }
+
+  if (clearBtn && searchInput) {
+    clearBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      filteredDepartments = [...allDepartments];
+      renderDepartmentList(filteredDepartments);
+      searchInput.focus();
+    });
+  }
+}
+
+async function fetchAllDepartments() {
+  const errorDiv = document.getElementById("dept-error");
+  if (errorDiv) {
+    errorDiv.classList.remove("active");
+    errorDiv.textContent = "";
+  }
+
+  try {
+    const res = await fetch("/api/departments", { credentials: "same-origin" });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+
+    allDepartments = await res.json();
+    allDepartments.sort((a, b) => (a.name || "").localeCompare(b.name || "", "da"));
+
+    filteredDepartments = [...allDepartments];
+    updateDeptCount(filteredDepartments.length);
+    renderDepartmentList(filteredDepartments);
+  } catch (err) {
+    console.error("Fetching departments failed:", err);
+    if (errorDiv) {
+      errorDiv.textContent = "Fejl ved indlæsning af afdelinger";
+      errorDiv.classList.add("active");
+    }
+  }
+}
+
+function filterDepartments(list, q) {
+  if (!q) return [...list];
+  return list.filter(d => {
+    const name = (d.name || "").toLowerCase();
+    const email = (d.email || "").toLowerCase();
+    return name.includes(q) || email.includes(q);
+  });
+}
+
+function renderDepartmentList(list) {
+  const container = document.getElementById("dept-list");
+  const empty = document.getElementById("dept-empty");
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  if (!list || list.length === 0) {
+    if (empty) empty.style.display = "block";
+    updateDeptCount(0);
+    return;
+  }
+
+  if (empty) empty.style.display = "none";
+  updateDeptCount(list.length);
+
+  list.forEach(dept => {
+    const row = document.createElement("div");
+    row.className = "dept-row";
+
+    const initial = (dept.name || "?").trim().charAt(0).toUpperCase();
+
+    row.innerHTML = `
+      <div class="dept-badge">${escapeHtml(initial)}</div>
+      <div class="dept-info">
+        <div class="dept-name">${escapeHtml(dept.name || "-")}</div>
+        <div class="dept-email">${dept.email ? escapeHtml(dept.email) : "-"}</div>
+      </div>
+      <div class="dept-actions">
+        <button class="btn btn-secondary" type="button">Rediger</button>
+        <button class="btn btn-danger" type="button">Slet</button>
+      </div>
+    `;
+
+    const emailEl = row.querySelector(".dept-email");
+    if (emailEl) {
+      emailEl.addEventListener("click", (e) => e.stopPropagation());
+    }
+
+    const [editBtn, deleteBtn] = row.querySelectorAll("button");
+    row.addEventListener("click", () => editDepartment(dept.id));
+    
+    editBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      editDepartment(dept.id);
+    });
+
+    deleteBtn.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      await deleteDepartment(dept.id);
+      await fetchAllDepartments();
+    });
+
+    container.appendChild(row);
+  });
+}
+
+function updateDeptCount(n) {
+  const el = document.getElementById("dept-count");
+  if (el) el.textContent = String(n ?? 0);
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
