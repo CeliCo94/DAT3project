@@ -1,1 +1,1 @@
-{"type":"ruleWater","id":"bd81d3a9-8d7d-4ecd-bc29-f325e0cc1ec3","name":"Water rules","description":"This is the descroption","consumptionType":"WATER","duration":2,"active":true,"thresholdWaterFlow":600}
+{"type":"ruleWater","id":"bd81d3a9-8d7d-4ecd-bc29-f325e0cc1ec3","name":"Water rules","description":"This is the descroption","consumptionType":"VAND","duration":2,"active":true,"thresholdWaterFlow":600}

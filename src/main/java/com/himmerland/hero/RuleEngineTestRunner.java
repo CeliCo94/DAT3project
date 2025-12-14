@@ -4,6 +4,7 @@ import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.domain.meters.Meter;
 import com.himmerland.hero.domain.rules.RuleWater;
 import com.himmerland.hero.service.monitoring.MonitoringService;
+import com.himmerland.hero.service.repositories.MeasurementRepository;
 import com.himmerland.hero.service.repositories.MeterRepository;
 import com.himmerland.hero.service.repositories.RuleRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -16,7 +17,9 @@ public class RuleEngineTestRunner {
     @Bean
     public CommandLineRunner runRuleEngineTest(MonitoringService monitoringService,
                                                MeterRepository meterRepository,
-                                               RuleRepository ruleRepository) {
+                                               RuleRepository ruleRepository,
+                                               MeasurementRepository measurementRepository
+                                            ) {
         return args -> {
 
             System.out.println("=== RULE ENGINE TEST RUNNER START ===");
@@ -76,9 +79,11 @@ public class RuleEngineTestRunner {
             // - second call: counter = 2 -> notification generated + saved
             System.out.println("[TestRunner] Sending measurement #1 (flow=700)");
             monitoringService.handleNewMeasurement(m1);
+            measurementRepository.save(m1); // Save the measurement
 
             System.out.println("[TestRunner] Sending measurement #2 (flow=800)");
             monitoringService.handleNewMeasurement(m2);
+            measurementRepository.save(m2); // Save the measurement 
 
             System.out.println("=== RULE ENGINE TEST RUNNER END ===");
         };

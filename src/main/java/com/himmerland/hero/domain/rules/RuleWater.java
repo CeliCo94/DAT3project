@@ -8,7 +8,7 @@ public class RuleWater extends Rule {
 
     public RuleWater() {
         super();
-        setConsumptionType("WATER");
+        setConsumptionType("VAND");
     }
 
     public Integer getThresholdWaterFlow() {
