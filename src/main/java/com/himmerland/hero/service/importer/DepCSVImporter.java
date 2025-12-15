@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DepCSVImporter {
-    private final String SEMICOLON_DELIMITER = ";";
-
-    public DepCSVImporter() {}
+    private static final String SEMICOLON_DELIMITER = ";";
 
     public List<DepartmentDTO> readCSVFileToDepartmentDTOs(String filePath) {
         List<DepartmentDTO> Depdtos = new ArrayList<DepartmentDTO>();

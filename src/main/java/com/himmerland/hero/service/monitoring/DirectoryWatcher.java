@@ -2,21 +2,31 @@ package com.himmerland.hero.service.monitoring;
 
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 
+import org.springframework.stereotype.Service;
+import jakarta.annotation.PostConstruct;
+
 import com.himmerland.hero.service.measurements.MeasurementService;
 
+@Service
 public class DirectoryWatcher {
 
-    private final Path directory;
-    private final MeasurementService service;
+    private final Path directory = Paths.get("src\\main\\resources\\csv");;
+    private final MeasurementService measurementService;
 
-    public DirectoryWatcher(Path directory, MeasurementService service) {
-        this.directory = directory;
-        this.service = service;
+    public DirectoryWatcher(MeasurementService measurementService) {
+        this.measurementService = measurementService;
+        System.out.println("[DirectoryWatcher] Watching directory: " + directory.toString());
+    }
+
+    @PostConstruct
+    public void start() {
+        startWatching();
     }
 
     public void startWatching() {
@@ -41,7 +51,7 @@ public class DirectoryWatcher {
                     } catch (InterruptedException ignored) {}
 
                     // run the CSV import
-                    service.ReadMeasurementData(filePath.toString());
+                    measurementService.ReadMeasurementData(filePath.toString());
                 }
 
                 key.reset();

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.management.monitor.Monitor;
 
+import org.springframework.stereotype.Service;
+
 import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.service.repositories.MeasurementRepository;
 import com.himmerland.hero.service.measurements.MeasurementCSVImporter.MeasurementCSVImporter;
@@ -11,6 +13,7 @@ import com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto.Measu
 import com.himmerland.hero.service.monitoring.MeterService;
 import com.himmerland.hero.service.monitoring.MonitoringService;
 
+@Service
 public class MeasurementService {
 
     private MeasurementRepository MeasurementRepo;
@@ -23,6 +26,7 @@ public class MeasurementService {
         this.importer = importer;
         this.meterService = meterService;
         this.monitoringService = monitoringService;
+        System.out.println("[MeasurementService] Instantiated");
     }
 
     public boolean CreateAndSaveMeasurement(MeasurementDTO measurement) {
