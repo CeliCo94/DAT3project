@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Himmerland HERO</title>
   <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="css/afdelinger.css" />
 </head>
 
 <body>
@@ -23,32 +24,32 @@
         <!-- Button to open modal -->
         <button class="add-department-btn" onclick="openDepartmentModal()">+ Opret ny afdeling</button>
         
-        <!-- Search Section -->
-        <div class="search-section">
-          <h3>Søg efter afdeling</h3>
-          <div class="search-container">
-            <div style="flex: 1;">
-              <label for="search-department-name" style="display: block; margin-bottom: 6px; font-weight: 600;">Navn:</label>
-              <input type="text" id="search-department-name" placeholder="Indtast afdeling navn..." 
-                     onkeypress="if(event.key === 'Enter') searchDepartment()" />
-            </div>
-            <button onclick="searchDepartment()">Søg</button>
+        <!-- Toolbar -->
+        <div class="dept-toolbar">
+          <div class="dept-search">
+            <input
+              type="text"
+              id="dept-search-input"
+              placeholder="Søg efter navn eller email…"
+              autocomplete="off"
+            />
+            <button type="button" class="btn btn-secondary" id="dept-clear-btn">Ryd</button>
           </div>
-          <div id="search-error" class="error-massage"></div>
 
-          <!-- Search Results-->
-          <div id="search-results" class="search-results">
-            <h4>Fundne afdelinger:</h4>
-            <div class="result-info">
-              <p><strong>Navn:</strong> <span id=result-name></span></p>
-              <p><strong>Email:</strong> <span id=result-email></span></p>
-            </div>
-            <div class="result-actions">
-              <button onclick="editDepartment(searchedDepartment.id)">Rediger</button>
-              <button onclick="deleteDepartment(searchedDepartment.id)">Slet</button>
-            </div>
+          <div class="dept-count">
+            <span id="dept-count">0</span> afdelinger
           </div>
-          </div>
+        </div>
+
+        <div id="dept-error" class="error-massage"></div>
+
+        <!-- List -->
+        <div id="dept-list" class="dept-list"></div>
+
+        <div id="dept-empty" class="dept-empty" style="display:none;">
+          Ingen afdelinger matcher din søgning.
+        </div>
+
 
           <!-- Modal for Create/Edit -->
           <div id="department-modal" class="modal-overlay" onclick="closeModalOnOverlay(event)">

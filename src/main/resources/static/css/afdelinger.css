@@ -1,0 +1,119 @@
+.dept-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  margin:16px 0;
+}
+
+.dept-search{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex:1;
+  max-width:520px;
+}
+
+#dept-search-input{
+  width:100%;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,0.12);
+  outline:none;
+}
+
+#dept-search-input:focus{
+  border-color: rgba(16,120,80,0.55);
+  box-shadow: 0 0 0 4px rgba(16,120,80,0.12);
+}
+
+.dept-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:10px;
+}
+
+.dept-row{
+  display:grid;
+  grid-template-columns:40px 1fr auto;
+  gap:14px;
+  align-items:center;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,0.08);
+  background:#fff;
+  transition: background 120ms ease, border-color 120ms ease;
+  cursor: pointer;
+}
+
+.dept-row:hover{
+  background: rgba(16,120,80,0.03);
+  border-color: rgba(16,120,80,1);
+}
+
+.dept-badge{
+  width:40px; height:40px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background: rgba(16,120,80,0.10);
+  color: rgb(16,120,80);
+  font-weight:700;
+}
+
+.dept-info{ min-width:0; }
+.dept-name{
+  font-weight:700;
+  font-size: 14.5px;
+  margin-bottom: 2px;
+  letter-spacing: 0.1px;
+}
+.dept-email{ 
+  font-size: 12.5px;
+  color: rgba(0,0,0,0.62); 
+  white-space:nowrap; 
+  overflow:hidden; 
+  text-overflow:ellipsis; 
+}
+
+.dept-actions{
+  opacity: 0.55;
+  transition: opacity 120ms ease;
+}
+.dept-row:hover .dept-actions{
+  opacity: 1;
+}
+
+.dept-actions button {
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dept-actions .btn-secondary {
+  background: rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.08);
+  color: rgba(0,0,0,0.72);
+}
+
+.btn-danger {
+  background: rgba(220, 53, 69, 0.10);
+  border: 1px solid rgba(220, 53, 69, 0.12);
+  color: rgb(220,53,69);
+}
+
+#dept-clear-btn{
+  background: rgba(117, 117, 117, 0.2);
+  border: 0;
+  color: rgba(0,0,0,0.55);
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+#dept-clear-btn:hover{
+  color: rgba(0,0,0,0.75);
+  background: rgba(117, 117, 117, 0.5);
+}
