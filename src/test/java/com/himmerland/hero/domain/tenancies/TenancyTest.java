@@ -10,14 +10,12 @@ class TenancyTest {
     void convenienceConstructor_setsFieldsAndGeneratesId() {
         Tenancy tenancy = new Tenancy(
             "Dept A",
-            "TEN-001",
             "Street 1",
             "City",
             "1234"
         );
 
         assertEquals("Dept A", tenancy.getDepartmentName());
-        assertEquals("TEN-001", tenancy.getTenancyNumber());
         assertEquals("Street 1", tenancy.getAddress());
         assertEquals("City", tenancy.getCity());
         assertEquals("1234", tenancy.getPostalCode());
@@ -30,14 +28,12 @@ class TenancyTest {
         String generatedId = tenancy.getId();
 
         tenancy.setDepartmentName("Dept B");
-        tenancy.setTenancyNumber("TEN-002");
         tenancy.setAddress("Street 2");
         tenancy.setCity("Town");
         tenancy.setPostalCode("5678");
 
         assertEquals(generatedId, tenancy.getId(), "Default constructor should keep generated id");
         assertEquals("Dept B", tenancy.getDepartmentName());
-        assertEquals("TEN-002", tenancy.getTenancyNumber());
         assertEquals("Street 2", tenancy.getAddress());
         assertEquals("Town", tenancy.getCity());
         assertEquals("5678", tenancy.getPostalCode());
@@ -45,7 +41,7 @@ class TenancyTest {
 
     @Test
     void setId_propagatesToIdentifiableBase() {
-        Tenancy tenancy = new Tenancy("Dept C", "TEN-003", "Street 3", "Village", "9999");
+        Tenancy tenancy = new Tenancy("Dept C", "Street 3", "Village", "9999");
         tenancy.setId("costum-id");
 
         assertEquals("costum-id", tenancy.getId(), "setId should propagate to identifiable base");

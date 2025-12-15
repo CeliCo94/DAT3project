@@ -6,6 +6,8 @@ import com.himmerland.hero.service.departments.DepartmentDTO;
 import com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 import com.himmerland.hero.service.repositories.TenancyRepository;
 import com.himmerland.hero.service.importer.TenancyCSVImporter;
+import com.himmerland.hero.service.tenancies.TenancyDTO;
+import com.himmerland.hero.service.departments.DepartmentService;
 
 import org.springframework.stereotype.Service;
 
@@ -20,10 +22,12 @@ import java.util.List;
 public class TenancyService {
     private final TenancyRepository repository;
     private TenancyCSVImporter importer;
+    private DepartmentService departmentService;
 
-    public TenancyService(TenancyRepository tenancyRepo, TenancyCSVImporter importer) {
+    public TenancyService(TenancyRepository tenancyRepo, TenancyCSVImporter importer, DepartmentService departmentService) {
         this.repository = tenancyRepo;
         this.importer = importer;
+        this.departmentService = departmentService;
     }
 
     public boolean CreateAndSaveTenancy(TenancyDTO tenancy) {
@@ -155,12 +159,12 @@ public class TenancyService {
         
         // If departmentName is provided, try to find the department by name
     private String resolveDepartmentId(TenancyDTO dto) {
-        if (dto.departmentName() != null && !dto.departmentName().isBlank()) {
+        if (dto.getdepartmentName() != null && !dto.getdepartmentName().isBlank()) {
             return departmentService.findAll().stream()
-                .filter(dept -> dept.getName() != null && dept.getName().equals(dto.departmentName()))
+                .filter(dept -> dept.getName() != null && dept.getName().equals(dto.getdepartmentName()))
                 .findFirst()
                 .map(dept -> dept.getId())
-                .orElse(dto.departmentName()); // Fallback: assume it's actually an ID if not found
+                .orElse(dto.getdepartmentName()); // Fallback: assume it's actually an ID if not found
         }
         
         return null;

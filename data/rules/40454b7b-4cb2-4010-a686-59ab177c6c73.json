@@ -1,1 +1,0 @@
-{"type":"ruleHeat","id":"40454b7b-4cb2-4010-a686-59ab177c6c73","name":"Test af varme 2","description":"Generel dårlig afkøling asædlfk jæasdfj ","consumptionType":"HEAT","criticality":"Medium","duration":20,"active":false,"thresholdTempIn":60,"thresholdTempOut":40,"thresholdHeatWaterFlow":20}

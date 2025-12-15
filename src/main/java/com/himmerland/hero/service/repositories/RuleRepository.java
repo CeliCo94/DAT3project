@@ -6,10 +6,10 @@ import java.nio.file.Path;
 import java.util.List;
 
 @Repository
-public class RuleRepository extends BaseRepository<Rule>{
+public class RuleRepository extends BaseRepository<Rule> {
 
     public RuleRepository(Path dataDir) {
-        super(dataDir, "Rules", Rule.class);
+        super(dataDir, "rules", Rule.class);
     }
 
     public List<Rule> findActive() {
@@ -20,8 +20,15 @@ public class RuleRepository extends BaseRepository<Rule>{
 
     public List<Rule> findRuleFromType(String type) {
         return findAll().stream()
-            .filter(rule -> type.equals(rule.getConsumptionType()))
-            .toList();
+                .filter(rule -> type.equals(rule.getConsumptionType()))
+                .toList();
+    }
+
+    public List<Rule> findByConsumptionType(String consumptionType) {
+        return findAll().stream()
+                .filter(rule -> consumptionType.equals(rule.getConsumptionType()))
+                .filter(Rule::isActive) // optional, if you want only active ones
+                .toList();
     }
 
     public List<Rule> findLastN(int amount) {

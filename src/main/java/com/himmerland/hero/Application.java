@@ -27,7 +27,7 @@ public class Application {
 
   public static void main(String[] args) {
     SpringApplication.run(Application.class, args);
-/*
+/* 
     Path path = Paths.get("src\\main\\resources\\csv");
 
     TenancyRepository tenancyRepo = new TenancyRepository(Paths.get("data"));
@@ -41,7 +41,7 @@ public class Application {
     DepCSVImporter depImporter = new DepCSVImporter();
     DepartmentService departmentService = new DepartmentService(DepRepo, depImporter);
     departmentService.ReadDepartmentData("src\\main\\resources\\csvDep\\departments(Ark1).csv");
-
+ 
     MeterRepository meterRepo = new MeterRepository(Paths.get("data"));
     MeasurementRepository measurementRepo = new MeasurementRepository(Paths.get("data"));
 
@@ -50,6 +50,6 @@ public class Application {
     MeasurementService measurementService = new MeasurementService(measurementRepo, mesImporter, meterService);
     DirectoryWatcher watcher = new DirectoryWatcher(path, measurementService);
     watcher.startWatching();
-    */
+     */
   }
 }

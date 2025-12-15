@@ -2,7 +2,6 @@ package com.himmerland.hero.service.ruleEngine;
 
 import com.himmerland.hero.domain.measurements.Measurement;
 import com.himmerland.hero.domain.notifications.Notification;
-import com.himmerland.hero.service.helperclasses.enums.Criticality;
 import com.himmerland.hero.domain.rules.Rule;
 
 import java.util.ArrayList;
@@ -10,13 +9,13 @@ import java.util.List;
 
 public class MeterRuleState {
 
-    private final String meterId;
+    private final String meterNumber;
     private final Rule rule;
 
     private int consecutiveBrokenCount = 0;
 
-    public MeterRuleState(String meterId, Rule rule) {
-        this.meterId = meterId;
+    public MeterRuleState(String meterNumber, Rule rule) {
+        this.meterNumber = meterNumber;
         this.rule = rule;
     }
 
@@ -28,10 +27,14 @@ public class MeterRuleState {
 
         if (brokenNow) {
             consecutiveBrokenCount++;
-            System.out.println("Rule is broken. Counter is now:" + consecutiveBrokenCount);
+            System.out.println("[MeterRuleState] meter=" + meterNumber
+                    + " rule=" + rule.getName()
+                    + " broken, count=" + consecutiveBrokenCount);
         } else {
             consecutiveBrokenCount = 0;
-            System.out.println("Counter is reset");
+            System.out.println("[MeterRuleState] meter=" + meterNumber
+                    + " rule=" + rule.getName()
+                    + " reset");
         }
 
         int duration = rule.getDuration();
@@ -39,13 +42,14 @@ public class MeterRuleState {
         if (duration > 0 && consecutiveBrokenCount >= duration) {
             Notification notification = buildNotification(measurement, ruleContext);
             notifications.add(notification);
-            System.out.println("Notification is added to list");
+
+            System.out.println("[MeterRuleState] meter=" + meterNumber
+                    + " rule=" + rule.getName()
+                    + " TRIGGERED notification");
 
             consecutiveBrokenCount = 0;
-            System.out.println("Counter is reset");
         }
 
-        System.out.println("Notifications will be returned from MeterRuleState to SimpleRuleEngine");
         return notifications;
     }
 
