@@ -8,7 +8,7 @@ public class RuleHumidity extends Rule {
 
     public RuleHumidity() {
         super();
-        setConsumptionType("HUMIDITY");
+        setConsumptionType("LUFTFUGTIGHED");
     }
 
     public Integer getThresholdHumidity() {

@@ -10,22 +10,22 @@ import java.util.stream.Collectors;
 @Service
 public class NotificationService {
 
-    private final NotificationRepository repository;
+    private final NotificationRepository notificationRepository;
 
-    public NotificationService(NotificationRepository notifRepo) {
-        this.repository = notifRepo;
+    public NotificationService(NotificationRepository notificationRepository) {
+        this.notificationRepository = notificationRepository;
     }
 
     public List<Notification> findAll() {
-        return repository.findAll();
+        return notificationRepository.findAll();
     }
 
     public Notification save(Notification notification) {
-        return repository.save(notification);
+        return notificationRepository.save(notification);
     }
 
     public Notification findCurrentNotification() {
-        return repository.findAll().stream()
+        return notificationRepository.findAll().stream()
                 .filter(Notification::isActive)
                 .filter(n -> !n.isSent())
                 .findFirst()
@@ -33,7 +33,7 @@ public class NotificationService {
     }
 
     public List<Notification> findAllActiveAndUnsent() {
-        return repository.findAll().stream()
+        return notificationRepository.findAll().stream()
                 .filter(Notification::isActive)
                 .filter(n -> !n.isSent())
                 .collect(Collectors.toList());

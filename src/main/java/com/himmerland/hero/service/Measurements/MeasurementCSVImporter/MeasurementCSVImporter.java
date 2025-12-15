@@ -6,12 +6,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 
+@Service
 public class MeasurementCSVImporter {
-    private final String SEMICOLON_DELIMITER = ";";
-
-    public MeasurementCSVImporter() {}
+    private static final String SEMICOLON_DELIMITER = ";";
 
     public List<MeasurementDTO> readCSVFileToMeasurementDTOs(String filePath) {
         List<MeasurementDTO> dtos = new ArrayList<MeasurementDTO>();

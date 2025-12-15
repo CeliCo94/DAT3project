@@ -7,12 +7,16 @@ import com.himmerland.hero.service.repositories.MeterRepository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class MeterService {
 
     private final MeterRepository meterRepository;
 
     public MeterService(MeterRepository meterRepository) {
         this.meterRepository = meterRepository;
+        System.out.println("[MeterService] Instantiated");
     }
 
     public void ensureMeterExists(MeasurementDTO dto) {

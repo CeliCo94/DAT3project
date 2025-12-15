@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import static java.nio.file.StandardCopyOption.ATOMIC_MOVE;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
+
 public final class JsonStorage<T extends Identifiable> implements StorageStrategy<T> {
 
     private final Path baseDir;
@@ -24,6 +25,7 @@ public final class JsonStorage<T extends Identifiable> implements StorageStrateg
         this.modelClass = modelClass;
         this.mapper     = new ObjectMapper();
         ensureDir();
+        System.out.println("[JsonStorage] Initialized for type: " + type + " at " + baseDir.toString());
     }
 
     private void ensureDir() {
