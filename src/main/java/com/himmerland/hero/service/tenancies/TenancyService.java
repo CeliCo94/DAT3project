@@ -87,7 +87,7 @@ public class TenancyService {
         List<TenancyDTO> dtos = new ArrayList();
         for (Tenancy t : tenancies) {
             System.out.println(t.getAddress());
-            dtos.add(new TenancyDTO(t.getDepartmentName(), t.getAddress(), t.getCity(), t.getPostalCode()));
+            dtos.add(TenancyDTO.fromDomain(t));
         }
         return dtos;
     }
