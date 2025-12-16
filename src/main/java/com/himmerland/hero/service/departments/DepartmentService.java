@@ -65,9 +65,7 @@ public class DepartmentService {
 
     public Boolean checkIfDepartmentExists(DepartmentDTO dto) {
         try {
-            System.out.println(dto.name());
             Department d = GetDepartmentFromName(dto.name());
-            System.out.println(d.getName());
             return true; // found
         } catch (RuntimeException e) {
             return false; // not found
@@ -92,9 +90,7 @@ public class DepartmentService {
     }
 
     public Department getDepartment(String id) {
-        if (id == null || id.isBlank()) {
-            throw new IllegalArgumentException("Id cannot be null or blank");
-        }
+        validateId(id);
         return repository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Department not found: " + id));
     }
@@ -122,9 +118,12 @@ public class DepartmentService {
         return repository.save(existing);
     }
 
-    private void validateId(String id) {
+    public void validateId(String id) {
         if (id == null || id.isBlank()) {
-            throw new IllegalArgumentException("Id cannot be null og blank");
+            throw new IllegalArgumentException("Id cannot be null or blank");
+        }
+        if (!VALID_ID.matcher(id).matches()) {
+            throw new IllegalArgumentException("Invalid id format: " + id);
         }
     }
 }
