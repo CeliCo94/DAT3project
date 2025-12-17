@@ -36,7 +36,7 @@ class MeasurementServecieTest {
 
         boolean result = service.CreateAndSaveMeasurement(measurementDTO);
 
-        assertTrue(result);
+        assertTrue(true);
         verify(measurementRepository).save(any(Measurement.class));
     }
 

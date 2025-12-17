@@ -16,7 +16,7 @@ import com.himmerland.hero.service.measurements.MeasurementService;
 @Service
 public class DirectoryWatcher {
 
-    private final Path directory = Paths.get("src\\main\\resources\\csv");;
+    private final Path directory = Paths.get("src/main/resources/csv");;
     private final MeasurementService measurementService;
 
     public DirectoryWatcher(MeasurementService measurementService) {
