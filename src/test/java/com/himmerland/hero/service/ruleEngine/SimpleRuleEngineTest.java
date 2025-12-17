@@ -52,7 +52,7 @@ class SimpleRuleEngineTest {
     void seedsStatesinceAndDelegatesPerMeter() {
         Rule r1 = rule("r1");
         Rule r2 = rule("r2");
-        when(ruleRepository.findRuleFromType("ruleHeat")).thenReturn(List.of(r1, r2));
+        when(ruleRepository.findByConsumptionType("ruleHeat")).thenReturn(List.of(r1, r2));
 
         Measurement m1 = measurement("m-123", "addr-1");
 
@@ -60,7 +60,7 @@ class SimpleRuleEngineTest {
 
         assertThat(notifications).hasSize(2);
 
-        verify(ruleRepository, times(1)).findRuleFromType("ruleHeat");
+        verify(ruleRepository, times(1)).findByConsumptionType("ruleHeat");
 
         verify(ruleContext, times(1)).getConsumptionType("m-123");
 
@@ -72,7 +72,7 @@ class SimpleRuleEngineTest {
     void reusesStateForSameMeter() {
         Rule r1 = rule("r1");
         Rule r2 = rule("r2");
-        when(ruleRepository.findRuleFromType("ruleHeat")).thenReturn(List.of(r1, r2));
+        when(ruleRepository.findByConsumptionType("ruleHeat")).thenReturn(List.of(r1, r2));
 
         Measurement m1 = measurement("m-123", "addr-1");
         Measurement m2 = measurement("m-123", "addr-2");
@@ -80,7 +80,7 @@ class SimpleRuleEngineTest {
         engine.onNewMeasurement(m1, ruleContext);
         engine.onNewMeasurement(m2, ruleContext);
 
-        verify(ruleRepository, times(1)).findRuleFromType("ruleHeat");
+        verify(ruleRepository, times(1)).findByConsumptionType("ruleHeat");
 
         verify(r1, times(2)).isBroken(any());
 
@@ -91,7 +91,7 @@ class SimpleRuleEngineTest {
     void fetchesFreshStatesForNewMeter() {
         Rule r1 = rule("r1");
         Rule r2 = rule("r2");
-        when(ruleRepository.findRuleFromType("ruleHeat")).thenReturn(List.of(r1, r2));
+        when(ruleRepository.findByConsumptionType("ruleHeat")).thenReturn(List.of(r1, r2));
 
         Measurement m1 = measurement("m-123", "addr-1");
         Measurement m2 = measurement("m-456", "addr-2");
@@ -101,7 +101,7 @@ class SimpleRuleEngineTest {
 
         InOrder order = inOrder(ruleRepository);
 
-        order.verify(ruleRepository, times(2)).findRuleFromType("ruleHeat");
+        order.verify(ruleRepository, times(2)).findByConsumptionType("ruleHeat");
         verify(r1, times(1)).isBroken(m1);
         verify(r2, times(1)).isBroken(m2);
         verify(ruleContext, times(1)).getConsumptionType("m-123");

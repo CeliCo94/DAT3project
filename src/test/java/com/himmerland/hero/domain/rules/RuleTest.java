@@ -11,17 +11,17 @@ public class RuleTest {
     public void testRuleHeatDefaultConstructor() {
         RuleHeat rule = new RuleHeat();
         Assertions.assertEquals(0, rule.getDuration());
-        Assertions.assertEquals("HEAT", rule.getConsumptionType());
+        Assertions.assertEquals("VARME", rule.getConsumptionType());
         Assertions.assertEquals("", rule.getName());
         Assertions.assertEquals("", rule.getDescription());
         Assertions.assertFalse(rule.isActive());
-    }
+     }
 
     @Test
     public void testRuleWaterDefaultConstructor() {
         RuleWater rule = new RuleWater();
         Assertions.assertEquals(0, rule.getDuration());
-        Assertions.assertEquals("WATER", rule.getConsumptionType());
+        Assertions.assertEquals("VAND", rule.getConsumptionType());
         Assertions.assertEquals("", rule.getName());
         Assertions.assertEquals("", rule.getDescription());
         Assertions.assertFalse(rule.isActive());
@@ -31,7 +31,7 @@ public class RuleTest {
     public void testRuleHumidityDefaultConstructor() {
         RuleHumidity rule = new RuleHumidity();
         Assertions.assertEquals(0, rule.getDuration());
-        Assertions.assertEquals("HUMIDITY", rule.getConsumptionType());
+        Assertions.assertEquals("LUFTFUGTIGHED", rule.getConsumptionType());
         Assertions.assertEquals("", rule.getName());
         Assertions.assertEquals("", rule.getDescription());
         Assertions.assertFalse(rule.isActive());
@@ -47,8 +47,8 @@ public class RuleTest {
         rule.setDescription("Test Description");
         Assertions.assertEquals("Test Description", rule.getDescription());
         
-        rule.setConsumptionType("HEAT");
-        Assertions.assertEquals("HEAT", rule.getConsumptionType());
+        rule.setConsumptionType("VARME");
+        Assertions.assertEquals("VARME", rule.getConsumptionType());
         
         rule.setDuration(60);
         Assertions.assertEquals(60, rule.getDuration());
@@ -169,7 +169,7 @@ public class RuleTest {
         Assertions.assertEquals("Full heat rule test", heatRule.getDescription());
         Assertions.assertEquals(120, heatRule.getDuration());
         Assertions.assertTrue(heatRule.isActive());
-        Assertions.assertEquals("HEAT", heatRule.getConsumptionType());
+        Assertions.assertEquals("VARME", heatRule.getConsumptionType());
         
         RuleWater waterRule = new RuleWater();
         waterRule.setName("Complete Water Rule");
@@ -182,7 +182,7 @@ public class RuleTest {
         Assertions.assertEquals("Full water rule test", waterRule.getDescription());
         Assertions.assertEquals(90, waterRule.getDuration());
         Assertions.assertTrue(waterRule.isActive());
-        Assertions.assertEquals("WATER", waterRule.getConsumptionType());
+        Assertions.assertEquals("VAND", waterRule.getConsumptionType());
         
         RuleHumidity humidityRule = new RuleHumidity();
         humidityRule.setName("Complete Humidity Rule");
@@ -195,6 +195,6 @@ public class RuleTest {
         Assertions.assertEquals("Full humidity rule test", humidityRule.getDescription());
         Assertions.assertEquals(45, humidityRule.getDuration());
         Assertions.assertFalse(humidityRule.isActive());
-        Assertions.assertEquals("HUMIDITY", humidityRule.getConsumptionType());
+        Assertions.assertEquals("LUFTFUGTIGHED", humidityRule.getConsumptionType());
     }
-} 
+}   
