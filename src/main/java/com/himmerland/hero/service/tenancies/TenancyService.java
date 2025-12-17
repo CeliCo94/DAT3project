@@ -7,11 +7,16 @@ import com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto.Measu
 import com.himmerland.hero.service.repositories.TenancyRepository;
 import com.himmerland.hero.service.importer.TenancyCSVImporter;
 import com.himmerland.hero.service.tenancies.TenancyDTO;
+
+import jakarta.annotation.PostConstruct;
+
 import com.himmerland.hero.service.departments.DepartmentService;
 
 import org.springframework.stereotype.Service;
 
+
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -28,6 +33,11 @@ public class TenancyService {
         this.repository = tenancyRepo;
         this.importer = importer;
         this.departmentService = departmentService;
+    }
+
+    @PostConstruct
+    public void start() {
+        ReadTenancyData("src\\main\\resources\\csvTenancy\\tenancies(Ark1).csv");
     }
 
     public boolean CreateAndSaveTenancy(TenancyDTO tenancy) {

@@ -7,6 +7,9 @@ import com.himmerland.hero.service.measurements.MeasurementFactory;
 import com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 import com.himmerland.hero.service.repositories.DepartmentRepository;
 import com.himmerland.hero.service.tenancies.TenancyDTO;
+
+import jakarta.annotation.PostConstruct;
+
 import com.himmerland.hero.service.importer.DepCSVImporter;
 
 import org.springframework.stereotype.Service;
@@ -30,6 +33,11 @@ public class DepartmentService {
 
     public List<Department> findAll() {
         return repository.findAll();
+    }
+
+    @PostConstruct
+    public void start() {
+        ReadDepartmentData("src\\main\\resources\\csvDep\\departments(Ark1).csv");
     }
 
     public boolean CreateAndSaveDepartment(DepartmentDTO dep) {
