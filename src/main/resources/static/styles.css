@@ -424,3 +424,21 @@ body {
 .add-tenancy-btn:hover {
   background: #156b47;
 }
+
+.form-message {
+  margin-bottom: 0.75rem;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d4e6d4;
+  background: #f8fff6;
+  font-weight: 600;
+}
+
+.form-message.success {
+  border-color: #bfe2c3;
+}
+
+.form-message.error {
+  border-color: #e0b1b1;
+  background: #fff6f6;
+}

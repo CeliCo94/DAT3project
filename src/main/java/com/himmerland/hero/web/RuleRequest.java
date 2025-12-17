@@ -16,6 +16,8 @@ public class RuleRequest {
     private Integer thresholdWaterFlow;
     private Integer thresholdHumidity;
 
+    private Boolean active;
+
     // GETTERS AND SETTERS
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }
@@ -46,4 +48,7 @@ public class RuleRequest {
 
     public Integer getThresholdHumidity() { return thresholdHumidity; }
     public void setThresholdHumidity(Integer thresholdHumidity) { this.thresholdHumidity = thresholdHumidity; }
+
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 }
