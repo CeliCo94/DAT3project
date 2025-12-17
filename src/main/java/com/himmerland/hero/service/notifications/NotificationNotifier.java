@@ -55,4 +55,14 @@ public class NotificationNotifier {
         Notification n = getCurrentNotification();
         return sendNotification(n);
     }
+
+    public boolean sendDailySummary(Notification notification) {
+        if (notification == null) {
+            return false;
+        }
+        for (NotificationChannel channel : channels) {
+            channel.send(notification);
+        }
+        return true;
+    }
 }
