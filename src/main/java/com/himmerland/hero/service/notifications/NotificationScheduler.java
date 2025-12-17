@@ -82,6 +82,7 @@ public class NotificationScheduler implements SchedulingConfigurer {
 
         unsent.forEach(n -> {
             n.setSent(true);
+            n.setActive(false);
             notificationService.save(n);
             });
 
