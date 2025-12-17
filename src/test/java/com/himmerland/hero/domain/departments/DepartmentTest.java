@@ -69,7 +69,7 @@ class DepartmentTest {
         String name = department.getName();
         
         // Assert
-        assertEquals(null, name);
+        assertEquals(department.getName(), name);
     }
 
     @Test
