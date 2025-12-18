@@ -7,6 +7,10 @@ import com.himmerland.hero.web.RuleRequest;
 @Component
 public class RuleFactory {
 
+    private static boolean defaultActive(RuleRequest dto) {
+    return dto.getActive() == null ? true : dto.getActive();
+    }
+
     public Rule create(RuleRequest dto) {
         String type = dto.getType();
 
@@ -17,6 +21,7 @@ public class RuleFactory {
                 rule.setDescription(dto.getDescription());
                 rule.setCriticality(dto.getCriticality());
                 rule.setDuration(dto.getDuration());
+                rule.setActive(defaultActive(dto));
                 rule.setThresholdTempIn(dto.getThresholdTempIn());
                 rule.setThresholdTempOut(dto.getThresholdTempOut());
                 rule.setThresholdHeatWaterFlow(dto.getThresholdHeatWaterFlow());
@@ -29,6 +34,7 @@ public class RuleFactory {
                 rule.setDescription(dto.getDescription());
                 rule.setCriticality(dto.getCriticality());
                 rule.setDuration(dto.getDuration());
+                rule.setActive(defaultActive(dto));
                 rule.setThresholdWaterFlow(dto.getThresholdWaterFlow());
                 return rule;
             }
@@ -39,6 +45,7 @@ public class RuleFactory {
                 rule.setDescription(dto.getDescription());
                 rule.setCriticality(dto.getCriticality());
                 rule.setDuration(dto.getDuration());
+                rule.setActive(defaultActive(dto));
                 rule.setThresholdHumidity(dto.getThresholdHumidity());
                 return rule;
             }
