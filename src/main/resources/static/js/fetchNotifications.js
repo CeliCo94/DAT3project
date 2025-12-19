@@ -2,6 +2,19 @@ document.addEventListener("DOMContentLoaded", () => {
   loadNotifications();
 });
 
+function formatDateTime(isoString) {
+  if (!isoString) return "-";
+  const d = new Date(isoString);
+  if (isNaN(d.getTime())) return isoString; 
+  return d.toLocaleString("da-DK", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 async function loadNotifications() {
   try {
     const response = await fetch("/api/notifications");
@@ -34,6 +47,7 @@ function renderTables(notifications) {
       <td>${n.rule}</td>
       <td>${n.criticality}</td>
       <td>${n.active ? "Aktiv" : "Lukket"}</td>
+      <td>${formatDateTime(n.timeStamp)}</td>
     `;
 
     if (n.active) {
