@@ -28,6 +28,10 @@ public class AddRuleRestController {
 
   @PostMapping(consumes = "application/json", produces = "application/json")
   public ResponseEntity<Rule> submitRule(@RequestBody RuleRequest body) {
+
+    if (body.getDuration() < 1) {
+      throw new IllegalArgumentException("Duration must be at least 1 hour");
+    }
     
     Rule rule = ruleFactory.create(body);
     System.out.println("Body in AddRuleController" + body);
