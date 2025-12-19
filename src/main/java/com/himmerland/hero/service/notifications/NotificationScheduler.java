@@ -78,10 +78,11 @@ public class NotificationScheduler implements SchedulingConfigurer {
         Notification dailySummary = new Notification();
         dailySummary.setCause(body.toString());
 
-        notifier.sendNotification(dailySummary); 
+        notifier.sendDailySummary(dailySummary); 
 
         unsent.forEach(n -> {
             n.setSent(true);
+            n.setActive(false);
             notificationService.save(n);
             });
 
