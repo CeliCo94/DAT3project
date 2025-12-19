@@ -1,6 +1,5 @@
 package com.himmerland.hero.domain.tenancies;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,16 +15,7 @@ public class Tenancy extends IdentifiableBase {
     public Tenancy() {
         super();
     }
-/*
-    // Convenience constructor for tests (without id - will use auto-generated from IdentifiableBase)
-    public Tenancy(String departmentName, String address, String city, String postalCode) {
-        super();
-        this.DepartmentName = departmentName;
-        this.Address = address;
-        this.City = city;
-        this.PostalCode = postalCode;
-    }
-*/
+    
     @JsonCreator
     public Tenancy(@JsonProperty("departmentName") String departmentname, @JsonProperty("address") String address, @JsonProperty("city") String city, @JsonProperty("postalCode") String postalCode) {
         super();

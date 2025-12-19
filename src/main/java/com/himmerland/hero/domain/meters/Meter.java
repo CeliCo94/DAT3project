@@ -8,7 +8,7 @@ public class Meter extends IdentifiableBase {
     private String address;
 
     public Meter() {
-        super(); // optional, called automatically
+        super();
     }
 
     public Meter(String meterNumber, String consumptionType,

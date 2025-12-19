@@ -2,8 +2,6 @@ package com.himmerland.hero.service.measurements;
 
 import java.util.List;
 
-import javax.management.monitor.Monitor;
-
 import org.springframework.stereotype.Service;
 
 import com.himmerland.hero.domain.measurements.Measurement;
@@ -33,8 +31,6 @@ public class MeasurementService {
         try {
             Measurement m = CreateNewMeasurement(measurement);
 
-            System.out.println(m.getMeterNumber());
-
             MeasurementRepo.save(m);
             monitoringService.handleNewMeasurement(m);
 
@@ -48,7 +44,6 @@ public class MeasurementService {
 
     private Measurement CreateNewMeasurement(MeasurementDTO measurement) {
         Measurement m = MeasurementFactory.fromDTO(measurement);
-        System.out.println(m.getMeterNumber());
         return m;
     }
 

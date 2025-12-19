@@ -19,13 +19,7 @@ public class Department extends IdentifiableBase  {
         this.Name = Name;
         this.Email = email;
     }
-/* 
-    public Department(String Name, String email) {
-        super();
-        this.Name = Name;
-        this.Email = email;
-    }
-    */
+
     public String getName() {
         return Name;
     }
@@ -44,5 +38,4 @@ public class Department extends IdentifiableBase  {
     public void setEmail(String email) {
         this.Email = email;
     }
-    
 }

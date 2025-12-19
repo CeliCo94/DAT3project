@@ -1,43 +1,36 @@
 package com.himmerland.hero.service.tenancies;
 
-import com.himmerland.hero.domain.departments.Department;
 import com.himmerland.hero.domain.tenancies.Tenancy;
-import com.himmerland.hero.service.departments.DepartmentDTO;
-import com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 import com.himmerland.hero.service.repositories.TenancyRepository;
 import com.himmerland.hero.service.importer.TenancyCSVImporter;
-import com.himmerland.hero.service.tenancies.TenancyDTO;
 
 import jakarta.annotation.PostConstruct;
 
-import com.himmerland.hero.service.departments.DepartmentService;
-
 import org.springframework.stereotype.Service;
 
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class TenancyService {
     private final TenancyRepository repository;
     private TenancyCSVImporter importer;
-    private DepartmentService departmentService;
 
-    public TenancyService(TenancyRepository tenancyRepo, TenancyCSVImporter importer, DepartmentService departmentService) {
+    public TenancyService(TenancyRepository tenancyRepo, TenancyCSVImporter importer) {
         this.repository = tenancyRepo;
         this.importer = importer;
-        this.departmentService = departmentService;
     }
 
     @PostConstruct
     public void start() {
-        ReadTenancyData("src\\main\\resources\\csvTenancy\\tenancies(Ark1).csv");
+        ReadTenancyData("src\\main\\resources\\csvTenancy\\tenancies2.csv");
+    }
+
+    public void deleteAllObjects() {
+        List<Tenancy> all = repository.findAll();
+        for (Tenancy t : all) {
+            repository.deleteById(t.getId());
+        }
     }
 
     public boolean CreateAndSaveTenancy(TenancyDTO tenancy) {
@@ -96,7 +89,6 @@ public class TenancyService {
         List<Tenancy> tenancies = repository.findAll();
         List<TenancyDTO> dtos = new ArrayList();
         for (Tenancy t : tenancies) {
-            System.out.println(t.getAddress());
             dtos.add(TenancyDTO.fromDomain(t));
         }
         return dtos;
@@ -105,54 +97,11 @@ public class TenancyService {
     public Boolean checkIfTenancyExists(TenancyDTO dto) {
         try {
             GetTenancyFromAddress(dto.getAddress());
-            return true; // found
+            return true; 
         } catch (RuntimeException e) {
-            return false; // not found
+            return false; 
         }
     }
-/*
-    public TenancyDTO updateTenancy(TenancyDTO dto) {
-        
-        Objects.requireNonNull(dto, "Update payload cannot be null");
-        //validateId(dto.id());
-
-        
-        Tenancy existing = repository.findById(dto.id())
-            .orElseThrow(() -> new IllegalArgumentException("Tenancy not found: " + dto.id()));
-
-        if (dto.meterNumber() != null && !dto.meterNumber().isBlank()) {
-            existing.setMeterNumber(dto.meterNumber());
-        }
-        
-        if (dto.departmentName() != null && !dto.departmentName().isBlank()) {
-            existing.setDepartmentName(dto.departmentName());
-        }
-        
-        if (dto.tenancyNumber() != null && !dto.tenancyNumber().isBlank()) {
-            existing.setTenancyNumber(dto.tenancyNumber());
-        }
-
-        if (dto.address() != null && !dto.address().isBlank()) {
-            existing.setAddress(dto.address());
-        }
-        
-        if (dto.city() != null && !dto.city().isBlank()) {
-            existing.setCity(dto.city());
-        }
-
-        if (dto.postalCode() != null && !dto.postalCode().isBlank()) {
-            existing.setPostalCode(dto.postalCode());
-        }
-        
-        if (dto.active() != null) {
-            existing.setActive(dto.active());
-        }
-        
-        //Tenancy updated = repository.save(existing);
-        return dto; //TenancyDTO.fromDomain(updated);
-        
-    }
-    */
 
     public void deleteTenancy(String id) {
         validateId(id);
@@ -163,20 +112,5 @@ public class TenancyService {
         if (id == null || id.isBlank()) {
             throw new IllegalArgumentException("Id cannot be null or blank");
         }
-    }
-
-    
-        
-        // If departmentName is provided, try to find the department by name
-    private String resolveDepartmentId(TenancyDTO dto) {
-        if (dto.getdepartmentName() != null && !dto.getdepartmentName().isBlank()) {
-            return departmentService.findAll().stream()
-                .filter(dept -> dept.getName() != null && dept.getName().equals(dto.getdepartmentName()))
-                .findFirst()
-                .map(dept -> dept.getId())
-                .orElse(dto.getdepartmentName()); // Fallback: assume it's actually an ID if not found
-        }
-        
-        return null;
     }
 }

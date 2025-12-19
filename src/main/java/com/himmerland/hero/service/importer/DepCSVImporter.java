@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.himmerland.hero.service.departments.DepartmentDTO;
-import com.himmerland.hero.service.tenancies.TenancyDTO;
 
 import org.springframework.stereotype.Service;
 
@@ -42,7 +41,7 @@ public class DepCSVImporter {
         if (index < values.length) {
             return values[index];
         } else {
-            return ""; // default for strings
+            return "";
         }
     }
 

@@ -56,18 +56,7 @@ public class MeasurementCSVImporter {
                         Humidity, HumidityUnit
                 );
 
-                System.out.println(measurement.getmeterNumber());
-
-                //boolean success = MeasurementService.CreateAndSaveMeasurement(measurement);
                 dtos.add(measurement);
-                /*
-                if (success) {
-                    System.out.println("Measurement Saves Successfully");
-                } else {
-                    System.out.println("Failed to save measurement");
-                    continue;
-                }
-                    */
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -95,7 +84,7 @@ public class MeasurementCSVImporter {
         if (index < values.length) {
             return values[index];
         } else {
-            return ""; // default for strings
+            return "";
         }
     }
 
@@ -103,13 +92,12 @@ public class MeasurementCSVImporter {
         if (index < values.length && !values[index].isEmpty()) {
             return parseInt(values[index]);
         } else {
-            return 0; // default for missing numbers
+            return 0;
         }
     }
 
     private double safeDouble(String[] values, int index) {
         if (index < values.length && !values[index].isEmpty()) {
-            // Handle comma decimal separator
             return parseDouble(values[index]);
         } else {
             return 0.0;

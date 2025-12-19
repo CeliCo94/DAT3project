@@ -1,12 +1,7 @@
 package com.himmerland.hero.service.departments;
 
 import com.himmerland.hero.domain.departments.Department;
-import com.himmerland.hero.domain.measurements.Measurement;
-import com.himmerland.hero.domain.tenancies.Tenancy;
-import com.himmerland.hero.service.measurements.MeasurementFactory;
-import com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 import com.himmerland.hero.service.repositories.DepartmentRepository;
-import com.himmerland.hero.service.tenancies.TenancyDTO;
 
 import jakarta.annotation.PostConstruct;
 
@@ -14,9 +9,7 @@ import com.himmerland.hero.service.importer.DepCSVImporter;
 
 import org.springframework.stereotype.Service;
 
-import java.nio.file.Path;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Service 
@@ -38,6 +31,13 @@ public class DepartmentService {
     @PostConstruct
     public void start() {
         ReadDepartmentData("src\\main\\resources\\csvDep\\departments(Ark1).csv");
+    }
+
+    public void deleteAllObjects() {
+        List<Department> all = repository.findAll();
+        for (Department d : all) {
+            repository.deleteById(d.getId());
+        }
     }
 
     public boolean CreateAndSaveDepartment(DepartmentDTO dep) {
@@ -84,15 +84,7 @@ public class DepartmentService {
         return repository.getFromName(name)
             .orElseThrow(() -> new RuntimeException("Tenancy not found for address: " + name));
     }
-/*
-    public Optional<Department> findById(String id) {
-        return repository.findById(id);
-    }
 
-    public Department save(Department department) {
-        return repository.save(department);
-    }
-*/
     public void delete(String id) {
         repository.deleteById(id);
     }
@@ -102,17 +94,7 @@ public class DepartmentService {
         return repository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Department not found: " + id));
     }
-/*
-    public Department createDepartment(DepartmentDTO payload) {
-        validateId(payload.id());
-        repository.findById(payload.id()).ifPresent(existing -> {
-            throw new IllegalArgumentException("Department already exists: " + payload.id());
-        });
 
-        Department department = new Department(payload.id(), payload.email());
-        return repository.save(department);
-    }
-*/
     public Department editDepartment(String id, DepartmentDTO payload) {
         Department existing = getDepartment(id);
 

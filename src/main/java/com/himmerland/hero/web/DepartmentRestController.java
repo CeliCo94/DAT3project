@@ -7,9 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/departments")
@@ -31,16 +29,6 @@ public class DepartmentRestController {
     public ResponseEntity<Department> getById(@PathVariable String id) {
         return ResponseEntity.ok(departmentService.getDepartment(id));
     }
-    /*
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Department> create(@RequestBody DepartmentDTO payload) {
-        Department created = departmentService.createDepartment(payload);
-        return ResponseEntity.created(Objects.requireNonNull(URI.create("/api/departments/" + created.getId())))
-                .contentType(Objects.requireNonNull(MediaType.APPLICATION_JSON))
-                .body(created);
-    }
-                */
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
                 produces = MediaType.APPLICATION_JSON_VALUE)

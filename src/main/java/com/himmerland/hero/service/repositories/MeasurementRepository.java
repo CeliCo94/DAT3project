@@ -32,13 +32,11 @@ public class MeasurementRepository extends BaseRepository<Measurement>{
         LocalDateTime cutoff = LocalDateTime.now().minusHours(hours);
 
         return MeasurementList.stream()
-                // convert string timestamp -> LocalDateTime
                 .filter(m -> {
                     try {
                         LocalDateTime ts = LocalDateTime.parse(m.getTimestamp(), formatter);
                         return ts.isAfter(cutoff);
                     } catch (Exception e) {
-                        // skip malformed date entries
                         return false;
                     }
                 })
