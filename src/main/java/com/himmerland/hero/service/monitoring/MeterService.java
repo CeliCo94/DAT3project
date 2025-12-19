@@ -4,7 +4,6 @@ import com.himmerland.hero.domain.meters.Meter;
 import com.himmerland.hero.service.measurements.MeasurementCSVImporter.dto.MeasurementDTO;
 import com.himmerland.hero.service.repositories.MeterRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;

@@ -1,6 +1,5 @@
 package com.himmerland.hero.service.tenancies;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.himmerland.hero.domain.tenancies.Tenancy;
 
 public class TenancyDTO {
@@ -41,18 +40,6 @@ public class TenancyDTO {
             tenancy.getPostalCode()
         );
     }
-    /*
-    public Tenancy toDomain() {
-        Tenancy tenancy = new Tenancy(
-            departmentName,
-            address,
-            city,
-            postalCode
-        );
-        
-        return tenancy;
-    }
-        */
 }
     
 

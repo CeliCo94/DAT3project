@@ -6,7 +6,6 @@ import java.nio.file.Path;
 
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 @Repository
 public class DepartmentRepository extends BaseRepository<Department>{

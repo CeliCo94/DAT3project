@@ -20,9 +20,6 @@
     <main class="content">
       <section class="card">
         <h2>Afdelinger</h2>
-
-        <!-- Button to open modal -->
-        <button class="add-department-btn" onclick="openDepartmentModal()">+ Opret ny afdeling</button>
         
         <!-- Toolbar -->
         <div class="dept-toolbar">
@@ -66,9 +63,6 @@
                 <input type="email" id="dept-email" name="email" required
                        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                        title="Indtast en gyldig email-adresse" />
-                <div class="modal-actions">
-                  <button type="button" class="btn btn-secondary" onclick="closeDepartmentModal()">Annuler</button>
-                  <button type="submit" id="submit-btn" class="btn btn-primary">Opret</button>
                 </div>
               </form>
             </div>

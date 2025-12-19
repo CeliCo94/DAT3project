@@ -23,8 +23,6 @@ public class MeasurementFactory {
             throw new IllegalArgumentException("TimeStamp cannot be null");
         }
 
-        System.out.println(dto.getmeterNumber());
-
         return new Measurement(dto.getAddress(), dto.getmeterNumber(), dto.getmeterType(), dto.getconsumptionType(), 
                         dto.gettimeStamp(), dto.getinfoCode(), dto.getVolume(), dto.getVolumeUnit(),
                         dto.getForwardTemperature(), dto.getForwardTemperatureUnit(),

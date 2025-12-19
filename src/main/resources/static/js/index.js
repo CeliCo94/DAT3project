@@ -14,12 +14,6 @@ for (i = 0; i < coll.length; i++) {
   });
 }
 
-
-// Onclick Notifications (trigger pop-up to see more details about a specific notification)
-//function myFunction(x) {
-  //alert("Row index is: " + x.rowIndex);
-//}
-
 function addRowHandlers() {
     var table = document.getElementById("sc1-table");
     var rows = table.getElementsByTagName("tr");

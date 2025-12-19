@@ -20,13 +20,10 @@
       <section class="card">
         <h2>Lejemål</h2>
 
-        <!-- Button to open modal-->
-         <button class="add-tenancy-btn" onclick="openTenancyModal()">+ Opret nyt lejemål</button>
-
          <!-- Filter by Department-->
         <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 12px;">
-          <label for="department-filter">Filtrer efter afdeling:</label>
-          <select id="department-filter" onclick="filterByDepartment()"
+          <label for="dtenancy-department-id">Filtrer efter afdeling:</label>
+          <select id="tenancy-department-id"
           style="padding: 8px 12px; border-radius: 4px; border: 1px solid #b9c9b9; font-size: 14px; min-width: 200px;">
           <option value="">Alle afdelinger</option>
           <!-- Departments will be loaded here -->
@@ -44,13 +41,6 @@
                 </div>
                 <form id="tenancy-form" class="modal-form">
                   <input type="hidden" id="tenancy-id-hidden" />
-
-                  <!-- Make ID field optional and only visible for edit mode -->
-                  <label for="tenancy-id"><strong>ID:</strong> <span style="color: #999;">(genereres automatisk)</span></label>
-                  <input type="text" id="tenancy-id" name="id" 
-                         pattern="^[A-Za-z0-9_-]{3,32}$"
-                         title="ID skal være 3-32 tegn langt og må kun indeholde bogstaver, tal og bindestreger" 
-                         placeholder="Lad stå tom for automatisk generering" />
 
                   <label for="tenancy-department-id"><strong>Afdelings ID:</strong></label>
                   <select id="tenancy-department-id" name="departmentId" required>
@@ -83,12 +73,10 @@
             <table class="data-table" id="lejemaal-table">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Afdeling</th>
                   <th>Adresse</th>
                   <th>By</th>
                   <th>Postnummer</th>
-                  <th>Handlinger</th>
                 </tr>
               </thead>
               <tbody>
