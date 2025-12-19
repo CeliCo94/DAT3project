@@ -36,7 +36,7 @@
                 <p id="ruleTypeDisplay"></p><br>
                             
                 <label for="ruleName">Reglens navn:</label>
-                <input type="text" id="ruleName" name="ruleName" placeholder="Tilføj navn"><br><br>
+                <input type="text" id="ruleName" name="ruleName" placeholder="Tilføj navn" required><br><br>
                 
                 <label for="ruleDescription">Beskriv regel og mulige årsager:</label>
                 <input type="text" id="ruleDescription" name="ruleDescription" placeholder="Tilføj beskrivelse"><br><br>
@@ -49,7 +49,7 @@
                 </select>
                 
                 <label for="ruleDuration">Varighed af regel i timer:</label>
-                <input type="number" id="ruleDuration" name="ruleDuration" placeholder="24"><br><br>
+                <input type="number" id="ruleDuration" name="ruleDuration" placeholder="24" min="1" step="1" required><br><br>
             </div>
 
             <div class="container" id="thresholds">
