@@ -20,12 +20,7 @@ public class TenancyService {
         this.repository = tenancyRepo;
         this.importer = importer;
     }
-
-    @PostConstruct
-    public void start() {
-        ReadTenancyData("src\\main\\resources\\csvTenancy\\tenancies2.csv");
-    }
-
+    
     public void deleteAllObjects() {
         List<Tenancy> all = repository.findAll();
         for (Tenancy t : all) {

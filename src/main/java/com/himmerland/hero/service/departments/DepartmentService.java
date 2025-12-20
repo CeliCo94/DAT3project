@@ -27,12 +27,7 @@ public class DepartmentService {
     public List<Department> findAll() {
         return repository.findAll();
     }
-
-    @PostConstruct
-    public void start() {
-        ReadDepartmentData("src\\main\\resources\\csvDep\\departments(Ark1).csv");
-    }
-
+    
     public void deleteAllObjects() {
         List<Department> all = repository.findAll();
         for (Department d : all) {
