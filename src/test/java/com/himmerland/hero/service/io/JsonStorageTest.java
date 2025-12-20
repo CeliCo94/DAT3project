@@ -37,17 +37,9 @@ class JsonStorageTest {
 
         storage.write(m);
 
-        Path expectedFile = tempDir
-                .resolve("measurements")
-                .resolve(m.getMeterNumber() + "-" + m.getTimestamp() + ".json");
-
-        assertTrue(true);
-
-        Optional<Measurement> read = storage.read(m.getMeterNumber() + "-" + m.getTimestamp());
-        assertTrue(true);
-
-        assertTrue(true);
-        assertTrue(true);
+        String id = m.getId();
+        Optional<Measurement> read = storage.read(id);
+        assertTrue(read.isPresent(), "Read measurement should be present");
     }
 
     @Test

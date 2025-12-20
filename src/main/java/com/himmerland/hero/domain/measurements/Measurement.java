@@ -28,6 +28,10 @@ public class Measurement extends IdentifiableBase {
     private double Humidity;
     private String HumidityUnit;
 
+    public Measurement(){
+        super();
+    }
+
     public Measurement(String address, String meterNumber, String meterType, String consumptionType, String timestamp, int infoCode,
                           double volume, String volumeUnit,
                           double forwardTemperature, String forwardTemperatureUnit,
