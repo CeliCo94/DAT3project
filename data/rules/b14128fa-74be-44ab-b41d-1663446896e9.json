@@ -1,1 +1,0 @@
-{"type":"ruleHumidity","id":"b14128fa-74be-44ab-b41d-1663446896e9","name":"Humidity is not good","description":"This is the description","consumptionType":"LUFTFUGTIGHED","criticality":null,"duration":48,"active":true,"thresholdHumidity":60}
